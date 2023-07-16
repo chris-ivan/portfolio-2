@@ -1,0 +1,18 @@
+body {
+  background: #131313;
+}
+
+body::-webkit-scrollbar {
+  background: #131313;
+  width: 12px;
+  height: 12px;
+}
+
+/* Track */
+/* body::-webkit-scrollbar-track {
+} */
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  border: 1px solid #767676;
+}
