@@ -18,7 +18,7 @@ export default function usePinchZoom(
   initialSize: frameSizeType<number>
 ) {
   // should be passed through props for better reusability
-  const { transform, setTransform } = useZoomStore();
+  const { setTransform } = useZoomStore();
 
   /** Direct update transform */
   const updateTransform = (newTransform: Partial<TransformType>) => {
@@ -33,10 +33,10 @@ export default function usePinchZoom(
   ) => {
     if (!contentRef?.current) return;
 
+    const { width, height } = initialSize;
+    const { transform } = useZoomStore.getState();
     const { offsetWidth, offsetHeight, offsetLeft, offsetTop } =
       contentRef.current;
-
-    const { width, height } = initialSize;
 
     let newRatio = ratio;
     let newScale = transform.scale * ratio;
@@ -48,9 +48,11 @@ export default function usePinchZoom(
       newScale = minScale;
     }
 
+    const { width: clientWidth, height: clientHeight } = getClientSize();
+
     /** Default center point scaling */
-    const mergedClientX = clientX ?? innerWidth / 2;
-    const mergedClientY = clientY ?? innerHeight / 2;
+    const mergedClientX = clientX || clientWidth / 2;
+    const mergedClientY = clientY || clientHeight / 2;
 
     const diffRatio = newRatio - 1;
     /** Deviation calculated from image size */
@@ -71,12 +73,14 @@ export default function usePinchZoom(
     if (ratio < 1 && newScale === 1) {
       const mergedWidth = offsetWidth * newScale;
       const mergedHeight = offsetHeight * newScale;
-      const { width: clientWidth, height: clientHeight } = getClientSize();
       if (mergedWidth <= clientWidth && mergedHeight <= clientHeight) {
         newX = 0;
         newY = 0;
       }
     }
+
+    // console.log(Math.round(newX), Math.round(newY), newScale);
+    console.log(ratio, newRatio);
 
     updateTransform({
       x: newX,

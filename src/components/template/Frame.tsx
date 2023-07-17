@@ -19,7 +19,7 @@ const Frame = (props: IFrameProps) => {
     >
       {title && (
         <div
-          className="absolute text-lg bottom-[100%] text-grey"
+          className="absolute bottom-[100%] text-grey"
           style={{
             transform: `scale(${1 / transform.scale})`,
             transformOrigin: "bottom left",

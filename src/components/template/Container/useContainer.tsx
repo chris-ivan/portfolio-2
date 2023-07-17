@@ -1,11 +1,19 @@
 import usePinchZoom from "../../../hooks/usePinchZoom";
 import useViewport from "../../../hooks/useViewport";
+import useZoomShortcut from "../../../hooks/useZoomShortcut";
 import { frameSizeType } from "../../../interfaces/frame";
+import {
+  BASE_SCALE_RATIO,
+  MAX_SCALE,
+  MIN_SCALE_MULTIPLIER,
+  SCALE_STEP,
+  WHEEL_MAX_SCALE_RATIO,
+} from "../../../static/transform";
 import { useZoomStore } from "../../../store/zoomStore";
 import {
   calculateMovement,
   getMinimumZoom,
-  isPinchZooming,
+  isWheelZooming,
   isShiftKeyScrolling,
 } from "./Container.util";
 import { useEffect } from "react";
@@ -15,13 +23,6 @@ interface IUseContainer {
   containerRef: React.RefObject<HTMLDivElement> | null;
   initialSize: frameSizeType<number>;
 }
-
-const BASE_SCALE_RATIO = 1;
-const WHEEL_MAX_SCALE_RATIO = 1;
-const MAX_SCALE = 5;
-const SCALE_STEP = 0.5;
-// to prevent empty space when zooming out
-const MIN_SCALE_MULTIPLIER = 1.25;
 
 const useContainer = (props: IUseContainer) => {
   const { contentRef, containerRef, initialSize } = props;
@@ -38,6 +39,7 @@ const useContainer = (props: IUseContainer) => {
     initialSize
   );
 
+  useZoomShortcut({ onZoom: dispatchZoomChange });
   const onZoom = (event: React.WheelEvent<HTMLDivElement>) => {
     event.preventDefault();
 
@@ -85,7 +87,7 @@ const useContainer = (props: IUseContainer) => {
   };
 
   const onWheel = (event: React.WheelEvent<HTMLDivElement>) => {
-    if (isPinchZooming(event)) return onZoom(event);
+    if (isWheelZooming(event)) return onZoom(event);
     if (isShiftKeyScrolling(event)) return onShiftKeyScroll(event);
     onMove(event);
   };

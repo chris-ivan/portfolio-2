@@ -1,29 +1,21 @@
 import { useRef } from "react";
-import {
-  frameSizeType,
-  viewportDimensionType,
-} from "../../../interfaces/frame";
 import useContainer from "./useContainer";
 import useResize from "../../../hooks/useResize";
+import { INITIAL_APP_SIZE } from "../../../static/frames";
 
 interface IContainer {
   children: React.ReactNode;
 }
 
-const initialSize: frameSizeType<viewportDimensionType> = {
-  width: "800vw",
-  height: "800vh",
-};
-
 const Container = ({ children }: IContainer) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const normalizedInitialSize = useResize({ initialSize });
+  const initialSize = useResize({ initialSize: INITIAL_APP_SIZE });
 
   const { transform, onWheel } = useContainer({
     contentRef,
     containerRef,
-    initialSize: normalizedInitialSize,
+    initialSize,
   });
   const { x, y, scale } = transform;
 

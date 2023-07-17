@@ -1,8 +1,9 @@
 import { TransformType } from "../../../interfaces/container";
 import { frameSizeType } from "../../../interfaces/frame";
-
-const SCROLLBAR_HEIGHT = 20;
-const MOUSE_WHEEL_THRESHOLD = 50;
+import {
+  MOUSE_WHEEL_THRESHOLD,
+  SCROLLBAR_HEIGHT,
+} from "../../../static/transform";
 
 export const calculateMovement = (
   container: HTMLDivElement,
@@ -53,12 +54,14 @@ export const calculateMovement = (
   };
 };
 
-export const isPinchZooming = (
+export const isWheelZooming = (
   event: React.WheelEvent<HTMLDivElement>
 ): boolean => {
   const { deltaX, deltaY, ctrlKey } = event;
   const isTrackpad = Math.abs(deltaY) < MOUSE_WHEEL_THRESHOLD;
-  return ctrlKey && !deltaX && isTrackpad;
+  const isTrackpadZooming = ctrlKey && !deltaX && isTrackpad;
+  const isMouseZooming = ctrlKey && !!deltaY;
+  return isTrackpadZooming || isMouseZooming;
 };
 
 export const isShiftKeyScrolling = (

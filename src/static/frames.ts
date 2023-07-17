@@ -1,4 +1,9 @@
-import { FRAME_KEY, IFrame } from "../interfaces/frame";
+import {
+  FRAME_KEY,
+  IFrame,
+  frameSizeType,
+  viewportDimensionType,
+} from "../interfaces/frame";
 
 export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.CONTACT]: {
@@ -74,4 +79,9 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       left: "630vw",
     },
   },
+};
+
+export const INITIAL_APP_SIZE: frameSizeType<viewportDimensionType> = {
+  width: "800vw",
+  height: "800vh",
 };
