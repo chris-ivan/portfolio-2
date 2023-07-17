@@ -1,5 +1,5 @@
 import "./App.css";
-import Container from "./components/template/Container";
+import Container from "./components/template/Container/Container";
 import Frame from "./components/template/Frame";
 import About from "./sections/About";
 import Contact from "./sections/Contact";
