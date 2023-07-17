@@ -28,14 +28,10 @@ const Container = ({ children }: IContainer) => {
   const { x, y, scale } = transform;
 
   return (
-    <div
-      ref={containerRef}
-      id="app-container"
-      className="relative w-[100vw] h-[100vh] overflow-scroll max-w-[100%] max-h-[70%]"
-    >
+    <div ref={containerRef} className="relative w-[100vw] h-[100vh]">
       <div
         ref={contentRef}
-        className="absolute select-none align-middle bg-dark-grey"
+        className="absolute select-none align-middle"
         style={{
           width: initialSize.width,
           height: initialSize.height,

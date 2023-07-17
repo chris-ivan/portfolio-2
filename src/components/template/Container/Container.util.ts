@@ -47,13 +47,10 @@ export const calculateMovement = (
   if (deltaY < 0)
     allowedY = Math.min(0, Math.max(-allowedMovements.up, deltaY));
 
-  container.scrollTop += allowedY;
-  container.scrollLeft += allowedX;
-
-  // return {
-  //   x: transform.x - allowedX,
-  //   y: transform.y - allowedY,
-  // };
+  return {
+    x: transform.x - allowedX,
+    y: transform.y - allowedY,
+  };
 };
 
 export const isPinchZooming = (
