@@ -1,15 +1,16 @@
 type elementDimensionType = string | number;
+export type viewportDimensionType = `${number}vh` | `${number}vw`;
 
-interface frameSizeType {
-  width: elementDimensionType;
-  height: elementDimensionType;
+export interface frameSizeType<T = elementDimensionType> {
+  width: T;
+  height: T;
 }
 
-interface framePositionType {
-  top: elementDimensionType;
-  left: elementDimensionType;
-  right: elementDimensionType;
-  bottom: elementDimensionType;
+export interface framePositionType<T = elementDimensionType> {
+  top: T;
+  left: T;
+  right: T;
+  bottom: T;
 }
 
 export interface IFrame {

@@ -28,8 +28,8 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       width: "80vh",
     },
     position: {
-      top: "162vh",
-      left: "286vw",
+      top: "280vh",
+      left: "162vw",
     },
   },
   [FRAME_KEY.LANDING]: {
@@ -46,7 +46,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.SKILLS]: {
     title: "Skills",
     size: {
-      width: "60vw",
+      width: "120vw",
     },
     position: {
       top: "372vh",
@@ -56,7 +56,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.ABOUT]: {
     title: "About",
     size: {
-      width: "120vw",
+      width: "60vw",
     },
     position: {
       top: "77vh",
@@ -70,7 +70,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "38vh",
-      left: "600vw",
+      left: "580vw",
     },
   },
 };
