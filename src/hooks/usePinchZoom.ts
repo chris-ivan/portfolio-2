@@ -1,12 +1,6 @@
-import { useState } from "react";
 import { TransformType } from "../interfaces/container";
 import { frameSizeType } from "../interfaces/frame";
-
-const initialTransform = {
-  x: 0,
-  y: 0,
-  scale: 1.5,
-};
+import { useZoomStore } from "../store/zoomStore";
 
 function getClientSize() {
   const width = document.documentElement.clientWidth;
@@ -23,14 +17,12 @@ export default function usePinchZoom(
   maxScale: number,
   initialSize: frameSizeType<number>
 ) {
-  const [transform, setTransform] = useState<TransformType>(initialTransform);
+  // should be passed through props for better reusability
+  const { transform, setTransform } = useZoomStore();
 
   /** Direct update transform */
   const updateTransform = (newTransform: Partial<TransformType>) => {
-    setTransform((preState) => ({
-      ...preState,
-      ...newTransform,
-    }));
+    setTransform(newTransform);
   };
 
   /** Scale according to the position of clientX and clientY */
@@ -94,7 +86,6 @@ export default function usePinchZoom(
   };
 
   return {
-    transform,
     updateTransform,
     dispatchZoomChange,
   };

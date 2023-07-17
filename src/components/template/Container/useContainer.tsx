@@ -1,6 +1,7 @@
 import usePinchZoom from "../../../hooks/usePinchZoom";
 import useViewport from "../../../hooks/useViewport";
 import { frameSizeType } from "../../../interfaces/frame";
+import { useZoomStore } from "../../../store/zoomStore";
 import {
   calculateMovement,
   getMinimumZoom,
@@ -29,7 +30,8 @@ const useContainer = (props: IUseContainer) => {
     getMinimumZoom(initialSize, viewportSize) * MIN_SCALE_MULTIPLIER;
   const maxScale = MAX_SCALE;
 
-  const { transform, updateTransform, dispatchZoomChange } = usePinchZoom(
+  const { transform } = useZoomStore();
+  const { updateTransform, dispatchZoomChange } = usePinchZoom(
     contentRef,
     minScale,
     maxScale,
