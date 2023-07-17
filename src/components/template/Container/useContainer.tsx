@@ -1,6 +1,12 @@
 import usePinchZoom from "../../../hooks/usePinchZoom";
+import useViewport from "../../../hooks/useViewport";
 import { frameSizeType } from "../../../interfaces/frame";
-import { calculateMovement, isPinchZooming } from "./Container.util";
+import {
+  calculateMovement,
+  getMinimumZoom,
+  isPinchZooming,
+  isShiftKeyScrolling,
+} from "./Container.util";
 import { useEffect } from "react";
 
 interface IUseContainer {
@@ -11,18 +17,26 @@ interface IUseContainer {
 
 const BASE_SCALE_RATIO = 1;
 const WHEEL_MAX_SCALE_RATIO = 1;
+const MAX_SCALE = 5;
 const SCALE_STEP = 0.5;
+// to prevent empty space when zooming out
+const MIN_SCALE_MULTIPLIER = 1.25;
 
 const useContainer = (props: IUseContainer) => {
   const { contentRef, containerRef, initialSize } = props;
+  const viewportSize = useViewport();
+  const minScale =
+    getMinimumZoom(initialSize, viewportSize) * MIN_SCALE_MULTIPLIER;
+  const maxScale = MAX_SCALE;
+
   const { transform, updateTransform, dispatchZoomChange } = usePinchZoom(
     contentRef,
-    1,
-    50,
+    minScale,
+    maxScale,
     initialSize
   );
 
-  const onZoom = (event: React.WheelEvent<HTMLImageElement>) => {
+  const onZoom = (event: React.WheelEvent<HTMLDivElement>) => {
     event.preventDefault();
 
     // Scale ratio depends on the deltaY size
@@ -39,7 +53,7 @@ const useContainer = (props: IUseContainer) => {
     dispatchZoomChange(ratio, event.clientX, event.clientY);
   };
 
-  const onMove = (event: React.WheelEvent<HTMLImageElement>) => {
+  const onMove = (event: React.WheelEvent<HTMLDivElement>) => {
     if (!contentRef?.current || !containerRef?.current) return;
 
     const newPosition = calculateMovement(
@@ -53,8 +67,25 @@ const useContainer = (props: IUseContainer) => {
     updateTransform(newPosition);
   };
 
-  const onWheel = (event: React.WheelEvent<HTMLImageElement>) => {
-    isPinchZooming(event) ? onZoom(event) : onMove(event);
+  const onShiftKeyScroll = (event: React.WheelEvent<HTMLDivElement>) => {
+    if (!contentRef?.current || !containerRef?.current) return;
+
+    const newPosition = calculateMovement(
+      containerRef.current,
+      contentRef.current,
+      event,
+      transform,
+      true
+    );
+
+    // @ts-ignore
+    updateTransform(newPosition);
+  };
+
+  const onWheel = (event: React.WheelEvent<HTMLDivElement>) => {
+    if (isPinchZooming(event)) return onZoom(event);
+    if (isShiftKeyScrolling(event)) return onShiftKeyScroll(event);
+    onMove(event);
   };
 
   const preventWheel = (event: WheelEvent) => {

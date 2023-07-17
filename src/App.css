@@ -1,8 +1,9 @@
-body {
+body,
+html {
   background: #131313;
 }
 
-body::-webkit-scrollbar {
+#app-container::-webkit-scrollbar {
   background: #131313;
   width: 12px;
   height: 12px;
@@ -13,6 +14,6 @@ body::-webkit-scrollbar {
 } */
 
 /* Handle */
-body::-webkit-scrollbar-thumb {
+#app-container::-webkit-scrollbar-thumb {
   border: 1px solid #767676;
 }

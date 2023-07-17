@@ -7,8 +7,8 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       width: "50vw",
     },
     position: {
-      top: "123vh",
-      left: "183vw",
+      top: "223vh",
+      left: "233vw",
     },
   },
   [FRAME_KEY.INTERESTS]: {
@@ -18,8 +18,8 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       height: "100vh",
     },
     position: {
-      top: "230vh",
-      left: "34vw",
+      top: "330vh",
+      left: "84vw",
     },
   },
   [FRAME_KEY.EXPERIENCES]: {
@@ -28,8 +28,8 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       width: "80vh",
     },
     position: {
-      top: "280vh",
-      left: "162vw",
+      top: "380vh",
+      left: "212vw",
     },
   },
   [FRAME_KEY.LANDING]: {
@@ -39,18 +39,19 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       height: "100vh",
     },
     position: {
-      top: "195vh",
-      left: "310vw",
+      top: "295vh",
+      left: "360vw",
     },
   },
   [FRAME_KEY.SKILLS]: {
     title: "Skills",
     size: {
       width: "120vw",
+      height: "100vh",
     },
     position: {
-      top: "372vh",
-      left: "366vw",
+      top: "472vh",
+      left: "416vw",
     },
   },
   [FRAME_KEY.ABOUT]: {
@@ -59,8 +60,8 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       width: "60vw",
     },
     position: {
-      top: "77vh",
-      left: "468vw",
+      top: "177vh",
+      left: "518vw",
     },
   },
   [FRAME_KEY.PROJECTS]: {
@@ -69,8 +70,8 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       width: "100vw",
     },
     position: {
-      top: "38vh",
-      left: "580vw",
+      top: "138vh",
+      left: "630vw",
     },
   },
 };
