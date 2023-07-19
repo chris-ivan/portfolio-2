@@ -8,7 +8,7 @@ const SCALE = 0.015;
 
 const Map = () => {
   const containerSize = useResize({ initialSize: INITIAL_APP_SIZE });
-  const viewPosition = useMap({ scale: SCALE, containerSize });
+  const viewPosition = useMap({ scale: SCALE });
   const { width, height } = containerSize;
 
   const children = useMemo(
