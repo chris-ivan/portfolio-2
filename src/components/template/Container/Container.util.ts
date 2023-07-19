@@ -79,5 +79,6 @@ export const getMinimumZoom = (
   const { width: targetWidth, height: targetHeight } = targetSize;
   const widthZoom = targetWidth / initialWidth;
   const heightZoom = targetHeight / initialHeight;
+
   return Math.max(widthZoom, heightZoom);
 };

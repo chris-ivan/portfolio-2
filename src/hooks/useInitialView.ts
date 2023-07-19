@@ -1,5 +1,5 @@
 import { TransformType } from "../interfaces/container";
-import { FRAMES } from "../static/frames";
+import { FRAME_KEY } from "../interfaces/frame";
 import checkMobile from "../utils/isMobile";
 import { useMemo, useRef, useEffect } from "react";
 
@@ -16,11 +16,11 @@ const useInitialView = (props: IUseInitialView) => {
   useEffect(() => {
     if (isMobile || !containerRef) return;
 
-    const targetId = FRAMES.LANDING.title;
+    const targetId = FRAME_KEY.LANDING;
     const target = document.getElementById(targetId || "");
     if (!target) return;
 
-    updateTransform({ x: -target.offsetLeft, y: -target.offsetTop });
+    // updateTransform({ x: -target.offsetLeft, y: -target.offsetTop });
     isInitialized.current = true;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

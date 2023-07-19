@@ -1,4 +1,5 @@
 import "./App.css";
+import Navigation from "./components/navigation";
 import Container from "./components/template/Container/Container";
 import Frame from "./components/template/Frame";
 import About from "./sections/About";
@@ -13,7 +14,7 @@ function App() {
   return (
     <>
       <Container>
-        <Frame>
+        <Frame id="">
           <About />
           <Contact />
           <Experiences />
@@ -23,6 +24,7 @@ function App() {
           <Skills />
         </Frame>
       </Container>
+      <Navigation />
     </>
   );
 }

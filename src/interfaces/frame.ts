@@ -13,10 +13,13 @@ export interface framePositionType<T = elementDimensionType> {
   bottom: T;
 }
 
-export interface IFrame {
-  title?: string;
+export interface IFrameBbox {
   size?: Partial<frameSizeType>;
   position?: Partial<framePositionType>;
+}
+
+export interface IFrame extends IFrameBbox {
+  title?: string;
 }
 
 export enum FRAME_KEY {

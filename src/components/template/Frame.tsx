@@ -3,10 +3,11 @@ import { useZoomStore } from "../../store/zoomStore";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
+  id: string;
 }
 
 const Frame = (props: IFrameProps) => {
-  const { children, size, position, title } = props;
+  const { children, size, position, title, id } = props;
   const { transform } = useZoomStore();
 
   return (
@@ -15,7 +16,7 @@ const Frame = (props: IFrameProps) => {
         ...size,
         ...position,
       }}
-      id={title}
+      id={id}
       className="absolute bg-white"
     >
       {title && (
