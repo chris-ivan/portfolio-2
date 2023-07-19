@@ -23,7 +23,7 @@ const Container = ({ children }: IContainer) => {
     <div ref={containerRef} className="relative w-[100vw] h-[100vh]">
       <div
         ref={contentRef}
-        className="absolute select-none align-middle"
+        className="absolute select-none align-middle bg-dark-grey"
         style={{
           width: initialSize.width,
           height: initialSize.height,

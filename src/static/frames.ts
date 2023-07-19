@@ -30,7 +30,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.EXPERIENCES]: {
     title: "Experiences",
     size: {
-      width: "80vh",
+      width: "80vw",
     },
     position: {
       top: "380vh",

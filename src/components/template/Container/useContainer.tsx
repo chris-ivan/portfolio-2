@@ -39,6 +39,8 @@ const useContainer = (props: IUseContainer) => {
     initialSize
   );
 
+  // const [_pinchDistance, setPinchDistance] = useState<number>(0);
+
   useZoomShortcut({ onZoom: dispatchZoomChange });
   const onZoom = (event: React.WheelEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -96,12 +98,35 @@ const useContainer = (props: IUseContainer) => {
     event.preventDefault();
   };
 
+  // const onTouchMove = (event: TouchEvent) => {
+  //   const { touches } = event;
+  //   const distance = Math.hypot(
+  //     touches[0].pageX - touches[1].pageX,
+  //     touches[0].pageY - touches[1].pageY
+  //   );
+
+  //   setPinchDistance((prev) => {
+  //     const ratio = 1 + ((distance - prev) / prev) * 1.5;
+  //     const centerX = (touches[0].screenX + touches[1].screenX) / 2;
+  //     const centerY = (touches[0].screenY + touches[1].screenY) / 2;
+  //     dispatchZoomChange(ratio, centerX, centerY);
+  //     return distance;
+  //   });
+  // };
+
   useEffect(() => {
-    window.addEventListener("wheel", preventWheel, { passive: false });
-    document.addEventListener("wheel", preventWheel, { passive: false });
-    containerRef?.current?.addEventListener("wheel", preventWheel, {
-      passive: false,
-    });
+    const container = containerRef?.current;
+    const options = { passive: false };
+
+    window.addEventListener("wheel", preventWheel, options);
+    document.addEventListener("wheel", preventWheel, options);
+    container?.addEventListener("wheel", preventWheel, options);
+
+    return () => {
+      window.removeEventListener("wheel", preventWheel);
+      document.removeEventListener("wheel", preventWheel);
+      container?.removeEventListener("wheel", preventWheel);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

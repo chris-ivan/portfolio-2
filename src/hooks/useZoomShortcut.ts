@@ -12,7 +12,8 @@ const isZoomingIn = (pressedKey: string) => {
 const isZoomTriggered = (e: KeyboardEvent) => {
   const pressedKey = e.key;
   const isZooming = isZoomingOut(pressedKey) || isZoomingIn(pressedKey);
-  return e.ctrlKey && isZooming;
+  // return e.ctrlKey && isZooming;
+  return isZooming;
 };
 
 interface IUseZoomShortcut {

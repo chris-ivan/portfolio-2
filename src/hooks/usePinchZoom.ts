@@ -17,12 +17,9 @@ export default function usePinchZoom(
   maxScale: number,
   initialSize: frameSizeType<number>
 ) {
-  // should be passed through props for better reusability
-  const { setTransform } = useZoomStore();
-
   /** Direct update transform */
   const updateTransform = (newTransform: Partial<TransformType>) => {
-    setTransform(newTransform);
+    useZoomStore.getState().setTransform(newTransform);
   };
 
   /** Scale according to the position of clientX and clientY */
@@ -78,9 +75,6 @@ export default function usePinchZoom(
         newY = 0;
       }
     }
-
-    // console.log(Math.round(newX), Math.round(newY), newScale);
-    console.log(ratio, newRatio);
 
     updateTransform({
       x: newX,
