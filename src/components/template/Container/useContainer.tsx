@@ -1,3 +1,4 @@
+import useInitialView from "../../../hooks/useInitialView";
 import usePinchZoom from "../../../hooks/usePinchZoom";
 import useViewport from "../../../hooks/useViewport";
 import useZoomShortcut from "../../../hooks/useZoomShortcut";
@@ -41,6 +42,7 @@ const useContainer = (props: IUseContainer) => {
 
   // const [_pinchDistance, setPinchDistance] = useState<number>(0);
 
+  useInitialView({ containerRef, updateTransform });
   useZoomShortcut({ onZoom: dispatchZoomChange });
   const onZoom = (event: React.WheelEvent<HTMLDivElement>) => {
     event.preventDefault();

@@ -15,6 +15,7 @@ const Frame = (props: IFrameProps) => {
         ...size,
         ...position,
       }}
+      id={title}
       className="absolute bg-white"
     >
       {title && (

@@ -4,7 +4,7 @@ import { TransformType } from "../interfaces/container";
 const initialTransform = {
   x: 0,
   y: 0,
-  scale: 1.5,
+  scale: 1,
 };
 
 interface IZoomStore {
