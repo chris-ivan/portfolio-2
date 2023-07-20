@@ -44,7 +44,7 @@ const PointerNode = (props: IPointerNode) => {
 
   return (
     <div
-      className="absolute flex items-center justify-center"
+      className="absolute flex items-center justify-center pointer-events-auto cursor-pointer"
       style={{
         ...position,
         transition:
