@@ -32,7 +32,7 @@ const Map = () => {
         style={{
           ...viewPosition,
         }}
-        className="absolute border border-solid border-blue"
+        className="absolute border-solid border-blue border-2"
       />
     </div>
   );
