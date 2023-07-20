@@ -1,6 +1,7 @@
 import usePointerNode from "./usePointerNode";
 // @ts-ignore
-import { ReactComponent as PointerArrow } from "../../../assets/icons/navigation-arrow.svg";
+import PointerArrow from "../../../assets/icons/NavigationArrow";
+import { COLOR } from "../../../static/colors";
 
 interface IPointerNode {
   targetId: string;
@@ -59,9 +60,12 @@ const PointerNode = (props: IPointerNode) => {
         }}
       >
         <PointerArrow
+          borderColor={isActive ? COLOR.ORANGE : COLOR.BLUE}
+          fillColor={isActive ? COLOR.ORANGE : COLOR.WHITE}
           style={{
             transition: "transform 0.05s ease-in-out",
             transform: `rotate(${angle}deg)`,
+            color: "red",
           }}
         />
       </div>
