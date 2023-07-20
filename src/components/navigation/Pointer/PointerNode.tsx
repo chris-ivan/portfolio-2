@@ -28,7 +28,8 @@ const concat = (
 
 const PointerNode = (props: IPointerNode) => {
   const { targetId, label } = props;
-  const { position, angle } = usePointerNode({ targetId });
+  const pointerNode = usePointerNode({ targetId, label });
+  const { position, angle, pointerPosition } = pointerNode;
 
   const isActive = false;
   const tailwindClass = concat(
@@ -36,9 +37,11 @@ const PointerNode = (props: IPointerNode) => {
     isActive
   );
 
+  const { x, y } = pointerPosition;
+
   return (
     <div
-      className="absolute"
+      className="absolute flex items-center justify-center"
       style={{
         ...position,
         transition:
@@ -48,13 +51,20 @@ const PointerNode = (props: IPointerNode) => {
       <div className={`${tailwindClass} border-2 border-solid p-2`}>
         {label}
       </div>
-      <PointerArrow
-        className="absolute top-0 left-2"
+      <div
+        className="absolute flex items-center justify-center"
         style={{
           transition: "transform 0.05s ease-in-out",
-          transform: `rotate(${angle}deg)`,
+          transform: `translate(${x}px, ${y}px)`,
         }}
-      />
+      >
+        <PointerArrow
+          style={{
+            transition: "transform 0.05s ease-in-out",
+            transform: `rotate(${angle}deg)`,
+          }}
+        />
+      </div>
     </div>
   );
 };

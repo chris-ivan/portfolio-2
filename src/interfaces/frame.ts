@@ -6,6 +6,11 @@ export interface frameSizeType<T = elementDimensionType> {
   height: T;
 }
 
+export interface frameCoordinateType {
+  x: number;
+  y: number;
+}
+
 export interface framePositionType<T = elementDimensionType> {
   top: T;
   left: T;

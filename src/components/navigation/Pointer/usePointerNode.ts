@@ -1,64 +1,50 @@
 import { useCallback, useEffect, useState } from "react";
-import { framePositionType } from "../../../interfaces/frame";
+import {
+  frameCoordinateType,
+  framePositionType,
+} from "../../../interfaces/frame";
 import useViewport from "../../../hooks/useViewport";
+import {
+  calculatePointerNodeArrowPosition,
+  calculatePointerNodePosition,
+} from "./Pointer.helper";
 
 interface IUsePointerNode {
   targetId: string;
+  label: string;
 }
 
-const PADDING = 20;
+const defaultCoordinate: frameCoordinateType = { x: 0, y: 0 };
 
 const usePointerNode = (props: IUsePointerNode) => {
   const [position, setPosition] = useState<Partial<framePositionType>>({});
+  const [pointerPosition, setPointerPosition] =
+    useState<frameCoordinateType>(defaultCoordinate);
   const [angle, setAngle] = useState<number>(0);
-  const { width: viewportWidth, height: viewportHeight } = useViewport();
-  const { targetId } = props;
+  const viewportSize = useViewport();
+  const { targetId, label } = props;
 
   const calculatePosition = useCallback(() => {
-    const position: Partial<framePositionType> = {};
+    const calcProps = { targetId, viewportSize };
+    const pointerNodePosition = calculatePointerNodePosition(calcProps);
+    const { position, angle } = pointerNodePosition;
 
-    const target = document.getElementById(targetId);
-    if (!target) return;
+    const arrowProps = { angle, label };
+    const pointerArrowPosition = calculatePointerNodeArrowPosition(arrowProps);
 
-    const targetPosition = target.getBoundingClientRect();
-    const targetCenterX = targetPosition.left + targetPosition.width / 2;
-    const targetCenterY = targetPosition.top + targetPosition.height / 2;
-
-    const viewportCenterX = viewportWidth / 2;
-    const viewportCenterY = viewportHeight / 2;
-
-    const angleRad = Math.atan2(targetCenterY, targetCenterX);
-    const angleDeg = (angleRad * 180) / Math.PI;
-
-    const allowedWidth = viewportCenterX - PADDING;
-    const allowedHeight = viewportCenterY - PADDING;
-
-    const scale = Math.min(
-      allowedWidth / Math.abs(targetCenterX),
-      allowedHeight / Math.abs(targetCenterY)
-    );
-    const vectorWidth = Math.abs(targetCenterX) * scale;
-    const vectorHeight = Math.abs(targetCenterY) * scale;
-
-    const isLeft = targetCenterX < 0;
-    const isTop = targetCenterY < 0;
-
-    const positionKeyX = isLeft ? "left" : "right";
-    const positionKeyY = isTop ? "top" : "bottom";
-
-    position[positionKeyX] = viewportCenterX - vectorWidth;
-    position[positionKeyY] = viewportCenterY - vectorHeight;
-
-    setAngle(angleDeg);
+    setAngle(angle);
     setPosition(position);
-  }, [targetId, viewportHeight, viewportWidth]);
+    setPointerPosition(pointerArrowPosition);
+  }, [targetId, viewportSize, label]);
 
   useEffect(() => {
-    const interval = setInterval(calculatePosition, 50);
+    calculatePosition();
+    const interval = setInterval(calculatePosition, 100);
     return () => clearInterval(interval);
-  }, [calculatePosition]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  return { position, angle };
+  return { position, angle, pointerPosition };
 };
 
 export default usePointerNode;
