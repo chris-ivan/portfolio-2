@@ -9,11 +9,14 @@ const initialTransform = {
 
 interface IZoomStore {
   transform: TransformType;
+  isNavigating: boolean;
   setTransform: (props: Partial<TransformType>) => void;
+  setIsNavigating: (isNavigating: boolean) => void;
 }
 
 export const useZoomStore = create<IZoomStore>((set) => ({
   transform: initialTransform,
+  isNavigating: false,
   setTransform: (props) =>
     set((store: IZoomStore) => ({
       transform: {
@@ -21,4 +24,5 @@ export const useZoomStore = create<IZoomStore>((set) => ({
         ...props,
       },
     })),
+  setIsNavigating: (isNavigating) => set({ isNavigating }),
 }));

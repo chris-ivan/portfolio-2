@@ -2,6 +2,7 @@ import usePointerNode from "./usePointerNode";
 // @ts-ignore
 import PointerArrow from "../../../assets/icons/NavigationArrow";
 import { COLOR } from "../../../static/colors";
+import { useZoomStore } from "../../../store/zoomStore";
 
 interface IPointerNode {
   targetId: string;
@@ -29,6 +30,7 @@ const concat = (
 
 const PointerNode = (props: IPointerNode) => {
   const { targetId, label } = props;
+  const { isNavigating } = useZoomStore();
   const pointerNode = usePointerNode({ targetId, label });
   const { position, angle, pointerPosition } = pointerNode;
 
@@ -46,10 +48,13 @@ const PointerNode = (props: IPointerNode) => {
       style={{
         ...position,
         transition:
-          "top 0.05s ease-in-out, left 0.05s  ease-in-out, width 0.05s  ease-in-out, height 0.05s  ease-in-out",
+          "top 0.05s ease-in-out, left 0.05s ease-in-out, right 0.05s ease-in-out, bottom 0.05s ease-in-out, opacity 0.3s ease-in-out",
+        opacity: isNavigating ? 1 : 0,
       }}
     >
-      <div className={`${tailwindClass} border-2 border-solid p-2`}>
+      <div
+        className={`${tailwindClass} border-2 border-solid p-2 transition-colors`}
+      >
         {label}
       </div>
       <div
@@ -65,7 +70,6 @@ const PointerNode = (props: IPointerNode) => {
           style={{
             transition: "transform 0.05s ease-in-out",
             transform: `rotate(${angle}deg)`,
-            color: "red",
           }}
         />
       </div>

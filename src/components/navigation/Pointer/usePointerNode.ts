@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   frameCoordinateType,
   framePositionType,
@@ -8,6 +8,8 @@ import {
   calculatePointerNodeArrowPosition,
   calculatePointerNodePosition,
 } from "./Pointer.helper";
+import { useZoomStore } from "../../../store/zoomStore";
+import { useInterval } from "../../../hooks/useInterval";
 
 interface IUsePointerNode {
   targetId: string;
@@ -22,6 +24,7 @@ const usePointerNode = (props: IUsePointerNode) => {
     useState<frameCoordinateType>(defaultCoordinate);
   const [angle, setAngle] = useState<number>(0);
   const viewportSize = useViewport();
+  const { isNavigating } = useZoomStore();
   const { targetId, label } = props;
 
   const calculatePosition = useCallback(() => {
@@ -37,12 +40,7 @@ const usePointerNode = (props: IUsePointerNode) => {
     setPointerPosition(pointerArrowPosition);
   }, [targetId, viewportSize, label]);
 
-  useEffect(() => {
-    calculatePosition();
-    const interval = setInterval(calculatePosition, 100);
-    return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useInterval(calculatePosition, isNavigating ? 100 : null);
 
   return { position, angle, pointerPosition };
 };

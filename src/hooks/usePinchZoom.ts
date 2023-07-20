@@ -11,6 +11,8 @@ function getClientSize() {
   };
 }
 
+let setNavigatingFalseTimeout: number;
+
 export default function usePinchZoom(
   contentRef: React.RefObject<HTMLDivElement> | null,
   minScale: number,
@@ -20,6 +22,12 @@ export default function usePinchZoom(
   /** Direct update transform */
   const updateTransform = (newTransform: Partial<TransformType>) => {
     useZoomStore.getState().setTransform(newTransform);
+    useZoomStore.getState().setIsNavigating(true);
+    setNavigatingFalseTimeout && clearTimeout(setNavigatingFalseTimeout);
+
+    setNavigatingFalseTimeout = setTimeout(() => {
+      useZoomStore.getState().setIsNavigating(false);
+    }, 300);
   };
 
   /** Scale according to the position of clientX and clientY */
