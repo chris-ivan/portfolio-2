@@ -44,12 +44,13 @@ const PointerNode = (props: IPointerNode) => {
 
   return (
     <div
-      className="absolute flex items-center justify-center pointer-events-auto cursor-pointer"
+      className="absolute flex items-center justify-center cursor-pointer"
       style={{
         ...position,
         transition:
           "top 0.05s ease-in-out, left 0.05s ease-in-out, right 0.05s ease-in-out, bottom 0.05s ease-in-out, opacity 0.3s ease-in-out",
         opacity: isNavigating ? 1 : 0,
+        pointerEvents: isNavigating ? "auto" : "none",
       }}
     >
       <div

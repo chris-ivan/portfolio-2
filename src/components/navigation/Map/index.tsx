@@ -3,12 +3,14 @@ import { FRAMES, INITIAL_APP_SIZE } from "../../../static/frames";
 import MapFrame from "./MapFrame";
 import { useMemo } from "react";
 import useMap from "./useMap";
+import { useZoomStore } from "../../../store/zoomStore";
 
 const SCALE = 0.015;
 
 const Map = () => {
   const containerSize = useResize({ initialSize: INITIAL_APP_SIZE });
   const viewPosition = useMap({ scale: SCALE });
+  const { isNavigating } = useZoomStore();
   const { width, height } = containerSize;
 
   const children = useMemo(
@@ -24,8 +26,9 @@ const Map = () => {
       style={{
         width: width * SCALE,
         height: height * SCALE,
+        opacity: isNavigating ? 1 : 0,
       }}
-      className="fixed bottom-6 left-6 border border-solid border-grey"
+      className="fixed bottom-6 left-6 border border-solid border-grey pointer-events-none transition-opacity"
     >
       {children}
       <div

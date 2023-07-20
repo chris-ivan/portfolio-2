@@ -27,7 +27,7 @@ export default function usePinchZoom(
 
     setNavigatingFalseTimeout = setTimeout(() => {
       useZoomStore.getState().setIsNavigating(false);
-    }, 300);
+    }, 2000);
   };
 
   /** Scale according to the position of clientX and clientY */
