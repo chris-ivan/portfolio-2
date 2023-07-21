@@ -36,7 +36,7 @@ const PointerNode = (props: IPointerNode) => {
         ...position,
         transition:
           "top 0.05s ease-in-out, left 0.05s ease-in-out, right 0.05s ease-in-out, bottom 0.05s ease-in-out, opacity 0.3s ease-in-out",
-        opacity: isVisible ? 1 : 1,
+        opacity: isVisible ? 1 : 0,
         pointerEvents: isVisible ? "auto" : "none",
       }}
     >
