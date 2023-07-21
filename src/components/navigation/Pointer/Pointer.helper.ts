@@ -6,8 +6,8 @@ import {
 } from "../../../interfaces/frame";
 
 const PADDING = 40;
-const AVG_CHAR_WIDTH = 6;
-const AVG_CHAR_HEIGHT = 18;
+const AVG_CHAR_WIDTH = 5.8;
+const AVG_CHAR_HEIGHT = 12;
 
 interface ICalculatePointerNodePosition {
   targetId: FRAME_KEY;
@@ -85,7 +85,7 @@ export const calculatePointerNodeArrowPosition = (
   const arrowHeight = allowedHeight * Math.sin(angleRad);
 
   return {
-    x: addPadding(arrowWidth, 20),
+    x: addPadding(arrowWidth, 30),
     y: addPadding(arrowHeight, 5),
   };
 };
