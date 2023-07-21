@@ -40,7 +40,7 @@ const PointerNode = (props: IPointerNode) => {
       }}
     >
       <div
-        className={`border-2 border-solid p-2 transition-colors`}
+        className={`border-2 border-solid px-2 py-1 transition-colors text-xs`}
         style={{
           borderColor: isActive ? COLOR.ORANGE : theme.colorBorderSecondary,
           backgroundColor: isActive ? COLOR.ORANGE : theme.colorBgBase,
@@ -61,7 +61,7 @@ const PointerNode = (props: IPointerNode) => {
           fillColor={isActive ? COLOR.ORANGE : theme.colorBgBase}
           style={{
             transition: "transform 0.05s ease-in-out",
-            transform: `rotate(${angle}deg)`,
+            transform: `rotate(${angle}deg) scale(0.75)`,
           }}
         />
       </div>
