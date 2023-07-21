@@ -10,7 +10,7 @@ import {
   calculatePointerNodePosition,
 } from "./Pointer.helper";
 import { useNavigationStore } from "../../../store/navigationStore";
-import { useInterval } from "../../../hooks/useInterval";
+import { useInterval } from "usehooks-ts";
 
 interface IUsePointerNode {
   targetId: FRAME_KEY;

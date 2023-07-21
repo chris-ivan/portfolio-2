@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { FRAME_KEY, IFrame } from "../../interfaces/frame";
 import { useNavigationStore } from "../../store/navigationStore";
-import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
+import { useIntersectionObserver } from "usehooks-ts";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
