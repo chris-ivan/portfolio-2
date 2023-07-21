@@ -1,5 +1,5 @@
 import useViewport from "../../../hooks/useViewport";
-import { useZoomStore } from "../../../store/zoomStore";
+import { useNavigationStore } from "../../../store/navigationStore";
 
 interface IUseMap {
   scale: number;
@@ -7,7 +7,7 @@ interface IUseMap {
 
 const useMap = (props: IUseMap) => {
   const { scale } = props;
-  const { transform } = useZoomStore();
+  const { transform } = useNavigationStore();
   const { x, y, scale: globalScale } = transform;
   const { width: viewportWidth, height: viewportHeight } = useViewport();
 

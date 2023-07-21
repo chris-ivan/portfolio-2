@@ -1,5 +1,5 @@
 import { IFrame } from "../../interfaces/frame";
-import { useZoomStore } from "../../store/zoomStore";
+import { useNavigationStore } from "../../store/navigationStore";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ interface IFrameProps extends IFrame {
 
 const Frame = (props: IFrameProps) => {
   const { children, size, position, title, id } = props;
-  const { transform } = useZoomStore();
+  const { transform } = useNavigationStore();
 
   return (
     <div

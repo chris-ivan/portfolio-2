@@ -8,7 +8,7 @@ import {
   calculatePointerNodeArrowPosition,
   calculatePointerNodePosition,
 } from "./Pointer.helper";
-import { useZoomStore } from "../../../store/zoomStore";
+import { useNavigationStore } from "../../../store/navigationStore";
 import { useInterval } from "../../../hooks/useInterval";
 
 interface IUsePointerNode {
@@ -24,7 +24,7 @@ const usePointerNode = (props: IUsePointerNode) => {
     useState<frameCoordinateType>(defaultCoordinate);
   const [angle, setAngle] = useState<number>(0);
   const viewportSize = useViewport();
-  const { isNavigating } = useZoomStore();
+  const { isNavigating } = useNavigationStore();
   const { targetId, label } = props;
 
   const calculatePosition = useCallback(() => {

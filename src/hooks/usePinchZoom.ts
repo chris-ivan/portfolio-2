@@ -1,6 +1,6 @@
 import { TransformType } from "../interfaces/container";
 import { frameSizeType } from "../interfaces/frame";
-import { useZoomStore } from "../store/zoomStore";
+import { useNavigationStore } from "../store/navigationStore";
 
 function getClientSize() {
   const width = document.documentElement.clientWidth;
@@ -21,12 +21,12 @@ export default function usePinchZoom(
 ) {
   /** Direct update transform */
   const updateTransform = (newTransform: Partial<TransformType>) => {
-    useZoomStore.getState().setTransform(newTransform);
-    useZoomStore.getState().setIsNavigating(true);
+    useNavigationStore.getState().setTransform(newTransform);
+    useNavigationStore.getState().setIsNavigating(true);
     setNavigatingFalseTimeout && clearTimeout(setNavigatingFalseTimeout);
 
     setNavigatingFalseTimeout = setTimeout(() => {
-      useZoomStore.getState().setIsNavigating(false);
+      useNavigationStore.getState().setIsNavigating(false);
     }, 2000);
   };
 
@@ -39,7 +39,7 @@ export default function usePinchZoom(
     if (!contentRef?.current) return;
 
     const { width, height } = initialSize;
-    const { transform } = useZoomStore.getState();
+    const { transform } = useNavigationStore.getState();
     const { offsetWidth, offsetHeight, offsetLeft, offsetTop } =
       contentRef.current;
 

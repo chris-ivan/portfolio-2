@@ -10,7 +10,7 @@ import {
   SCALE_STEP,
   WHEEL_MAX_SCALE_RATIO,
 } from "../../../static/transform";
-import { useZoomStore } from "../../../store/zoomStore";
+import { useNavigationStore } from "../../../store/navigationStore";
 import {
   calculateMovement,
   getMinimumZoom,
@@ -32,7 +32,7 @@ const useContainer = (props: IUseContainer) => {
     getMinimumZoom(initialSize, viewportSize) * MIN_SCALE_MULTIPLIER;
   const maxScale = MAX_SCALE;
 
-  const { transform } = useZoomStore();
+  const { transform } = useNavigationStore();
   const { updateTransform, dispatchZoomChange } = usePinchZoom(
     contentRef,
     minScale,

@@ -2,7 +2,7 @@ import usePointerNode from "./usePointerNode";
 // @ts-ignore
 import PointerArrow from "../../../assets/icons/NavigationArrow";
 import { COLOR } from "../../../static/colors";
-import { useZoomStore } from "../../../store/zoomStore";
+import { useNavigationStore } from "../../../store/navigationStore";
 
 interface IPointerNode {
   targetId: string;
@@ -30,7 +30,7 @@ const concat = (
 
 const PointerNode = (props: IPointerNode) => {
   const { targetId, label } = props;
-  const { isNavigating } = useZoomStore();
+  const { isNavigating } = useNavigationStore();
   const pointerNode = usePointerNode({ targetId, label });
   const { position, angle, pointerPosition } = pointerNode;
 
