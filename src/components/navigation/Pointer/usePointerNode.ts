@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import {
+  FRAME_KEY,
   frameCoordinateType,
   framePositionType,
 } from "../../../interfaces/frame";
@@ -12,7 +13,7 @@ import { useNavigationStore } from "../../../store/navigationStore";
 import { useInterval } from "../../../hooks/useInterval";
 
 interface IUsePointerNode {
-  targetId: string;
+  targetId: FRAME_KEY;
   label: string;
 }
 

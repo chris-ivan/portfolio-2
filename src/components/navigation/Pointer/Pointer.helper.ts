@@ -1,4 +1,5 @@
 import {
+  FRAME_KEY,
   frameCoordinateType,
   framePositionType,
   frameSizeType,
@@ -9,7 +10,7 @@ const AVG_CHAR_WIDTH = 8;
 const AVG_CHAR_HEIGHT = 24;
 
 interface ICalculatePointerNodePosition {
-  targetId: string;
+  targetId: FRAME_KEY;
   viewportSize: frameSizeType<number>;
 }
 
@@ -24,12 +25,18 @@ export const calculatePointerNodePosition = (
   const target = document.getElementById(targetId);
   if (!target) return { position, angle: 0 };
 
-  const targetPosition = target.getBoundingClientRect();
-  const targetCenterX = targetPosition.left + targetPosition.width / 2;
-  const targetCenterY = targetPosition.top + targetPosition.height / 2;
-
   const viewportCenterX = viewportWidth / 2;
   const viewportCenterY = viewportHeight / 2;
+
+  const targetPosition = target.getBoundingClientRect();
+
+  const targetCenterX =
+    targetPosition.left + targetPosition.width / 2 - viewportCenterX;
+  const targetCenterY =
+    targetPosition.top + targetPosition.height / 2 - viewportCenterY;
+
+  if (targetId === FRAME_KEY.ABOUT)
+    console.log(targetPosition.left, targetPosition.top);
 
   const angleRad = Math.atan2(targetCenterY, targetCenterX);
   const angleDeg = (angleRad * 180) / Math.PI;
