@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { FRAME_KEY, IFrame } from "../../interfaces/frame";
 import { useNavigationStore } from "../../store/navigationStore";
 import { useIntersectionObserver } from "usehooks-ts";
+import useTheme from "../../hooks/useTheme";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
@@ -12,6 +13,7 @@ const Frame = (props: IFrameProps) => {
   const { children, size, position, title, id } = props;
   const { transform, removeRecommendedFrame, changeFrameVisibility } =
     useNavigationStore();
+  const { theme } = useTheme();
 
   const ref = useRef<HTMLDivElement>(null);
   const isInitiated = useRef(false);
@@ -31,6 +33,7 @@ const Frame = (props: IFrameProps) => {
       style={{
         ...size,
         ...position,
+        backgroundColor: theme.colorBgBase,
       }}
       id={id}
       ref={ref}
@@ -42,6 +45,7 @@ const Frame = (props: IFrameProps) => {
           style={{
             transform: `scale(${1 / transform.scale})`,
             transformOrigin: "bottom left",
+            color: theme.colorBorder,
           }}
         >
           {title}

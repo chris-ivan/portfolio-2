@@ -1,7 +1,7 @@
 import "./App.css";
 import Navigation from "./components/navigation";
 import Container from "./components/template/Container/Container";
-import Frame from "./components/template/Frame";
+import { ThemeProvider } from "./context/ThemeContext";
 import About from "./sections/About";
 import Contact from "./sections/Contact";
 import Experiences from "./sections/Experiences";
@@ -12,20 +12,18 @@ import Skills from "./sections/Skills";
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <Container>
-        <Frame id="">
-          <About />
-          <Contact />
-          <Experiences />
-          <Interests />
-          <LandingPage />
-          <Projects />
-          <Skills />
-        </Frame>
+        <About />
+        <Contact />
+        <Experiences />
+        <Interests />
+        <LandingPage />
+        <Projects />
+        <Skills />
       </Container>
       <Navigation />
-    </>
+    </ThemeProvider>
   );
 }
 

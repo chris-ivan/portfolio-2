@@ -35,9 +35,6 @@ export const calculatePointerNodePosition = (
   const targetCenterY =
     targetPosition.top + targetPosition.height / 2 - viewportCenterY;
 
-  if (targetId === FRAME_KEY.ABOUT)
-    console.log(targetPosition.left, targetPosition.top);
-
   const angleRad = Math.atan2(targetCenterY, targetCenterX);
   const angleDeg = (angleRad * 180) / Math.PI;
 
