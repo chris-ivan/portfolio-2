@@ -1,14 +1,30 @@
-import { IFrame } from "../../interfaces/frame";
+import { useEffect, useRef } from "react";
+import { FRAME_KEY, IFrame } from "../../interfaces/frame";
 import { useNavigationStore } from "../../store/navigationStore";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
-  id: string;
+  id: FRAME_KEY;
 }
 
 const Frame = (props: IFrameProps) => {
   const { children, size, position, title, id } = props;
-  const { transform } = useNavigationStore();
+  const { transform, removeRecommendedFrame, changeFrameVisibility } =
+    useNavigationStore();
+
+  const ref = useRef<HTMLDivElement>(null);
+  const isInitiated = useRef(false);
+  const entry = useIntersectionObserver(ref, {});
+
+  useEffect(() => {
+    changeFrameVisibility(id, !!entry?.isIntersecting);
+
+    if (isInitiated.current || !entry?.isIntersecting) return;
+    removeRecommendedFrame(id);
+    isInitiated.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [entry?.isIntersecting]);
 
   return (
     <div
@@ -17,6 +33,7 @@ const Frame = (props: IFrameProps) => {
         ...position,
       }}
       id={id}
+      ref={ref}
       className="absolute bg-white"
     >
       {title && (

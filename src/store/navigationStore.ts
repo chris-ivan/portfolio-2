@@ -13,15 +13,26 @@ interface INavigationStore {
   transform: TransformType;
   isNavigating: boolean;
   recommendedFrame: FRAME_KEY[];
+  frameVisibility: { [key in FRAME_KEY]: boolean };
   setTransform: (props: Partial<TransformType>) => void;
   setIsNavigating: (isNavigating: boolean) => void;
   removeRecommendedFrame: (frameKey: FRAME_KEY) => void;
+  changeFrameVisibility: (frameKey: FRAME_KEY, isVisible: boolean) => void;
 }
 
 export const useNavigationStore = create<INavigationStore>((set) => ({
   transform: initialTransform,
   isNavigating: false,
   recommendedFrame: [...NAVIGATING_ORDER],
+  frameVisibility: {
+    [FRAME_KEY.CONTACT]: false,
+    [FRAME_KEY.INTERESTS]: false,
+    [FRAME_KEY.EXPERIENCES]: false,
+    [FRAME_KEY.LANDING]: false,
+    [FRAME_KEY.SKILLS]: false,
+    [FRAME_KEY.ABOUT]: false,
+    [FRAME_KEY.PROJECTS]: false,
+  },
   setTransform: (props) =>
     set((store: INavigationStore) => ({
       transform: {
@@ -38,6 +49,15 @@ export const useNavigationStore = create<INavigationStore>((set) => ({
       }
       return {
         recommendedFrame: [...store.recommendedFrame],
+      };
+    }),
+  changeFrameVisibility: (frameKey, isVisible) =>
+    set((store: INavigationStore) => {
+      return {
+        frameVisibility: {
+          ...store.frameVisibility,
+          [frameKey]: isVisible,
+        },
       };
     }),
 }));

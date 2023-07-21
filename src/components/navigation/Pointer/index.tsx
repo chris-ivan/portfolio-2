@@ -6,7 +6,7 @@ const Pointer = () => {
   const pointers = Object.keys(FRAME_KEY).map((key) => (
     <PointerNode
       key={key}
-      targetId={key}
+      targetId={key as FRAME_KEY}
       label={FRAMES[key as FRAME_KEY].title || ""}
     />
   ));

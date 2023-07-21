@@ -4,9 +4,10 @@ import PointerArrow from "../../../assets/icons/NavigationArrow";
 import { COLOR } from "../../../static/colors";
 import { useNavigationStore } from "../../../store/navigationStore";
 import { useMemo } from "react";
+import { FRAME_KEY } from "../../../interfaces/frame";
 
 interface IPointerNode {
-  targetId: string;
+  targetId: FRAME_KEY;
   label: string;
 }
 
@@ -31,7 +32,8 @@ const concat = (
 
 const PointerNode = (props: IPointerNode) => {
   const { targetId, label } = props;
-  const { isNavigating, recommendedFrame } = useNavigationStore();
+  const { isNavigating, recommendedFrame, frameVisibility } =
+    useNavigationStore();
   const pointerNode = usePointerNode({ targetId, label });
   const { position, angle, pointerPosition } = pointerNode;
 
@@ -45,6 +47,9 @@ const PointerNode = (props: IPointerNode) => {
   );
 
   const { x, y } = pointerPosition;
+  const isVisible = useMemo(() => {
+    return !frameVisibility[targetId] && isNavigating;
+  }, [frameVisibility, isNavigating, targetId]);
 
   return (
     <div
@@ -53,8 +58,8 @@ const PointerNode = (props: IPointerNode) => {
         ...position,
         transition:
           "top 0.05s ease-in-out, left 0.05s ease-in-out, right 0.05s ease-in-out, bottom 0.05s ease-in-out, opacity 0.3s ease-in-out",
-        opacity: isNavigating ? 1 : 0,
-        pointerEvents: isNavigating ? "auto" : "none",
+        opacity: isVisible ? 1 : 0,
+        pointerEvents: isVisible ? "auto" : "none",
       }}
     >
       <div
