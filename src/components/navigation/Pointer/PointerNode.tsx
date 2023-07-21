@@ -3,6 +3,7 @@ import usePointerNode from "./usePointerNode";
 import PointerArrow from "../../../assets/icons/NavigationArrow";
 import { COLOR } from "../../../static/colors";
 import { useNavigationStore } from "../../../store/navigationStore";
+import { useMemo } from "react";
 
 interface IPointerNode {
   targetId: string;
@@ -30,11 +31,14 @@ const concat = (
 
 const PointerNode = (props: IPointerNode) => {
   const { targetId, label } = props;
-  const { isNavigating } = useNavigationStore();
+  const { isNavigating, recommendedFrame } = useNavigationStore();
   const pointerNode = usePointerNode({ targetId, label });
   const { position, angle, pointerPosition } = pointerNode;
 
-  const isActive = false;
+  const isActive = useMemo(() => {
+    return targetId === recommendedFrame[0];
+  }, [recommendedFrame, targetId]);
+
   const tailwindClass = concat(
     [getTailwindBorderColor, getTailwindBgColor, getTailwindColor],
     isActive

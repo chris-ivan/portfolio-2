@@ -85,3 +85,13 @@ export const INITIAL_APP_SIZE: frameSizeType<viewportDimensionType> = {
   width: "800vw",
   height: "800vh",
 };
+
+export const NAVIGATING_ORDER: FRAME_KEY[] = [
+  FRAME_KEY.LANDING,
+  FRAME_KEY.SKILLS,
+  FRAME_KEY.EXPERIENCES,
+  FRAME_KEY.PROJECTS,
+  FRAME_KEY.CONTACT,
+  FRAME_KEY.ABOUT,
+  FRAME_KEY.INTERESTS,
+];
