@@ -41,9 +41,13 @@ const PointerNode = (props: IPointerNode) => {
     return targetId === recommendedFrame[0];
   }, [recommendedFrame, targetId]);
 
-  const tailwindClass = concat(
-    [getTailwindBorderColor, getTailwindBgColor, getTailwindColor],
-    isActive
+  const tailwindClass = useMemo(
+    () =>
+      concat(
+        [getTailwindBorderColor, getTailwindBgColor, getTailwindColor],
+        isActive
+      ),
+    [isActive]
   );
 
   const { x, y } = pointerPosition;
