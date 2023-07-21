@@ -14,8 +14,7 @@ interface IPointerNode {
 
 const PointerNode = (props: IPointerNode) => {
   const { targetId, label } = props;
-  const { isNavigating, recommendedFrame, frameVisibility } =
-    useNavigationStore();
+  const { recommendedFrame, frameVisibility } = useNavigationStore();
   const pointerNode = usePointerNode({ targetId, label });
   const { position, angle, pointerPosition } = pointerNode;
   const { theme } = useTheme();
@@ -26,8 +25,8 @@ const PointerNode = (props: IPointerNode) => {
 
   const { x, y } = pointerPosition;
   const isVisible = useMemo(() => {
-    return !frameVisibility[targetId] && isNavigating;
-  }, [frameVisibility, isNavigating, targetId]);
+    return !frameVisibility[targetId];
+  }, [frameVisibility, targetId]);
 
   return (
     <div

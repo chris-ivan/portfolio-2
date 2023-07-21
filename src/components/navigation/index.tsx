@@ -1,3 +1,4 @@
+import NavigationConfig from "./Config";
 import Map from "./Map";
 import Pointer from "./Pointer";
 
@@ -6,6 +7,7 @@ const Navigation = () => {
     <>
       <Map />
       <Pointer />
+      <NavigationConfig />
     </>
   );
 };

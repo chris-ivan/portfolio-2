@@ -4,13 +4,14 @@ import MapFrame from "./MapFrame";
 import { useMemo } from "react";
 import useMap from "./useMap";
 import { useNavigationStore } from "../../../store/navigationStore";
+import { Transition } from "@headlessui/react";
 
 const SCALE = 0.015;
 
 const Map = () => {
   const containerSize = useResize({ initialSize: INITIAL_APP_SIZE });
   const viewPosition = useMap({ scale: SCALE });
-  const { isNavigating } = useNavigationStore();
+  const { isNavigating, showMiniMap } = useNavigationStore();
   const { width, height } = containerSize;
 
   const children = useMemo(
@@ -22,22 +23,31 @@ const Map = () => {
   );
 
   return (
-    <div
-      style={{
-        width: width * SCALE,
-        height: height * SCALE,
-        opacity: isNavigating ? 1 : 0,
-      }}
-      className="fixed bottom-6 left-6 border border-solid border-grey pointer-events-none transition-opacity"
+    <Transition
+      show={isNavigating && showMiniMap}
+      enter="transition-opacity duration-150"
+      enterFrom="opacity-0"
+      enterTo="opacity-100"
+      leave="transition-opacity duration-150"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
     >
-      {children}
       <div
         style={{
-          ...viewPosition,
+          width: width * SCALE,
+          height: height * SCALE,
         }}
-        className="absolute border-solid border-blue border-2"
-      />
-    </div>
+        className="fixed bottom-6 left-6 border border-solid border-grey pointer-events-none"
+      >
+        {children}
+        <div
+          style={{
+            ...viewPosition,
+          }}
+          className="absolute border-solid border-blue border-2"
+        />
+      </div>
+    </Transition>
   );
 };
 

@@ -12,17 +12,23 @@ const initialTransform = {
 interface INavigationStore {
   transform: TransformType;
   isNavigating: boolean;
+  showNavigation: boolean;
+  showMiniMap: boolean;
   recommendedFrame: FRAME_KEY[];
   frameVisibility: { [key in FRAME_KEY]: boolean };
   setTransform: (props: Partial<TransformType>) => void;
   setIsNavigating: (isNavigating: boolean) => void;
   removeRecommendedFrame: (frameKey: FRAME_KEY) => void;
   changeFrameVisibility: (frameKey: FRAME_KEY, isVisible: boolean) => void;
+  toggleNavigation: () => void;
+  toggleMiniMap: () => void;
 }
 
 export const useNavigationStore = create<INavigationStore>((set) => ({
   transform: initialTransform,
   isNavigating: false,
+  showNavigation: true,
+  showMiniMap: true,
   recommendedFrame: [...NAVIGATING_ORDER],
   frameVisibility: {
     [FRAME_KEY.CONTACT]: false,
@@ -60,4 +66,10 @@ export const useNavigationStore = create<INavigationStore>((set) => ({
         },
       };
     }),
+  toggleNavigation: () =>
+    set((store: INavigationStore) => ({
+      showNavigation: !store.showNavigation,
+    })),
+  toggleMiniMap: () =>
+    set((store: INavigationStore) => ({ showMiniMap: !store.showMiniMap })),
 }));

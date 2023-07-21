@@ -6,11 +6,13 @@ import { DARK_THEME, LIGHT_THEME } from "../static/colors";
 export interface IThemeContext {
   theme: ITheme;
   setTheme: (theme: ThemeType) => void;
+  isDarkMode: boolean;
 }
 
 export const ThemeContext = createContext<IThemeContext>({
   theme: LIGHT_THEME,
   setTheme: () => undefined,
+  isDarkMode: false,
 });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
@@ -36,7 +38,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, [isDarkMode]);
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme, isDarkMode }}>
       {children}
     </ThemeContext.Provider>
   );
