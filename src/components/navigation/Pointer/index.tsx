@@ -22,7 +22,7 @@ const Pointer = () => {
   return (
     <Transition
       show={isNavigating && showNavigation}
-      enter="transition-opacity duration-150"
+      enter="transition-opacity duration-300"
       enterFrom="opacity-0"
       enterTo="opacity-100"
       leave="transition-opacity duration-150"
