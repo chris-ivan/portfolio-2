@@ -1,8 +1,7 @@
 import { useRef } from "react";
 import useContainer from "./useContainer";
-import useResize from "../../../hooks/useResize";
-import { INITIAL_APP_SIZE } from "../../../static/frames";
 import useTheme from "../../../hooks/useTheme";
+import { useNavigationStore } from "../../../store/navigationStore";
 
 interface IContainer {
   children: React.ReactNode;
@@ -11,14 +10,15 @@ interface IContainer {
 const Container = ({ children }: IContainer) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const initialSize = useResize({ initialSize: INITIAL_APP_SIZE });
+  const { appSize } = useNavigationStore();
   const { theme } = useTheme();
 
   const { transform, onWheel } = useContainer({
     contentRef,
     containerRef,
-    initialSize,
+    initialSize: appSize,
   });
+
   const { x, y, scale } = transform;
 
   return (
@@ -27,8 +27,8 @@ const Container = ({ children }: IContainer) => {
         ref={contentRef}
         className="absolute select-none align-middle"
         style={{
-          width: initialSize.width,
-          height: initialSize.height,
+          width: appSize.width,
+          height: appSize.height,
           transform: `translate3d(${x}px, ${y}px, 0) scale3d(${scale}, ${scale}, 1)`,
           backgroundColor: theme.colorBgSecondary,
         }}

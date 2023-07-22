@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { TransformType } from "../interfaces/container";
-import { FRAME_KEY } from "../interfaces/frame";
+import { FRAME_KEY, frameSizeType } from "../interfaces/frame";
 import { NAVIGATING_ORDER } from "../static/frames";
 
 const initialTransform = {
@@ -10,12 +10,14 @@ const initialTransform = {
 };
 
 interface INavigationStore {
+  appSize: frameSizeType<number>;
   transform: TransformType;
   isNavigating: boolean;
   showNavigation: boolean;
   showMiniMap: boolean;
   recommendedFrame: FRAME_KEY[];
   frameVisibility: { [key in FRAME_KEY]: boolean };
+  setAppSize: (appSize: frameSizeType<number>) => void;
   setTransform: (props: Partial<TransformType>) => void;
   setIsNavigating: (isNavigating: boolean) => void;
   removeRecommendedFrame: (frameKey: FRAME_KEY) => void;
@@ -25,6 +27,7 @@ interface INavigationStore {
 }
 
 export const useNavigationStore = create<INavigationStore>((set) => ({
+  appSize: { width: 0, height: 0 },
   transform: initialTransform,
   isNavigating: false,
   showNavigation: true,
@@ -39,6 +42,7 @@ export const useNavigationStore = create<INavigationStore>((set) => ({
     [FRAME_KEY.ABOUT]: false,
     [FRAME_KEY.PROJECTS]: false,
   },
+  setAppSize: (appSize) => set({ appSize }),
   setTransform: (props) =>
     set((store: INavigationStore) => ({
       transform: {

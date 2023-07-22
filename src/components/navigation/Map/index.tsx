@@ -1,5 +1,4 @@
-import useResize from "../../../hooks/useResize";
-import { FRAMES, INITIAL_APP_SIZE } from "../../../static/frames";
+import { FRAMES } from "../../../static/frames";
 import MapFrame from "./MapFrame";
 import { useMemo } from "react";
 import useMap from "./useMap";
@@ -9,10 +8,10 @@ import { Transition } from "@headlessui/react";
 const SCALE = 0.015;
 
 const Map = () => {
-  const containerSize = useResize({ initialSize: INITIAL_APP_SIZE });
+  const { appSize } = useNavigationStore();
   const viewPosition = useMap({ scale: SCALE });
   const { isNavigating, showMiniMap } = useNavigationStore();
-  const { width, height } = containerSize;
+  const { width, height } = appSize;
 
   const children = useMemo(
     () =>
