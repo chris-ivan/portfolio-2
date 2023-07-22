@@ -22,32 +22,30 @@ const Map = () => {
     []
   );
 
+  const isMapVisible = useMemo(
+    () => isNavigating && showMiniMap,
+    [isNavigating, showMiniMap]
+  );
+
   return (
-    <Transition
-      show={isNavigating && showMiniMap}
-      enter="transition-opacity duration-300"
-      enterFrom="opacity-0"
-      enterTo="opacity-100"
-      leave="transition-opacity duration-150"
-      leaveFrom="opacity-100"
-      leaveTo="opacity-0"
+    <div
+      style={{
+        width: width * SCALE,
+        height: height * SCALE,
+        opacity: isMapVisible ? 1 : 0,
+      }}
+      className="fixed bottom-6 left-6 border border-solid border-grey pointer-events-none transition-opacity"
     >
-      <div
-        style={{
-          width: width * SCALE,
-          height: height * SCALE,
-        }}
-        className="fixed bottom-6 left-6 border border-solid border-grey pointer-events-none"
-      >
-        {children}
+      {children}
+      <Transition show={isMapVisible}>
         <div
           style={{
             ...viewPosition,
           }}
           className="absolute border-solid border-blue border-2"
         />
-      </div>
-    </Transition>
+      </Transition>
+    </div>
   );
 };
 
