@@ -1,8 +1,8 @@
 import { getMinimumZoom } from "../components/template/Container/Container.util";
-import { TransformType } from "../interfaces/container";
 import { frameSizeType } from "../interfaces/frame";
 import { MAX_SCALE, MIN_SCALE_MULTIPLIER } from "../static/transform";
 import { useNavigationStore } from "../store/navigationStore";
+import updateTransform from "../utils/updateTransform";
 import useViewport from "./useViewport";
 import { useMemo } from "react";
 
@@ -14,8 +14,6 @@ function getClientSize() {
     height,
   };
 }
-
-let setNavigatingFalseTimeout: number;
 
 export default function usePinchZoom(
   contentRef: React.RefObject<HTMLDivElement> | null,
@@ -30,16 +28,6 @@ export default function usePinchZoom(
   );
 
   /** Direct update transform */
-  const updateTransform = (newTransform: Partial<TransformType>) => {
-    useNavigationStore.getState().setTransform(newTransform);
-    useNavigationStore.getState().setIsNavigating(true);
-    setNavigatingFalseTimeout && clearTimeout(setNavigatingFalseTimeout);
-
-    setNavigatingFalseTimeout = setTimeout(() => {
-      useNavigationStore.getState().setIsNavigating(false);
-    }, 2000);
-  };
-
   /** Scale according to the position of clientX and clientY */
   const dispatchZoomChange = (
     ratio: number,
@@ -55,8 +43,6 @@ export default function usePinchZoom(
 
     let newRatio = ratio;
     let newScale = transform.scale * ratio;
-
-    console.log(minScale, maxScale);
 
     if (newScale > maxScale) {
       newRatio = maxScale / transform.scale;
@@ -96,8 +82,6 @@ export default function usePinchZoom(
         newY = 0;
       }
     }
-
-    console.log(transform.scale, ratio, transform.scale * ratio, newScale);
 
     updateTransform({
       x: newX,

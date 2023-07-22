@@ -1,5 +1,7 @@
 import { useNavigationStore } from "../../../store/navigationStore";
 import useViewport from "../../../hooks/useViewport";
+import { DraggableData, DraggableEvent } from "react-draggable";
+import updateTransform from "../../../utils/updateTransform";
 
 const useScrollbar = () => {
   const { transform, appSize } = useNavigationStore();
@@ -23,7 +25,33 @@ const useScrollbar = () => {
   const top = (-y - diffY) * heightPercentage;
   const height = maxHeight * heightPercentage;
 
-  return { width, left, top, height };
+  const onDragHorizontal = (_: DraggableEvent, data: DraggableData) => {
+    updateTransform({
+      ...transform,
+      x: transform.x - data.deltaX / widthPercentage,
+    });
+  };
+
+  const onDragVertical = (_: DraggableEvent, data: DraggableData) => {
+    updateTransform({
+      ...transform,
+      y: transform.y - data.deltaY / heightPercentage,
+    });
+  };
+
+  const verticalScrollbar = {
+    onDrag: onDragVertical,
+    top,
+    height,
+  };
+
+  const horizontalScrollbar = {
+    onDrag: onDragHorizontal,
+    left,
+    width,
+  };
+
+  return { verticalScrollbar, horizontalScrollbar };
 };
 
 export default useScrollbar;

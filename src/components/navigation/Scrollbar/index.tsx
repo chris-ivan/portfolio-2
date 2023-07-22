@@ -1,27 +1,39 @@
+import Draggable from "react-draggable";
 import useScrollbar from "./useScrollbar";
 
 const Scrollbar = () => {
-  const horizontalScrollbar = useScrollbar();
+  const scrollbar = useScrollbar();
+  const { horizontalScrollbar, verticalScrollbar } = scrollbar;
+  const { onDrag: onDragHorizontal, width, left } = horizontalScrollbar;
+  const { onDrag: onDragVertical, height, top } = verticalScrollbar;
 
   return (
     <>
-      <div className="fixed bottom-0 left-0 right-3 h-3 overflow-hidden">
-        <div
-          style={{
-            width: horizontalScrollbar.width,
-            transform: `translateX(${horizontalScrollbar.left}px)`,
-          }}
-          className="h-full border border-solid border-grey cursor-pointer"
-        />
+      <div className="fixed z-50 bottom-0 left-0 right-3 h-3 overflow-hidden">
+        <Draggable
+          onDrag={onDragHorizontal}
+          bounds="parent"
+          axis="x"
+          position={{ x: left, y: 0 }}
+        >
+          <div
+            style={{ width }}
+            className="h-full border border-solid border-grey bg bg-dark-grey dark:bg-black"
+          />
+        </Draggable>
       </div>
-      <div className="fixed top-0 right-0 bottom-3 w-3 overflow-hidden">
-        <div
-          style={{
-            height: horizontalScrollbar.height,
-            transform: `translateY(${horizontalScrollbar.top}px)`,
-          }}
-          className="h-full w-full border border-solid border-grey cursor-pointer"
-        />
+      <div className="fixed z-50 top-0 right-0 bottom-3 w-3 overflow-hidden">
+        <Draggable
+          onDrag={onDragVertical}
+          bounds="parent"
+          axis="y"
+          position={{ x: 0, y: top }}
+        >
+          <div
+            style={{ height }}
+            className="h-full w-full border border-solid border-grey bg-dark-grey dark:bg-black"
+          />
+        </Draggable>
       </div>
     </>
   );
