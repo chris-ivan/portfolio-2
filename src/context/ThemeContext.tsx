@@ -34,6 +34,12 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
     body.style.backgroundColor = theme.colorBgSecondary;
     html.style.backgroundColor = theme.colorBgSecondary;
+
+    if (isDarkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDarkMode]);
 

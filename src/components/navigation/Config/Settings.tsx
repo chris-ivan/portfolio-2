@@ -27,7 +27,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="relative">
+    <div ref={ref} className="relative">
       <Transition
         enter="transition ease-linear duration-150 opacity transform"
         enterFrom="opacity-0 translate-y-20"
@@ -37,10 +37,7 @@ const Settings = () => {
         leaveTo="opacity-0 translate-y-20"
         show={showSettings}
       >
-        <div
-          ref={ref}
-          className="absolute bottom-12 right-0 flex flex-col items-start w-36"
-        >
+        <div className="absolute bottom-12 right-0 flex flex-col items-start w-36">
           <SettingsButton label={themeLabel} onClick={toggleTheme} />
           <SettingsButton label={navigationLabel} onClick={toggleNavigation} />
           <SettingsButton label={miniMapLabel} onClick={toggleMiniMap} />

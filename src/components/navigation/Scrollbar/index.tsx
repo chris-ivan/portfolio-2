@@ -9,7 +9,7 @@ const Scrollbar = () => {
 
   return (
     <>
-      <div className="fixed z-50 bottom-0 left-0 right-3 h-3 overflow-hidden">
+      <div className="fixed z-50 bottom-0 left-0 right-3 h-3 overflow-hidden border border-solid border-black">
         <Draggable
           onDrag={onDragHorizontal}
           bounds="parent"
@@ -22,7 +22,7 @@ const Scrollbar = () => {
           />
         </Draggable>
       </div>
-      <div className="fixed z-50 top-0 right-0 bottom-3 w-3 overflow-hidden">
+      <div className="fixed z-50 top-0 right-0 bottom-3 w-3 overflow-hidden border border-solid border-black">
         <Draggable
           onDrag={onDragVertical}
           bounds="parent"
