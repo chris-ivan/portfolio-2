@@ -4,8 +4,9 @@ import useViewport from "../../../hooks/useViewport";
 const useScrollbar = () => {
   const { transform, appSize } = useNavigationStore();
   const { width: viewportWidth, height: viewportHeight } = useViewport();
-  const maxWidth = viewportWidth - 12;
-  const maxHeight = viewportHeight - 12;
+
+  const maxWidth = viewportWidth;
+  const maxHeight = viewportHeight;
   const { scale, x, y } = transform;
 
   const multiplier = 4;

@@ -5,7 +5,7 @@ const Scrollbar = () => {
 
   return (
     <>
-      <div className="fixed bottom-0 left-0 right-3 h-3">
+      <div className="fixed bottom-0 left-0 right-3 h-3 overflow-hidden">
         <div
           style={{
             width: horizontalScrollbar.width,
@@ -14,7 +14,7 @@ const Scrollbar = () => {
           className="h-full border border-solid border-grey cursor-pointer"
         />
       </div>
-      <div className="fixed top-0 right-0 bottom-3 w-3">
+      <div className="fixed top-0 right-0 bottom-3 w-3 overflow-hidden">
         <div
           style={{
             height: horizontalScrollbar.height,
