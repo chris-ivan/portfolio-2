@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { TransformType } from "../interfaces/container";
 import { FRAME_KEY, frameSizeType } from "../interfaces/frame";
-import { NAVIGATING_ORDER } from "../static/frames";
+import { INITIAL_APP_SIZE_PX, NAVIGATING_ORDER } from "../static/frames";
 
 const initialTransform = {
   x: 0,
@@ -27,7 +27,7 @@ interface INavigationStore {
 }
 
 export const useNavigationStore = create<INavigationStore>((set) => ({
-  appSize: { width: 0, height: 0 },
+  appSize: INITIAL_APP_SIZE_PX,
   transform: initialTransform,
   isNavigating: false,
   showNavigation: true,

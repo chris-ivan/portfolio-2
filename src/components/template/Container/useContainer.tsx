@@ -1,19 +1,15 @@
 import useInitialView from "../../../hooks/useInitialView";
 import usePinchZoom from "../../../hooks/usePinchZoom";
-import useViewport from "../../../hooks/useViewport";
 import useZoomShortcut from "../../../hooks/useZoomShortcut";
 import { frameSizeType } from "../../../interfaces/frame";
 import {
   BASE_SCALE_RATIO,
-  MAX_SCALE,
-  MIN_SCALE_MULTIPLIER,
   SCALE_STEP,
   WHEEL_MAX_SCALE_RATIO,
 } from "../../../static/transform";
 import { useNavigationStore } from "../../../store/navigationStore";
 import {
   calculateMovement,
-  getMinimumZoom,
   isWheelZooming,
   isShiftKeyScrolling,
 } from "./Container.util";
@@ -27,23 +23,16 @@ interface IUseContainer {
 
 const useContainer = (props: IUseContainer) => {
   const { contentRef, containerRef, initialSize } = props;
-  const viewportSize = useViewport();
-  const minScale =
-    getMinimumZoom(initialSize, viewportSize) * MIN_SCALE_MULTIPLIER;
-  const maxScale = MAX_SCALE;
 
   const { transform } = useNavigationStore();
   const { updateTransform, dispatchZoomChange } = usePinchZoom(
     contentRef,
-    minScale,
-    maxScale,
     initialSize
   );
 
-  // const [_pinchDistance, setPinchDistance] = useState<number>(0);
-
   useInitialView({ containerRef, updateTransform });
   useZoomShortcut({ onZoom: dispatchZoomChange });
+
   const onZoom = (event: React.WheelEvent<HTMLDivElement>) => {
     event.preventDefault();
 

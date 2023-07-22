@@ -4,6 +4,7 @@ import {
   frameSizeType,
   viewportDimensionType,
 } from "../interfaces/frame";
+import { viewportToPx } from "../utils/viewport";
 
 export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.CONTACT]: {
@@ -84,6 +85,11 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
 export const INITIAL_APP_SIZE: frameSizeType<viewportDimensionType> = {
   width: "800vw",
   height: "800vh",
+};
+
+export const INITIAL_APP_SIZE_PX: frameSizeType<number> = {
+  width: viewportToPx(INITIAL_APP_SIZE.width),
+  height: viewportToPx(INITIAL_APP_SIZE.height),
 };
 
 export const NAVIGATING_ORDER: FRAME_KEY[] = [

@@ -3,3 +3,16 @@ export const getViewportHeight = () =>
 
 export const getViewportWidth = () =>
   Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+export const viewportToPx = (size: string): number => {
+  const viewportWidth = getViewportWidth();
+  const viewportHeight = window.innerHeight;
+
+  if (size.endsWith("vh")) {
+    return (viewportHeight * parseFloat(size)) / 100;
+  } else if (size.endsWith("vw")) {
+    return (viewportWidth * parseFloat(size)) / 100;
+  } else {
+    return 0;
+  }
+};
