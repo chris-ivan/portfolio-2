@@ -34,8 +34,6 @@ const useContainer = (props: IUseContainer) => {
   useZoomShortcut({ onZoom: dispatchZoomChange });
 
   const onZoom = (event: React.WheelEvent<HTMLDivElement>) => {
-    event.preventDefault();
-
     // Scale ratio depends on the deltaY size
     const scaleRatio = Math.abs(event.deltaY / 10);
     // Limit the maximum scale ratio

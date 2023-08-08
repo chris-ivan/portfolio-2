@@ -1,7 +1,6 @@
 import {
   FRAME_KEY,
   frameCoordinateType,
-  framePositionType,
   frameSizeType,
 } from "../../../interfaces/frame";
 
@@ -12,24 +11,24 @@ const AVG_CHAR_HEIGHT = 12;
 interface ICalculatePointerNodePosition {
   targetId: FRAME_KEY;
   viewportSize: frameSizeType<number>;
+  label: string;
 }
 
 export const calculatePointerNodePosition = (
   props: ICalculatePointerNodePosition
 ) => {
-  const { targetId, viewportSize } = props;
+  const { targetId, viewportSize, label } = props;
   const { width: viewportWidth, height: viewportHeight } = viewportSize;
 
-  const position: Partial<framePositionType> = {};
+  const position: frameCoordinateType = { x: 0, y: 0 };
 
   const target = document.getElementById(targetId);
   if (!target) return { position, angle: 0 };
 
-  const viewportCenterX = viewportWidth / 2;
-  const viewportCenterY = viewportHeight / 2;
-
   const targetPosition = target.getBoundingClientRect();
 
+  const viewportCenterX = viewportWidth / 2;
+  const viewportCenterY = viewportHeight / 2;
   const targetCenterX =
     targetPosition.left + targetPosition.width / 2 - viewportCenterX;
   const targetCenterY =
@@ -38,24 +37,20 @@ export const calculatePointerNodePosition = (
   const angleRad = Math.atan2(targetCenterY, targetCenterX);
   const angleDeg = (angleRad * 180) / Math.PI;
 
-  const allowedWidth = viewportCenterX - PADDING;
+  const nodeLength = label.length * AVG_CHAR_WIDTH;
+  const allowedWidth = viewportCenterX - PADDING - nodeLength / 1.7;
   const allowedHeight = viewportCenterY - PADDING;
 
   const scale = Math.min(
     allowedWidth / Math.abs(targetCenterX),
     allowedHeight / Math.abs(targetCenterY)
   );
-  const vectorWidth = Math.abs(targetCenterX) * scale;
-  const vectorHeight = Math.abs(targetCenterY) * scale;
 
-  const isLeft = targetCenterX < 0;
-  const isTop = targetCenterY < 0;
+  const vectorWidth = targetCenterX * scale;
+  const vectorHeight = targetCenterY * scale;
 
-  const positionKeyX = isLeft ? "left" : "right";
-  const positionKeyY = isTop ? "top" : "bottom";
-
-  position[positionKeyX] = viewportCenterX - vectorWidth;
-  position[positionKeyY] = viewportCenterY - vectorHeight;
+  position.x = vectorWidth;
+  position.y = vectorHeight;
 
   return { position, angle: angleDeg };
 };

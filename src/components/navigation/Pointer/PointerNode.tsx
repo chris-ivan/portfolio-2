@@ -23,18 +23,17 @@ const PointerNode = (props: IPointerNode) => {
     return targetId === recommendedFrame[0];
   }, [recommendedFrame, targetId]);
 
-  const { x, y } = pointerPosition;
   const isVisible = useMemo(() => {
+    if (!position.x || !position.y) return false;
     return !frameVisibility[targetId];
-  }, [frameVisibility, targetId]);
+  }, [frameVisibility, targetId, position]);
 
   return (
     <div
       className="absolute flex items-center justify-center"
       style={{
-        ...position,
-        transition:
-          "top 0.05s ease-in-out, left 0.05s ease-in-out, right 0.05s ease-in-out, bottom 0.05s ease-in-out, opacity 0.3s ease-in-out",
+        transform: `translate(${position.x}px, ${position.y}px)`,
+        transition: "transform 0.2s ease-in-out, opacity 0.3s ease-in-out",
         opacity: isVisible ? 1 : 0,
         pointerEvents: isVisible ? "auto" : "none",
       }}
@@ -53,7 +52,7 @@ const PointerNode = (props: IPointerNode) => {
         className="absolute flex items-center justify-center"
         style={{
           transition: "transform 0.05s ease-in-out",
-          transform: `translate(${x}px, ${y}px)`,
+          transform: `translate(${pointerPosition.x}px, ${pointerPosition.y}px)`,
         }}
       >
         <PointerArrow

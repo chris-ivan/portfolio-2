@@ -1,9 +1,5 @@
-import { useCallback, useState } from "react";
-import {
-  FRAME_KEY,
-  frameCoordinateType,
-  framePositionType,
-} from "../../../interfaces/frame";
+import { useCallback, useState, useMemo } from "react";
+import { FRAME_KEY, frameCoordinateType } from "../../../interfaces/frame";
 import useViewport from "../../../hooks/useViewport";
 import {
   calculatePointerNodeArrowPosition,
@@ -20,16 +16,22 @@ interface IUsePointerNode {
 const defaultCoordinate: frameCoordinateType = { x: 0, y: 0 };
 
 const usePointerNode = (props: IUsePointerNode) => {
-  const [position, setPosition] = useState<Partial<framePositionType>>({});
+  const { targetId, label } = props;
+  const viewportSize = useViewport();
+  const { isNavigating } = useNavigationStore();
+  const calcProps = useMemo(
+    () => ({ label, targetId, viewportSize }),
+    [label, targetId, viewportSize]
+  );
+
+  const [position, setPosition] = useState<frameCoordinateType>(
+    calculatePointerNodePosition(calcProps).position
+  );
   const [pointerPosition, setPointerPosition] =
     useState<frameCoordinateType>(defaultCoordinate);
   const [angle, setAngle] = useState<number>(0);
-  const viewportSize = useViewport();
-  const { isNavigating } = useNavigationStore();
-  const { targetId, label } = props;
 
   const calculatePosition = useCallback(() => {
-    const calcProps = { targetId, viewportSize };
     const pointerNodePosition = calculatePointerNodePosition(calcProps);
     const { position, angle } = pointerNodePosition;
 
@@ -39,7 +41,7 @@ const usePointerNode = (props: IUsePointerNode) => {
     setAngle(angle);
     setPosition(position);
     setPointerPosition(pointerArrowPosition);
-  }, [targetId, viewportSize, label]);
+  }, [label, calcProps]);
 
   useInterval(calculatePosition, isNavigating ? 100 : null);
 
