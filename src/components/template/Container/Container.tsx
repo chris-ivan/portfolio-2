@@ -26,6 +26,7 @@ const Container = ({ children }: IContainer) => {
       <div
         ref={contentRef}
         className="absolute select-none align-middle"
+        id="app-container"
         style={{
           width: appSize.width,
           height: appSize.height,

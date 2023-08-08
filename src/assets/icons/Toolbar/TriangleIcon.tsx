@@ -11,7 +11,7 @@ const TriangleIcon = (props?: IIcon) => {
       {...res}
     >
       <path
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M15.547 6L4 26h23.094L15.547 6zm0 5.6L8.85 23.2h13.395l-6.697-11.6z"
         fill={fill || "#767676"}
       />

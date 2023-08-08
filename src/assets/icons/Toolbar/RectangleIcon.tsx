@@ -11,7 +11,7 @@ const RectangleIcon = (props?: IIcon) => {
       {...res}
     >
       <path
-        fill-rule="evenodd"
+        fillRule="evenodd"
         d="M23.2 8.8H8.8V23.2H23.2V8.8ZM6 6V26H26V6H6Z"
         fill={fill || "#767676"}
       />

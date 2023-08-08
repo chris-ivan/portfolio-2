@@ -1,4 +1,5 @@
 import useInitialView from "../../../hooks/useInitialView";
+import usePanPagination from "../../../hooks/usePanNavigation";
 import usePinchZoom from "../../../hooks/usePinchZoom";
 import useZoomShortcut from "../../../hooks/useZoomShortcut";
 import { frameSizeType } from "../../../interfaces/frame";
@@ -32,6 +33,7 @@ const useContainer = (props: IUseContainer) => {
 
   useInitialView({ containerRef, updateTransform });
   useZoomShortcut({ onZoom: dispatchZoomChange });
+  usePanPagination();
 
   const onZoom = (event: React.WheelEvent<HTMLDivElement>) => {
     // Scale ratio depends on the deltaY size

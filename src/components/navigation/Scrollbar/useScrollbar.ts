@@ -28,14 +28,14 @@ const useScrollbar = () => {
   const onDragHorizontal = (_: DraggableEvent, data: DraggableData) => {
     updateTransform({
       ...transform,
-      x: transform.x - (data.deltaX * 0.25) / widthPercentage,
+      x: transform.x - data.deltaX / widthPercentage,
     });
   };
 
   const onDragVertical = (_: DraggableEvent, data: DraggableData) => {
     updateTransform({
       ...transform,
-      y: transform.y - (data.deltaY * 0.25) / heightPercentage,
+      y: transform.y - data.deltaY / heightPercentage,
     });
   };
 
