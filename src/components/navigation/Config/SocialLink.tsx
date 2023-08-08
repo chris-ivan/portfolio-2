@@ -14,7 +14,7 @@ const SocialLink = (props: ISocialLink) => {
       rel="noopener noreferrer"
     >
       {/* @ts-ignore */}
-      <Icon className="text-black hover:text-grey dark:text-white dark:hover:text-grey" />
+      <Icon className="text-black hover:text-dark-grey dark:text-white dark:hover:text-grey" />
     </a>
   );
 };

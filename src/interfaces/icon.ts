@@ -1,3 +1,3 @@
-export interface IIcon {
+export interface IIcon extends React.SVGProps<SVGSVGElement> {
   fill?: string;
 }

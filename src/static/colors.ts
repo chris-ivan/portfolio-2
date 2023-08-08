@@ -22,9 +22,9 @@ export const DARK_THEME: ITheme = {
   colorTertiaty: COLOR.LIGHT_BLUE,
   colorBgBase: isMobile ? COLOR.BLACK : COLOR.DARKER_GREY,
   colorBgSecondary: isMobile ? COLOR.DARKER_GREY : COLOR.BLACK,
-  colorText: COLOR.WHITE,
-  colorTextSecondary: COLOR.LIGHT_GREY,
-  colorTextTertiary: COLOR.GREY,
+  colorText: COLOR.LIGHT_GREY,
+  colorTextSecondary: COLOR.GREY,
+  colorTextTertiary: COLOR.DARKER_GREY,
   colorBorder: COLOR.DARK_GREY,
   colorBorderSecondary: COLOR.DARK_BLUE,
 };
