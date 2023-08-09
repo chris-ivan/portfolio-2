@@ -2,6 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-family: "Noto Sans", system-ui, sans-serif;
+  }
+
+  h1 {
+    font-family: "Grifter";
+    font-size: 72px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
+
+  h2 {
+    font-family: "Grifter";
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%;
+  }
+
+  h3 {
+    font-family: "Grifter";
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 135%;
+  }
+
+  h4 {
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 135%;
+  }
+
+  h5 {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 135%;
+  }
+
+  div,
+  p {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    h1 {
+      font-size: 64px;
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+    h3 {
+      font-size: 24px;
+    }
+    h4 {
+      font-size: 24px;
+    }
+    h5 {
+      font-size: 18px;
+    }
+    div,
+    p {
+      font-size: 14px;
+    }
+  }
+}
+
 /* Box sizing rules */
 *,
 *::before,
