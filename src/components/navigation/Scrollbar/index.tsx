@@ -18,7 +18,7 @@ const Scrollbar = () => {
         >
           <div
             style={{ width }}
-            className="h-full border border-solid border-grey bg bg-dark-grey dark:bg-black"
+            className="h-full border-l-2 border-r-2 border-solid border-grey bg bg-dark-grey dark:bg-black"
           />
         </Draggable>
       </div>
@@ -31,7 +31,7 @@ const Scrollbar = () => {
         >
           <div
             style={{ height }}
-            className="h-full w-full border border-solid border-grey bg-dark-grey dark:bg-black"
+            className="h-full w-full border-t-2 border-b-2 border-solid border-grey bg-dark-grey dark:bg-black"
           />
         </Draggable>
       </div>

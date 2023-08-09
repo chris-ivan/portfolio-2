@@ -4,12 +4,21 @@ import { useMemo } from "react";
 import useMap from "./useMap";
 import { useNavigationStore } from "../../../store/navigationStore";
 import { Transition } from "@headlessui/react";
+import Draggable from "react-draggable";
 
 const SCALE = 0.015;
 
 const Map = () => {
   const { appSize } = useNavigationStore();
-  const viewPosition = useMap({ scale: SCALE });
+  const mapProps = useMap({ scale: SCALE });
+  const {
+    mapPosition,
+    mapDimension,
+    onDragStart,
+    onDrag,
+    onDragStop,
+    isDragging,
+  } = mapProps;
   const { isNavigating, showMiniMap } = useNavigationStore();
   const { width, height } = appSize;
 
@@ -37,12 +46,23 @@ const Map = () => {
     >
       {children}
       <Transition show={isMapVisible}>
-        <div
-          style={{
-            ...viewPosition,
-          }}
-          className="absolute border-solid border-blue border-2"
-        />
+        <div className="pointer-events-none absolute top-0 left-0 right-0 bottom-0">
+          <Draggable
+            bounds="parent"
+            position={mapPosition}
+            onStart={onDragStart}
+            onDrag={onDrag}
+            onStop={onDragStop}
+          >
+            <div
+              style={{
+                ...mapDimension,
+                cursor: isDragging ? "grabbing" : "grab",
+              }}
+              className="absolute border-solid pointer-events-auto border-blue border-2"
+            />
+          </Draggable>
+        </div>
       </Transition>
     </div>
   );
