@@ -6,62 +6,84 @@ import Heading2Icon from "../../../assets/icons/Toolbar/Heading2Icon";
 import Heading3Icon from "../../../assets/icons/Toolbar/Heading3Icon";
 import PencilIcon from "../../../assets/icons/Toolbar/PencilIcon";
 import RectangleIcon from "../../../assets/icons/Toolbar/RectangleIcon";
+import TextIcon from "../../../assets/icons/Toolbar/TextIcon";
 import TriangleIcon from "../../../assets/icons/Toolbar/TriangleIcon";
+import { KonvaToolbarEnum } from "../../../interfaces/konva";
+import { useKonvaStore } from "../../../store/konvaStore";
 import ToolbarButton from "./ToolbarButton";
+import ColorPicker from "./ToolbarColorPicker";
+import useCreateShape from "./useCreateShape";
+import useCreateText from "./useCreateText";
+import useToolbarState from "./useToolbarState";
+// import useUndoRedo from "./useUndoRedo";
 
 const Toolbar = () => {
+  // const { handleUndo, handleRedo, canUndo, canRedo } = useUndoRedo();
+  const { createRectangle, createEllipse, createPolygon } = useCreateShape();
+  const { createH1, createH2, createH3, createText } = useCreateText();
+  const { handlePencil, handleMove } = useToolbarState();
+  const { currentToolbar } = useKonvaStore();
+
   return (
     <div className="flex h-[60px] w-full border-b border-solid border-light-grey dark:border-dark-grey pt-8 pb-6 px-8 items-center justify-between">
       <div />
-      <div>
+      <div className="flex items-center justify-between">
         <ToolbarButton
-          isActive={true}
+          isActive={currentToolbar === KonvaToolbarEnum.SELECT}
           label="Move"
           Icon={CursorIcon}
-          onClick={() => {}}
+          onClick={handleMove}
         />
         <ToolbarButton
-          isActive={false}
+          isActive={currentToolbar === KonvaToolbarEnum.PENCIL}
           label="Free drawing"
           Icon={PencilIcon}
-          onClick={() => {}}
+          onClick={handlePencil}
         />
         <ToolbarButton
           isActive={false}
           label="Heading 1"
           Icon={Heading1Icon}
-          onClick={() => {}}
+          onClick={createH1}
         />
         <ToolbarButton
           isActive={false}
           label="Heading 2"
           Icon={Heading2Icon}
-          onClick={() => {}}
+          onClick={createH2}
         />
         <ToolbarButton
           isActive={false}
           label="Heading 3"
           Icon={Heading3Icon}
-          onClick={() => {}}
+          onClick={createH3}
+        />
+        <ToolbarButton
+          isActive={false}
+          label="Normal Text"
+          Icon={TextIcon}
+          onClick={createText}
         />
         <ToolbarButton
           isActive={false}
           label="Rectangle"
           Icon={RectangleIcon}
-          onClick={() => {}}
+          onClick={createRectangle}
         />
         <ToolbarButton
           isActive={false}
           label="Ellipse"
           Icon={EllipseIcon}
-          onClick={() => {}}
+          onClick={createEllipse}
         />
         <ToolbarButton
           isActive={false}
           label="Triangle"
           Icon={TriangleIcon}
-          onClick={() => {}}
+          onClick={createPolygon}
         />
+        <ColorPicker type="fill" label="Fill color" />
+        <ColorPicker type="stroke" label="Outline color" />
       </div>
       <div>
         <ToolbarButton
