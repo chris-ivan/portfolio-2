@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { BASE_SCALE_RATIO, SCALE_STEP } from "../static/transform";
 
 const isZoomingOut = (pressedKey: string) => {
@@ -34,20 +33,14 @@ const useZoomShortcut = (props: IUseZoomShortcut) => {
     if (isZoomingIn(pressedKey)) onZoomIn();
   };
 
-  const handleKeydown = (e: KeyboardEvent) => {
+  const onKeyDown = (e: KeyboardEvent) => {
     if (isZoomTriggered(e)) {
       e.preventDefault();
       handleZoom(e);
     }
   };
 
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeydown);
-    return () => {
-      window.removeEventListener("keydown", handleKeydown);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  return { onKeyDown };
 };
 
 export default useZoomShortcut;

@@ -1,19 +1,18 @@
-import { TransformType } from "../../../interfaces/container";
-import { frameSizeType } from "../../../interfaces/frame";
+import { frameCoordinateType, frameSizeType } from "../../../interfaces/frame";
 import {
   MOUSE_WHEEL_THRESHOLD,
   SCROLLBAR_HEIGHT,
 } from "../../../static/transform";
+import { useNavigationStore } from "../../../store/navigationStore";
 
 export const calculateMovement = (
   container: HTMLDivElement,
   content: HTMLElement,
-  event: React.WheelEvent<HTMLDivElement>,
-  transform: TransformType,
-  shiftKeyEnabled?: boolean
+  delta: frameCoordinateType
 ) => {
   const containerRect = container.getBoundingClientRect();
   const contentRect = content.getBoundingClientRect();
+  const transform = useNavigationStore.getState().transform;
 
   const allowedMovements = {
     up: containerRect.top - contentRect.top,
@@ -25,12 +24,7 @@ export const calculateMovement = (
   let allowedX = 0;
   let allowedY = 0;
 
-  let { deltaX, deltaY } = event;
-
-  if (shiftKeyEnabled) {
-    deltaX = deltaY;
-    deltaY = 0;
-  }
+  const { x: deltaX, y: deltaY } = delta;
 
   //  kiri: deltaX > 0  -> konten ke kanan
   if (deltaX > 0)

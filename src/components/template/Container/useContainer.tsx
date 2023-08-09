@@ -1,14 +1,12 @@
 import useInitialView from "../../../hooks/useInitialView";
-import usePanPagination from "../../../hooks/usePanNavigation";
 import usePinchZoom from "../../../hooks/usePinchZoom";
-import useZoomShortcut from "../../../hooks/useZoomShortcut";
+import useShortcut from "../../../hooks/useShortcut";
 import { frameSizeType } from "../../../interfaces/frame";
 import {
   BASE_SCALE_RATIO,
   SCALE_STEP,
   WHEEL_MAX_SCALE_RATIO,
 } from "../../../static/transform";
-import { useNavigationStore } from "../../../store/navigationStore";
 import {
   calculateMovement,
   isWheelZooming,
@@ -25,15 +23,25 @@ interface IUseContainer {
 const useContainer = (props: IUseContainer) => {
   const { contentRef, containerRef, initialSize } = props;
 
-  const { transform } = useNavigationStore();
   const { updateTransform, dispatchZoomChange } = usePinchZoom(
     contentRef,
     initialSize
   );
 
+  const handleMove2D = (dx: number, dy: number) => {
+    if (!contentRef?.current || !containerRef?.current) return;
+
+    const newPosition = calculateMovement(
+      containerRef.current,
+      contentRef.current,
+      { x: dx, y: dy }
+    );
+    // @ts-ignore
+    updateTransform(newPosition);
+  };
+
   useInitialView({ containerRef, updateTransform });
-  useZoomShortcut({ onZoom: dispatchZoomChange });
-  usePanPagination();
+  useShortcut({ onZoom: dispatchZoomChange, handleMove2D });
 
   const onZoom = (event: React.WheelEvent<HTMLDivElement>) => {
     // Scale ratio depends on the deltaY size
@@ -51,32 +59,12 @@ const useContainer = (props: IUseContainer) => {
   };
 
   const onMove = (event: React.WheelEvent<HTMLDivElement>) => {
-    if (!contentRef?.current || !containerRef?.current) return;
-
-    const newPosition = calculateMovement(
-      containerRef.current,
-      contentRef.current,
-      event,
-      transform
-    );
-
-    // @ts-ignore
-    updateTransform(newPosition);
+    const { deltaX, deltaY } = event;
+    handleMove2D(deltaX, deltaY);
   };
 
   const onShiftKeyScroll = (event: React.WheelEvent<HTMLDivElement>) => {
-    if (!contentRef?.current || !containerRef?.current) return;
-
-    const newPosition = calculateMovement(
-      containerRef.current,
-      contentRef.current,
-      event,
-      transform,
-      true
-    );
-
-    // @ts-ignore
-    updateTransform(newPosition);
+    handleMove2D(event.deltaY, 0);
   };
 
   const onWheel = (event: React.WheelEvent<HTMLDivElement>) => {
@@ -121,7 +109,7 @@ const useContainer = (props: IUseContainer) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { transform, onWheel };
+  return { onWheel };
 };
 
 export default useContainer;

@@ -1,16 +1,15 @@
-import { useEffect, useRef, useCallback } from "react";
-import { useNavigationStore } from "../store/navigationStore";
-import updateTransform from "../utils/updateTransform";
+import { useRef, useCallback } from "react";
 
 const setCursor = (cursor: string) => {
-  const targetId = "app-container";
-  const target = document.getElementById(targetId);
-  if (!target) return;
-
-  target.style.cursor = cursor;
+  document.body.style.cursor = cursor;
 };
 
-const usePanPagination = () => {
+interface IUsePanNavigation {
+  handleMove2D: (dx: number, dy: number) => void;
+}
+
+const usePanNavigation = (props: IUsePanNavigation) => {
+  const { handleMove2D } = props;
   const isHoldingLeftKey = useRef<boolean>(false);
   const isHoldingSpace = useRef<boolean>(false);
 
@@ -19,16 +18,14 @@ const usePanPagination = () => {
     isHoldingLeftKey.current = true;
   }, []);
 
-  const onMouseMove = useCallback((e: MouseEvent) => {
-    if (!isHoldingLeftKey.current) return;
-    setCursor("grabbing");
-    const curPosition = useNavigationStore.getState().transform;
-    const newPosition = {
-      x: curPosition.x + e.movementX,
-      y: curPosition.y + e.movementY,
-    };
-    updateTransform(newPosition);
-  }, []);
+  const onMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isHoldingLeftKey.current) return;
+      setCursor("grabbing");
+      handleMove2D(-e.movementX, -e.movementY);
+    },
+    [handleMove2D]
+  );
 
   const onMouseUp = useCallback(() => {
     if (!isHoldingLeftKey.current) return;
@@ -52,22 +49,7 @@ const usePanPagination = () => {
     setCursor("auto");
   }, []);
 
-  useEffect(() => {
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseup", onMouseUp);
-    window.addEventListener("keydown", onKeyDown);
-    window.addEventListener("keyup", onKeyUp);
-
-    return () => {
-      window.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseup", onMouseUp);
-      window.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("keyup", onKeyUp);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  return { onKeyDown, onKeyUp, onMouseDown, onMouseMove, onMouseUp };
 };
 
-export default usePanPagination;
+export default usePanNavigation;

@@ -10,10 +10,10 @@ interface IContainer {
 const Container = ({ children }: IContainer) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const { appSize } = useNavigationStore();
+  const { appSize, transform } = useNavigationStore();
   const { theme } = useTheme();
 
-  const { transform, onWheel } = useContainer({
+  const { onWheel } = useContainer({
     contentRef,
     containerRef,
     initialSize: appSize,
