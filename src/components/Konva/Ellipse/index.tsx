@@ -1,9 +1,11 @@
 import { Ellipse as EllipseComponent } from "react-konva";
 import useEllipse from "./useEllipse";
-import { IKonvaEllipse } from "../../../interfaces/konva";
+import { IKonvaEllipse, KonvaToolbarEnum } from "../../../interfaces/konva";
+import { useKonvaStore } from "../../../store/konvaStore";
 
 const Ellipse = (props: IKonvaEllipse) => {
   const { config: shapeProps } = props;
+  const { currentToolbar } = useKonvaStore();
 
   const ellipse = useEllipse(props);
   const {
@@ -23,7 +25,7 @@ const Ellipse = (props: IKonvaEllipse) => {
         onTap={onSelect}
         ref={shapeRef}
         {...shapeProps}
-        draggable
+        draggable={currentToolbar === KonvaToolbarEnum.SELECT}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onTransformStart={onTransformStart}
