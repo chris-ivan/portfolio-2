@@ -36,7 +36,7 @@ const ColorPicker = (props: IFillColorPicker) => {
   return (
     <div className="relative">
       <div
-        className="relative h-5 w-5 border-2 border-solid border-black cursor-pointer mx-1 rounded-lg overflow-hidden"
+        className="relative h-5 w-5 border-2 border-solid border-black cursor-pointer mx-2 overflow-hidden"
         onClick={() => setOpenColorPicker((prev) => !prev)}
         title={label}
         aria-label={label}

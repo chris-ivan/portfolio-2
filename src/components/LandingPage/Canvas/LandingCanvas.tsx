@@ -11,6 +11,7 @@ import { useRef } from "react";
 import useTransformer from "./hooks/useTransformer";
 import { BASIC_SHAPE } from "../../../static/konva";
 import useViewport from "../../../hooks/useViewport";
+import useFontLoaded from "./hooks/useFontLoaded";
 
 const LandingCanvas = () => {
   const stageRef = useRef<StageType>(null);
@@ -18,6 +19,7 @@ const LandingCanvas = () => {
   const trRef = useRef<TransformerType>(null);
   const selectionRef = useRef<RectType>(null);
 
+  useFontLoaded();
   useKeyboardShortcut({ stageRef });
   const mouseHandler = useLandingCanvas({ layerRef, selectionRef });
   const transformer = useTransformer({ layerRef, trRef });

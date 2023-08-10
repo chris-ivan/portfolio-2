@@ -9,10 +9,11 @@ import {
 } from "react-color/lib/components/common";
 import ColorSlider from "./ColorSlider";
 import { ColorPointer, HorizontalColorPointer } from "./ColorPointer";
+import { getColorHex } from "../../../utils/color";
 
 const ColorPickerParent = (props: InjectedColorProps) => {
   return (
-    <div className="flex flex-col h-[300px] w-[200px] p-3 shadow-md bg-white gap-3">
+    <div className="flex flex-col h-[240px] w-[200px] p-3 shadow-lg bg-white dark:bg-darker-grey gap-3 border border-solid border-light-grey dark:border-dark-grey">
       <div className="relative w-full bg-red-500 flex-1">
         <ColorSlider
           props={props}
@@ -29,7 +30,7 @@ const ColorPickerParent = (props: InjectedColorProps) => {
               pointer={HorizontalColorPointer}
             />
           </div>
-          <div className="relative flex items-center w-full flex-1">
+          <div className="relative flex items-center w-full flex-1 bg-white">
             <ColorSlider
               props={props}
               element={Alpha}
@@ -37,17 +38,13 @@ const ColorPickerParent = (props: InjectedColorProps) => {
             />
           </div>
         </div>
-        <div className="w-7 h-7 relative">
+        <div className="w-7 h-7 relative border-solid border border-light-grey dark:border-dark-grey">
           <Checkboard />
           <div
             className="w-full h-full absolute top-0 left-0"
-            style={{ background: props.hex }}
+            style={{ background: getColorHex(props) }}
           />
         </div>
-      </div>
-      <div className="flex gap-2">
-        <span className="text-dark-grey">HEX</span>
-        <div className="bg-red-500 w-full h-full" />
       </div>
       <div className="flex gap-[6px] h-6">
         {BASIC_COLORS.map((color) => (

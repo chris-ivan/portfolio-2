@@ -25,7 +25,7 @@ const Toolbar = () => {
   const { currentToolbar } = useKonvaStore();
 
   return (
-    <div className="flex h-[60px] w-full border-b border-solid border-light-grey dark:border-dark-grey pt-8 pb-6 px-8 items-center justify-between">
+    <div className="relative z-10 flex h-[60px] w-full border-b border-solid border-light-grey dark:border-dark-grey pt-8 pb-6 px-8 items-center justify-between">
       <div />
       <div className="flex items-center justify-between">
         <ToolbarButton

@@ -19,7 +19,7 @@ const ToolbarButton = (props: IToolbarButton) => {
 
   return (
     <button
-      className={`${tailwindBgClass} hover:bg-light-grey hover:dark:bg-black mx-[2px] rounded-md`}
+      className={`${tailwindBgClass} hover:bg-light-grey hover:dark:bg-black mx-[2px]`}
       onClick={onClick}
       title={label}
       aria-label={label}

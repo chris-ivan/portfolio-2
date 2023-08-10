@@ -1,5 +1,7 @@
 import { TextConfig } from "konva/lib/shapes/Text";
 import { KonvaEnum, KonvaNodeType } from "../interfaces/konva";
+import { COLOR } from "../interfaces/theme";
+
 export const BASIC_SHAPE = {
   MIN_WIDTH: 10,
   MIN_HEIGHT: 10,
@@ -8,8 +10,8 @@ export const BASIC_SHAPE = {
 export const DEFAULT_TEXT: TextConfig = {
   text: "Text",
   fontSize: 16,
-  fontFamily: "Calibri",
-  fill: "#000000",
+  fontFamily: "Noto Sans",
+  fill: COLOR.BLACK,
   align: "center",
   width: 50,
   lineHeight: 1.5,
@@ -18,25 +20,28 @@ export const DEFAULT_TEXT: TextConfig = {
 export const DEFAULT_H1: TextConfig = {
   ...DEFAULT_TEXT,
   text: "Heading 1",
-  fontSize: 24,
-  width: 100,
-  lineHeight: 1.3,
+  fontFamily: "Grifter",
+  fontSize: 72,
+  width: 400,
+  lineHeight: 1.2,
 };
 
 export const DEFAULT_H2: TextConfig = {
   ...DEFAULT_TEXT,
   text: "Heading 2",
-  fontSize: 20,
-  width: 90,
-  lineHeight: 1.3,
+  fontFamily: "Grifter",
+  fontSize: 44,
+  width: 280,
+  lineHeight: 1.2,
 };
 
 export const DEFAULT_H3: TextConfig = {
   ...DEFAULT_TEXT,
   text: "Heading 3",
-  fontSize: 18,
-  width: 80,
-  lineHeight: 1.3,
+  fontFamily: "Grifter",
+  fontSize: 32,
+  width: 200,
+  lineHeight: 1.35,
 };
 
 export const initialRectangles: KonvaNodeType[] = [
@@ -66,6 +71,28 @@ export const initialRectangles: KonvaNodeType[] = [
       id: "rect2",
       stroke: "#111111",
       strokeWidth: 1,
+    },
+  },
+  {
+    id: "text1",
+    type: KonvaEnum.TEXT,
+    config: {
+      ...DEFAULT_H2,
+      text: "Lorem Ipsum",
+      id: "text1",
+      x: 300,
+      y: 300,
+    },
+  },
+  {
+    id: "text2",
+    type: KonvaEnum.TEXT,
+    config: {
+      ...DEFAULT_TEXT,
+      text: "Lorem Ipsum",
+      id: "text2",
+      x: 300,
+      y: 400,
     },
   },
 ];

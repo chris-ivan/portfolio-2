@@ -10,7 +10,7 @@ const ColorButton = (props: IColorButton) => {
       style={{
         backgroundColor: color,
       }}
-      className="h-full w-full border border-solid border-grey"
+      className="h-full w-full border border-solid border-grey dark:border-dark-grey"
     />
   );
 };
