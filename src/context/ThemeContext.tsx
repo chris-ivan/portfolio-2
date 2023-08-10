@@ -3,6 +3,7 @@ import { ITheme, ThemeType } from "../interfaces/theme";
 import { useDarkMode } from "usehooks-ts";
 import { DARK_THEME, LIGHT_THEME } from "../static/colors";
 import { useZustandThemeStore } from "../store/themeStore";
+import { useKonvaStore } from "../store/konvaStore";
 
 export interface IThemeContext {
   theme: ITheme;
@@ -18,6 +19,7 @@ export const ThemeContext = createContext<IThemeContext>({
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode, enable, disable } = useDarkMode();
+  const { setTheme: setKonvaTheme } = useKonvaStore();
   const { setIsDarkMode } = useZustandThemeStore();
 
   const theme = useMemo(() => {
@@ -37,6 +39,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     body.style.backgroundColor = theme.colorBgSecondary;
     html.style.backgroundColor = theme.colorBgSecondary;
     setIsDarkMode(isDarkMode);
+    setKonvaTheme(isDarkMode ? "dark" : "light");
 
     if (isDarkMode) {
       document.documentElement.classList.add("dark");

@@ -7,10 +7,10 @@ const LandingPageSection = () => {
   const stageRef = useRef<StageType>(null);
 
   return (
-    <>
+    <div>
       <Toolbar stageRef={stageRef} />
       <LandingCanvas stageRef={stageRef} />
-    </>
+    </div>
   );
 };
 

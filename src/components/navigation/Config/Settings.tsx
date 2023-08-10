@@ -37,7 +37,7 @@ const Settings = () => {
         leaveTo="opacity-0 translate-y-20"
         show={showSettings}
       >
-        <div className="absolute bottom-12 right-0 flex flex-col items-start w-36">
+        <div className="absolute shadow-md bottom-12 right-0 flex flex-col border border-b-0 border-solid border-grey items-start w-36">
           <SettingsButton label={themeLabel} onClick={toggleTheme} />
           <SettingsButton label={navigationLabel} onClick={toggleNavigation} />
           <SettingsButton label={miniMapLabel} onClick={toggleMiniMap} />

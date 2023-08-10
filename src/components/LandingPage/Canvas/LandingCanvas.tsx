@@ -38,7 +38,7 @@ const LandingCanvas = (props: ILandingCanvas) => {
     <Stage
       ref={stageRef}
       width={width}
-      height={height - 40}
+      height={height - 60}
       onMouseDown={onMouseDown}
       onTouchStart={onMouseDown}
       onMouseMove={onMouseMove}

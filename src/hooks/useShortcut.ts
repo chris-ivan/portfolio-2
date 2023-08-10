@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import usePanNavigation from "./usePanNavigation";
 import useArrowNavigation from "./useArrowNavigation";
 import useZoomShortcut from "./useZoomShortcut";
+import useGlobalDeselect from "./useGlobalDeselect";
 
 interface IUseShortcut {
   onZoom: (value: number) => void;
@@ -14,9 +15,11 @@ const useShortcut = (props: IUseShortcut) => {
   const panNavigation = usePanNavigation({ handleMove2D });
   const arrowNavigation = useArrowNavigation({ handleMove2D });
   const zoomNavigation = useZoomShortcut({ onZoom });
+  const globalDeselect = useGlobalDeselect();
 
-  const onMouseDown = (_e: MouseEvent) => {
+  const onMouseDown = (e: MouseEvent) => {
     panNavigation.onMouseDown();
+    globalDeselect.onMouseDown(e);
   };
   const onMouseMove = (e: MouseEvent) => {
     panNavigation.onMouseMove(e);

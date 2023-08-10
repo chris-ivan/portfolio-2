@@ -3,6 +3,7 @@ import { FRAME_KEY, IFrame } from "../../interfaces/frame";
 import { useNavigationStore } from "../../store/navigationStore";
 import { useIntersectionObserver } from "usehooks-ts";
 import useTheme from "../../hooks/useTheme";
+import NoiseBG from "../../assets/images/Noise.png";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
@@ -13,7 +14,7 @@ const Frame = (props: IFrameProps) => {
   const { children, size, position, title, id } = props;
   const { transform, removeRecommendedFrame, changeFrameVisibility } =
     useNavigationStore();
-  const { theme } = useTheme();
+  const { theme, isDarkMode } = useTheme();
 
   const ref = useRef<HTMLDivElement>(null);
   const isInitiated = useRef(false);
@@ -37,7 +38,7 @@ const Frame = (props: IFrameProps) => {
       }}
       id={id}
       ref={ref}
-      className="absolute bg-white"
+      className="absolute shadow-xl"
     >
       {title && (
         <div
@@ -52,6 +53,12 @@ const Frame = (props: IFrameProps) => {
         </div>
       )}
       {children}
+      <img
+        src={NoiseBG}
+        className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none touch-none object-cover w-full h-full"
+        style={{ opacity: isDarkMode ? 0.2 : 0.5 }}
+        alt=""
+      />
     </div>
   );
 };

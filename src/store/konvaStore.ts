@@ -6,7 +6,11 @@ import {
   KonvaStateType,
   KonvaToolbarEnum,
 } from "../interfaces/konva";
-import { getInitialNodes } from "../static/konva";
+import {
+  INITIAL_NODE_CONFIG,
+  INITIAL_NODE_ID,
+  getInitialNodes,
+} from "../static/konva";
 
 type ModifyNodeTypeCb =
   | KonvaNodeConfigType
@@ -35,6 +39,7 @@ interface IKonvaStore {
   setCurrentToolbar: (toolbar: KonvaToolbarEnum) => void;
   setIsTransformingMultipleNodes: (isTransforming: boolean) => void;
   setIsEditingText: (isEditing: boolean) => void;
+  setTheme: (theme: "light" | "dark") => void;
 }
 
 const handleChange =
@@ -176,6 +181,37 @@ const handleToggleNodeSelection = (id: string) => (state: IKonvaStore) => {
   return { selectedNodeIds: newSelectedNodeIds };
 };
 
+const convertStateTheme = (
+  state: KonvaStateType,
+  theme: "light" | "dark"
+): KonvaStateType => {
+  const newState = state.map((node): KonvaNodeType => {
+    if (INITIAL_NODE_CONFIG[node.id as INITIAL_NODE_ID] === undefined)
+      return node;
+    const newConfig =
+      INITIAL_NODE_CONFIG[node.id as INITIAL_NODE_ID][theme] || {};
+
+    // @ts-ignore
+    const newNode: KonvaNodeType = {
+      ...node,
+      config: { ...node.config, ...newConfig },
+    };
+
+    return newNode;
+  });
+
+  return newState;
+};
+
+export const updateKonvaHistoryTheme =
+  (theme: "light" | "dark") => (state: IKonvaStore) => {
+    const { history, currentState } = state;
+    const newHistory = history.map((state) => convertStateTheme(state, theme));
+    const newCurrentState = convertStateTheme(currentState, theme);
+
+    return { history: newHistory, currentState: newCurrentState };
+  };
+
 export const useKonvaStore = create<IKonvaStore>((set, get) => ({
   history: [],
   currentState: getInitialNodes(),
@@ -196,4 +232,5 @@ export const useKonvaStore = create<IKonvaStore>((set, get) => ({
   setIsTransformingMultipleNodes: (isTransforming) =>
     set({ isTransformingMultipleNodes: isTransforming }),
   setIsEditingText: (isEditing) => set({ isEditingText: isEditing }),
+  setTheme: (theme) => set(updateKonvaHistoryTheme(theme)),
 }));
