@@ -1,6 +1,6 @@
 import { TextConfig } from "konva/lib/shapes/Text";
 import { useKonvaStore } from "../../../store/konvaStore";
-import { IGenerateShapeProps, generateText } from "../../../utils/konva";
+import { generateText, getViewportCenter } from "../../../utils/konva";
 import {
   DEFAULT_H1,
   DEFAULT_H2,
@@ -8,15 +8,10 @@ import {
   DEFAULT_TEXT,
 } from "../../../static/konva";
 
-const createTextProps: IGenerateShapeProps = {
-  x: 400,
-  y: 400,
-};
-
 const getConfig = (config: TextConfig) => {
   return {
     ...config,
-    ...createTextProps,
+    ...getViewportCenter(),
   };
 };
 

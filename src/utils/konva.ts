@@ -15,6 +15,7 @@ import { LineConfig } from "konva/lib/shapes/Line";
 import { TextConfig } from "konva/lib/shapes/Text";
 import { DEFAULT_TEXT } from "../static/konva";
 import { useKonvaStore } from "../store/konvaStore";
+import { getViewportHeight, getViewportWidth } from "./viewport";
 
 export interface IGenerateShapeProps {
   x?: number;
@@ -175,4 +176,14 @@ export const handleTransformEnd = () => {
   const { setIsTransformingMultipleNodes } = useKonvaStore.getState();
   setIsTransformingMultipleNodes(false);
   return false;
+};
+
+export const getViewportCenter = (): IGenerateShapeProps => {
+  const viewportWidth = getViewportWidth();
+  const viewportHeight = getViewportHeight();
+
+  return {
+    x: viewportWidth / 2 - 200,
+    y: viewportHeight / 2 - 100,
+  };
 };

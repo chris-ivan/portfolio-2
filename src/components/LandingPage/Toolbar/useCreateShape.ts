@@ -1,31 +1,26 @@
 import { useKonvaStore } from "../../../store/konvaStore";
 import {
-  IGenerateShapeProps,
   generateEllipse,
   generatePolygon,
   generateRectangle,
+  getViewportCenter,
 } from "../../../utils/konva";
-
-const createShapeProps: IGenerateShapeProps = {
-  x: 400,
-  y: 400,
-};
 
 const useCreateShape = () => {
   const { addNodes } = useKonvaStore();
 
   const createRectangle = () => {
-    const rect = generateRectangle(createShapeProps);
+    const rect = generateRectangle(getViewportCenter());
     addNodes([rect], true);
   };
 
   const createEllipse = () => {
-    const ellipse = generateEllipse(createShapeProps);
+    const ellipse = generateEllipse(getViewportCenter());
     addNodes([ellipse], true);
   };
 
   const createPolygon = () => {
-    const polygon = generatePolygon(createShapeProps);
+    const polygon = generatePolygon(getViewportCenter());
     addNodes([polygon], true);
   };
 
