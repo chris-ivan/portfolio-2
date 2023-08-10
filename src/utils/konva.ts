@@ -16,6 +16,25 @@ import { TextConfig } from "konva/lib/shapes/Text";
 import { DEFAULT_TEXT } from "../static/konva";
 import { useKonvaStore } from "../store/konvaStore";
 import { getViewportHeight, getViewportWidth } from "./viewport";
+import { useZustandThemeStore } from "../store/themeStore";
+import { COLOR } from "../interfaces/theme";
+
+const getDefaultColor = (property: "fill" | "stroke" | "line" | "text") => {
+  const { isDarkMode } = useZustandThemeStore.getState();
+
+  switch (property) {
+    case "fill":
+      return isDarkMode ? COLOR.DARK_GREY : COLOR.LIGHT_GREY;
+    case "stroke":
+      return isDarkMode ? COLOR.LIGHT_GREY : COLOR.DARK_GREY;
+    case "line":
+      return isDarkMode ? COLOR.BLUE : COLOR.ORANGE;
+    case "text":
+      return isDarkMode ? COLOR.WHITE : COLOR.BLACK;
+    default:
+      return COLOR.GREY;
+  }
+};
 
 export interface IGenerateShapeProps {
   x?: number;
@@ -36,8 +55,8 @@ export const generateRectangle = (
       width: props?.width || 100,
       height: props?.height || 100,
       rotation: props?.rotation,
-      fill: props?.fill || "#efefef",
-      stroke: props?.stroke || "#111111",
+      fill: props?.fill || getDefaultColor("fill"),
+      stroke: props?.stroke || getDefaultColor("stroke"),
       strokeWidth: props?.strokeWidth || 1,
       id,
     },
@@ -58,8 +77,8 @@ export const generateEllipse = (
       radiusX: props?.radiusX || 60,
       radiusY: props?.radiusY || 60,
       rotation: props?.rotation,
-      fill: props?.fill || "#efefef",
-      stroke: props?.stroke || "#111111",
+      fill: props?.fill || getDefaultColor("fill"),
+      stroke: props?.stroke || getDefaultColor("stroke"),
       strokeWidth: props?.strokeWidth || 1,
       id,
     },
@@ -82,8 +101,8 @@ export const generatePolygon = (
       width: props?.width || 150,
       height: props?.height || 150,
       rotation: props?.rotation,
-      fill: props?.fill || "#efefef",
-      stroke: props?.stroke || "#111111",
+      fill: props?.fill || getDefaultColor("fill"),
+      stroke: props?.stroke || getDefaultColor("stroke"),
       strokeWidth: props?.strokeWidth || 1,
       id,
     },
@@ -118,7 +137,7 @@ export const generateLine = (
     config: {
       ...structuredClone(rest),
       points: props?.points || [x, y],
-      stroke: props?.stroke || "#111111",
+      stroke: props?.stroke || getDefaultColor("line"),
       strokeWidth: props?.strokeWidth || 2,
       tension: props?.tension || 0,
       lineCap: props?.lineCap || "round",
@@ -145,7 +164,7 @@ export const generateText = (
       text: props?.text || DEFAULT_TEXT.text,
       fontSize: props?.fontSize || DEFAULT_TEXT.fontSize,
       fontFamily: props?.fontFamily || DEFAULT_TEXT.fontFamily,
-      fill: props?.fill || DEFAULT_TEXT.fill,
+      fill: props?.fill || getDefaultColor("text"),
       align: props?.align || DEFAULT_TEXT.align,
       id,
     },

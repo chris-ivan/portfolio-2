@@ -24,7 +24,7 @@ const loadFont = async () => {
 
     modifyNodes(textNodeIds, (prev) => ({ ...prev }), false);
   } catch {
-    console.log("error");
+    console.error;
   }
 };
 

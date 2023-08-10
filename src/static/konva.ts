@@ -1,6 +1,5 @@
 import { TextConfig } from "konva/lib/shapes/Text";
 import { KonvaEnum, KonvaNodeType } from "../interfaces/konva";
-import { COLOR } from "../interfaces/theme";
 
 export const BASIC_SHAPE = {
   MIN_WIDTH: 10,
@@ -11,7 +10,6 @@ export const DEFAULT_TEXT: TextConfig = {
   text: "Text",
   fontSize: 16,
   fontFamily: "Noto Sans",
-  fill: COLOR.BLACK,
   align: "center",
   width: 50,
   lineHeight: 1.5,
