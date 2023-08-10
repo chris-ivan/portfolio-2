@@ -1,3 +1,6 @@
+import AlignCenterIcon from "../../../assets/icons/Toolbar/AlignCenterIcon";
+import AlignLeftIcon from "../../../assets/icons/Toolbar/AlignLeftIcon";
+import AlignRightIcon from "../../../assets/icons/Toolbar/AlignRightIcon";
 import CursorIcon from "../../../assets/icons/Toolbar/CursorIcon";
 import DownloadIcon from "../../../assets/icons/Toolbar/DownloadIcon";
 import EllipseIcon from "../../../assets/icons/Toolbar/EllipseIcon";
@@ -12,6 +15,7 @@ import { KonvaToolbarEnum } from "../../../interfaces/konva";
 import { useKonvaStore } from "../../../store/konvaStore";
 import ToolbarButton from "./ToolbarButton";
 import ColorPicker from "./ToolbarColorPicker";
+import useAlignment from "./useAlignment";
 import useCreateShape from "./useCreateShape";
 import useCreateText from "./useCreateText";
 import useToolbarState from "./useToolbarState";
@@ -23,6 +27,15 @@ const Toolbar = () => {
   const { createH1, createH2, createH3, createText } = useCreateText();
   const { handlePencil, handleMove } = useToolbarState();
   const { currentToolbar } = useKonvaStore();
+  const {
+    handleAlignLeft,
+    handleAlignCenter,
+    handleAlignRight,
+    showAlignment,
+    isAlignLeft,
+    isAlignCenter,
+    isAlignRight,
+  } = useAlignment();
 
   return (
     <div className="relative z-10 flex h-[60px] w-full border-b border-solid border-light-grey dark:border-dark-grey pt-8 pb-6 px-8 items-center justify-between">
@@ -84,6 +97,27 @@ const Toolbar = () => {
         />
         <ColorPicker type="fill" label="Fill color" />
         <ColorPicker type="stroke" label="Outline color" />
+        <ToolbarButton
+          isActive={isAlignLeft}
+          visible={showAlignment}
+          label="Align left"
+          Icon={AlignLeftIcon}
+          onClick={handleAlignLeft}
+        />
+        <ToolbarButton
+          isActive={isAlignCenter}
+          visible={showAlignment}
+          label="Align center"
+          Icon={AlignCenterIcon}
+          onClick={handleAlignCenter}
+        />
+        <ToolbarButton
+          isActive={isAlignRight}
+          visible={showAlignment}
+          label="Align right"
+          Icon={AlignRightIcon}
+          onClick={handleAlignRight}
+        />
       </div>
       <div>
         <ToolbarButton

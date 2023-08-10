@@ -6,16 +6,19 @@ interface IToolbarButton {
   Icon: (props: IIcon) => JSX.Element;
   isActive: boolean;
   label: string;
+  visible?: boolean;
 }
 
 const ToolbarButton = (props: IToolbarButton) => {
-  const { onClick, Icon, isActive, label } = props;
+  const { onClick, Icon, isActive, label, visible = true } = props;
   const { theme } = useTheme();
 
   const iconColor = isActive ? theme.colorText : theme.colorTextSecondary;
   const tailwindBgClass = isActive
     ? "bg-light-grey dark:bg-black"
     : "bg-transparent";
+
+  if (!visible) return null;
 
   return (
     <button
