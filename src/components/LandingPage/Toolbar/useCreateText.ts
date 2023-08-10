@@ -7,6 +7,7 @@ import {
   DEFAULT_H3,
   DEFAULT_TEXT,
 } from "../../../static/konva";
+import { KonvaToolbarEnum } from "../../../interfaces/konva";
 
 const getConfig = (config: TextConfig) => {
   return {
@@ -19,6 +20,7 @@ const createTextNode = (baseText: TextConfig) => {
   const textConfig = getConfig(baseText);
   const textNode = generateText(textConfig);
   useKonvaStore.getState().addNodes([textNode], true);
+  useKonvaStore.getState().setCurrentToolbar(KonvaToolbarEnum.SELECT);
 };
 
 const useCreateText = () => {

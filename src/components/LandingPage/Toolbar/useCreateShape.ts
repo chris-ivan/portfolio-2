@@ -1,28 +1,33 @@
+import {
+  KonvaNodeConfigType,
+  KonvaNodeType,
+  KonvaToolbarEnum,
+} from "../../../interfaces/konva";
 import { useKonvaStore } from "../../../store/konvaStore";
 import {
+  IGenerateShapeProps,
   generateEllipse,
   generatePolygon,
   generateRectangle,
   getViewportCenter,
 } from "../../../utils/konva";
 
+type createBasicNodeFn = (
+  props?: IGenerateShapeProps & Partial<KonvaNodeConfigType>
+) => KonvaNodeType;
+
 const useCreateShape = () => {
-  const { addNodes } = useKonvaStore();
+  const { addNodes, setCurrentToolbar } = useKonvaStore();
 
-  const createRectangle = () => {
-    const rect = generateRectangle(getViewportCenter());
-    addNodes([rect], true);
+  const generateShape = (fn: createBasicNodeFn) => {
+    const node = fn(getViewportCenter());
+    addNodes([node], true);
+    setCurrentToolbar(KonvaToolbarEnum.SELECT);
   };
 
-  const createEllipse = () => {
-    const ellipse = generateEllipse(getViewportCenter());
-    addNodes([ellipse], true);
-  };
-
-  const createPolygon = () => {
-    const polygon = generatePolygon(getViewportCenter());
-    addNodes([polygon], true);
-  };
+  const createRectangle = () => generateShape(generateRectangle);
+  const createEllipse = () => generateShape(generateEllipse);
+  const createPolygon = () => generateShape(generatePolygon);
 
   return { createRectangle, createEllipse, createPolygon };
 };
