@@ -38,6 +38,7 @@ const usePencil = () => {
 
   const onMouseUp = () => {
     isDrawing.current = false;
+    console.log(currentState[currentState.length - 1]);
   };
 
   return { onMouseDown, onMouseMove, onMouseUp };

@@ -161,6 +161,7 @@ export const generateText = (
       ...props,
       x: props?.x || 10,
       y: props?.y || 10,
+      fontStyle: props?.fontStyle || "normal",
       text: props?.text || DEFAULT_TEXT.text,
       fontSize: props?.fontSize || DEFAULT_TEXT.fontSize,
       fontFamily: props?.fontFamily || DEFAULT_TEXT.fontFamily,

@@ -15,7 +15,7 @@ const NavigationConfig = () => {
   return (
     <>
       <div className="fixed top-4 left-6" style={{ color: theme.colorText }}>
-        Hello, World!
+        Christopher Ivan Gunardi
       </div>
       <div className="fixed bottom-4 right-6 flex items-center gap-2">
         <SocialLink

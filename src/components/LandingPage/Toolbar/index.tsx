@@ -131,27 +131,29 @@ const Toolbar = (props: IToolbar) => {
         />
         <ColorPicker type="fill" label="Fill color" />
         <ColorPicker type="stroke" label="Outline color" />
-        <ToolbarButton
-          isActive={isAlignLeft}
-          visible={showAlignment}
-          label="Align left"
-          Icon={AlignLeftIcon}
-          onClick={handleAlignLeft}
-        />
-        <ToolbarButton
-          isActive={isAlignCenter}
-          visible={showAlignment}
-          label="Align center"
-          Icon={AlignCenterIcon}
-          onClick={handleAlignCenter}
-        />
-        <ToolbarButton
-          isActive={isAlignRight}
-          visible={showAlignment}
-          label="Align right"
-          Icon={AlignRightIcon}
-          onClick={handleAlignRight}
-        />
+        {showAlignment && (
+          <div className="flex items-center justify-between">
+            <div className="w-px h-6 bg-light-grey dark:bg-dark-grey mx-2" />
+            <ToolbarButton
+              isActive={isAlignLeft}
+              label="Align left"
+              Icon={AlignLeftIcon}
+              onClick={handleAlignLeft}
+            />
+            <ToolbarButton
+              isActive={isAlignCenter}
+              label="Align center"
+              Icon={AlignCenterIcon}
+              onClick={handleAlignCenter}
+            />
+            <ToolbarButton
+              isActive={isAlignRight}
+              label="Align right"
+              Icon={AlignRightIcon}
+              onClick={handleAlignRight}
+            />
+          </div>
+        )}
       </div>
       <div>
         <ToolbarButton

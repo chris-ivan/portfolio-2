@@ -6,7 +6,7 @@ import {
   KonvaStateType,
   KonvaToolbarEnum,
 } from "../interfaces/konva";
-import { initialRectangles } from "../static/konva";
+import { getInitialNodes } from "../static/konva";
 
 type ModifyNodeTypeCb =
   | KonvaNodeConfigType
@@ -178,7 +178,7 @@ const handleToggleNodeSelection = (id: string) => (state: IKonvaStore) => {
 
 export const useKonvaStore = create<IKonvaStore>((set, get) => ({
   history: [],
-  currentState: initialRectangles,
+  currentState: getInitialNodes(),
   historyIndex: 0,
   selectedNodeIds: [],
   currentToolbar: KonvaToolbarEnum.SELECT,
