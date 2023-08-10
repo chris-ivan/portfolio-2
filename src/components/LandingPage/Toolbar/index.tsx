@@ -1,3 +1,4 @@
+import { Stage as StageType } from "konva/lib/Stage";
 import AlignCenterIcon from "../../../assets/icons/Toolbar/AlignCenterIcon";
 import AlignLeftIcon from "../../../assets/icons/Toolbar/AlignLeftIcon";
 import AlignRightIcon from "../../../assets/icons/Toolbar/AlignRightIcon";
@@ -20,8 +21,17 @@ import useCreateShape from "./useCreateShape";
 import useCreateText from "./useCreateText";
 import useToolbarState from "./useToolbarState";
 // import useUndoRedo from "./useUndoRedo";
+import { v4 as uuidv4 } from "uuid";
+import useTheme from "../../../hooks/useTheme";
 
-const Toolbar = () => {
+interface IToolbar {
+  stageRef: React.RefObject<StageType>;
+}
+
+const Toolbar = (props: IToolbar) => {
+  const { stageRef } = props;
+  const { theme } = useTheme();
+
   // const { handleUndo, handleRedo, canUndo, canRedo } = useUndoRedo();
   const { createRectangle, createEllipse, createPolygon } = useCreateShape();
   const { createH1, createH2, createH3, createText } = useCreateText();
@@ -36,6 +46,30 @@ const Toolbar = () => {
     isAlignCenter,
     isAlignRight,
   } = useAlignment();
+
+  const handleDownloadImage = () => {
+    if (!stageRef.current) return;
+
+    const canvas = stageRef.current.toCanvas({ pixelRatio: 2 });
+    const context = canvas.getContext("2d");
+    if (!context) return;
+
+    context.globalCompositeOperation = "destination-over";
+    context.fillStyle = theme.colorBgBase;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    // cleaning up by resetting to default
+    context.globalCompositeOperation = "source-over";
+    const dataURL = canvas.toDataURL();
+
+    const link = document.createElement("a");
+
+    link.href = dataURL;
+    link.download = `image-${uuidv4()}.png`;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <div className="relative z-10 flex h-[60px] w-full border-b border-solid border-light-grey dark:border-dark-grey pt-8 pb-6 px-8 items-center justify-between">
@@ -122,9 +156,10 @@ const Toolbar = () => {
       <div>
         <ToolbarButton
           isActive={false}
+          visible={!!stageRef?.current}
           label="Download as image"
           Icon={DownloadIcon}
-          onClick={() => {}}
+          onClick={handleDownloadImage}
         />
       </div>
     </div>

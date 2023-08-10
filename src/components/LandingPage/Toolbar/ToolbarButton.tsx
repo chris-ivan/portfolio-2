@@ -13,7 +13,7 @@ const ToolbarButton = (props: IToolbarButton) => {
   const { onClick, Icon, isActive, label, visible = true } = props;
   const { theme } = useTheme();
 
-  const iconColor = isActive ? theme.colorText : theme.colorTextSecondary;
+  const iconColor = isActive ? theme.colorPrimary : theme.colorTextSecondary;
   const tailwindBgClass = isActive
     ? "bg-light-grey dark:bg-black"
     : "bg-transparent";

@@ -1,8 +1,8 @@
 import { Stage, Layer, Transformer, Rect } from "react-konva";
 import { Transformer as TransformerType } from "konva/lib/shapes/Transformer";
-import { Stage as StageType } from "konva/lib/Stage";
 import { Layer as LayerType } from "konva/lib/Layer";
 import { Rect as RectType } from "konva/lib/shapes/Rect";
+import { Stage as StageType } from "konva/lib/Stage";
 import { useKonvaStore } from "../../../store/konvaStore";
 import KonvaNode from "../../Konva/KonvaNode";
 import useKeyboardShortcut from "./hooks/useKeyboardShortcut";
@@ -13,8 +13,12 @@ import { BASIC_SHAPE } from "../../../static/konva";
 import useViewport from "../../../hooks/useViewport";
 import useFontLoaded from "./hooks/useFontLoaded";
 
-const LandingCanvas = () => {
-  const stageRef = useRef<StageType>(null);
+interface ILandingCanvas {
+  stageRef: React.RefObject<StageType>;
+}
+
+const LandingCanvas = (props: ILandingCanvas) => {
+  const { stageRef } = props;
   const layerRef = useRef<LayerType>(null);
   const trRef = useRef<TransformerType>(null);
   const selectionRef = useRef<RectType>(null);
