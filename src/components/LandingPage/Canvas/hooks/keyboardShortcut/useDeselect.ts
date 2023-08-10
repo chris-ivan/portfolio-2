@@ -1,5 +1,4 @@
 import { useKonvaStore } from "../../../../../store/konvaStore";
-import { useEffect } from "react";
 
 const onDeselect = () => {
   const { setSelectedNodeIds } = useKonvaStore.getState();
@@ -11,13 +10,11 @@ const onDeselectListener = (e: KeyboardEvent) => {
 };
 
 const useDeselect = () => {
-  useEffect(() => {
-    window.addEventListener("keydown", onDeselectListener);
+  const onKeyDown = (e: KeyboardEvent) => {
+    onDeselectListener(e);
+  };
 
-    return () => {
-      window.removeEventListener("keydown", onDeselectListener);
-    };
-  });
+  return { onKeyDown };
 };
 
 export default useDeselect;

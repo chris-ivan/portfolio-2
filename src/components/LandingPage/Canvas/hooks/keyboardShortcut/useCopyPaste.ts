@@ -5,7 +5,7 @@ import {
   KonvaNodeType,
 } from "../../../../../interfaces/konva";
 import { useKonvaStore } from "../../../../../store/konvaStore";
-import { useEffect, useCallback } from "react";
+import { useCallback } from "react";
 import {
   generateBasicShape,
   generateLine,
@@ -158,15 +158,7 @@ const useCopyPaste = (props: IUseCopyPaste) => {
     [stageRef]
   );
 
-  useEffect(() => {
-    if (!stageRef) return;
-
-    window.addEventListener("keydown", onKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [stageRef, onKeyDown]);
+  return { onKeyDown };
 };
 
 export default useCopyPaste;

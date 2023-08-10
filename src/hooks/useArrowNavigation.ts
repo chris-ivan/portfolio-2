@@ -1,3 +1,5 @@
+import { useKonvaStore } from "../store/konvaStore";
+
 interface IUseArrowNavigation {
   handleMove2D: (dx: number, dy: number) => void;
 }
@@ -21,6 +23,9 @@ const useArrowNavigation = (props: IUseArrowNavigation) => {
   const { handleMove2D } = props;
 
   const onKeyDown = (e: KeyboardEvent) => {
+    const { isEditingText } = useKonvaStore.getState();
+    if (isEditingText) return;
+
     const [dx, dy] = handleArrowNavigation(e);
     if (dx === 0 && dy === 0) return;
     handleMove2D(dx * MULTIPLIER, dy * MULTIPLIER);

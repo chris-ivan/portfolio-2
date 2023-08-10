@@ -1,5 +1,4 @@
 import { useKonvaStore } from "../../../../../store/konvaStore";
-import { useEffect } from "react";
 
 const isUndo = (e: KeyboardEvent) => e.key === "z" && e.ctrlKey;
 const isRedo = (e: KeyboardEvent) => e.key === "y" && e.ctrlKey;
@@ -18,13 +17,11 @@ const onUndoRedoListener = (e: KeyboardEvent) => {
 };
 
 const useUndoRedo = () => {
-  useEffect(() => {
-    window.addEventListener("keydown", onUndoRedoListener);
+  const onKeyDown = (e: KeyboardEvent) => {
+    onUndoRedoListener(e);
+  };
 
-    return () => {
-      window.removeEventListener("keydown", onUndoRedoListener);
-    };
-  });
+  return { onKeyDown };
 };
 
 export default useUndoRedo;

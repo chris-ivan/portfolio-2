@@ -1,5 +1,4 @@
 import { useKonvaStore } from "../../../../../store/konvaStore";
-import { useEffect } from "react";
 
 const DELETE_KEYS = ["Delete", "Backspace"];
 
@@ -16,13 +15,11 @@ const onDeleteListener = (e: KeyboardEvent) => {
 };
 
 const useDeleteNode = () => {
-  useEffect(() => {
-    window.addEventListener("keydown", onDeleteListener);
+  const onKeyDown = (e: KeyboardEvent) => {
+    onDeleteListener(e);
+  };
 
-    return () => {
-      window.removeEventListener("keydown", onDeleteListener);
-    };
-  });
+  return { onKeyDown };
 };
 
 export default useDeleteNode;

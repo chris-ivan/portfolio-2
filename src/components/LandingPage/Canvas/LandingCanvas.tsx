@@ -5,7 +5,7 @@ import { Rect as RectType } from "konva/lib/shapes/Rect";
 import { Stage as StageType } from "konva/lib/Stage";
 import { useKonvaStore } from "../../../store/konvaStore";
 import KonvaNode from "../../Konva/KonvaNode";
-import useKeyboardShortcut from "./hooks/useKeyboardShortcut";
+import useKeyboardShortcut from "./hooks/useKonvaShortcut";
 import useLandingCanvas from "./useLandingCanvas";
 import { useRef } from "react";
 import useTransformer from "./hooks/useTransformer";
