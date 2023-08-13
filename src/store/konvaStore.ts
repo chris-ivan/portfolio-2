@@ -216,7 +216,7 @@ export const useKonvaStore = create<IKonvaStore>((set, get) => ({
   history: [],
   currentState: getInitialNodes(),
   historyIndex: 0,
-  selectedNodeIds: [],
+  selectedNodeIds: [INITIAL_NODE_ID.TITLE],
   currentToolbar: KonvaToolbarEnum.SELECT,
   isTransformingMultipleNodes: false,
   isEditingText: false,
