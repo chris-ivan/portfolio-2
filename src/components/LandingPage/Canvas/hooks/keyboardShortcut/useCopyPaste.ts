@@ -5,7 +5,7 @@ import {
   KonvaNodeType,
 } from "../../../../../interfaces/konva";
 import { useKonvaStore } from "../../../../../store/konvaStore";
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import {
   generateBasicShape,
   generateLine,
@@ -13,6 +13,7 @@ import {
 } from "../../../../../utils/konva";
 import { Stage } from "konva/lib/Stage";
 import { Vector2d } from "konva/lib/types";
+import { NotificationContext } from "../../../../../context/NotificationContext";
 
 const KonvaBasicShapes = [KonvaEnum.ELLIPSE, KonvaEnum.POLYGON, KonvaEnum.RECT];
 
@@ -100,42 +101,52 @@ const duplicateNodes = (nodes: KonvaNodeType[], position?: Vector2d) => {
   useKonvaStore.getState().addNodes(newNodes, true);
 };
 
-const copy = async (nodes: KonvaNodeType[]): Promise<void> => {
-  try {
-    await navigator.clipboard.writeText(JSON.stringify(nodes));
-    console.log("copied to clipboard");
-  } catch {
-    console.log("failed to copy to clipboard");
-  }
-};
-
-const cut = async (nodes: KonvaNodeType[]): Promise<void> => {
-  try {
-    await copy(nodes);
-    useKonvaStore.getState().deleteNodes(nodes.map((node) => node.id));
-  } catch {
-    console.log("failed to cut");
-  }
-};
-
-const paste = async (position: Vector2d | null): Promise<void> => {
-  try {
-    const text: string = await navigator.clipboard.readText();
-    if (!text || typeof text !== "string") return;
-
-    const nodes: KonvaNodeType[] = JSON.parse(text) as KonvaNodeType[];
-    duplicateNodes(nodes, position || undefined);
-  } catch (e) {
-    console.log("failed to paste");
-  }
-};
-
 interface IUseCopyPaste {
   stageRef: React.RefObject<Stage>;
 }
 
 const useCopyPaste = (props: IUseCopyPaste) => {
   const { stageRef } = props;
+  const { toastSuccess, toastError } = useContext(NotificationContext);
+
+  const copy = useCallback(
+    async (nodes: KonvaNodeType[]): Promise<void> => {
+      try {
+        await navigator.clipboard.writeText(JSON.stringify(nodes));
+        toastSuccess("copied to clipboard");
+      } catch {
+        toastError("failed to copy to clipboard");
+      }
+    },
+    [toastSuccess, toastError]
+  );
+
+  const cut = useCallback(
+    async (nodes: KonvaNodeType[]): Promise<void> => {
+      try {
+        await copy(nodes);
+        useKonvaStore.getState().deleteNodes(nodes.map((node) => node.id));
+      } catch {
+        toastError("failed to cut");
+      }
+    },
+    [copy, toastError]
+  );
+
+  const paste = useCallback(
+    async (position: Vector2d | null): Promise<void> => {
+      try {
+        const text: string = await navigator.clipboard.readText();
+        if (!text || typeof text !== "string") return;
+
+        const nodes: KonvaNodeType[] = JSON.parse(text) as KonvaNodeType[];
+        duplicateNodes(nodes, position || undefined);
+      } catch (e) {
+        toastError("failed to paste");
+      }
+    },
+    [toastError]
+  );
 
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -155,7 +166,7 @@ const useCopyPaste = (props: IUseCopyPaste) => {
       const position = stageRef.current.getPointerPosition();
       if (e.key === "v") return void paste(position);
     },
-    [stageRef]
+    [stageRef, copy, cut, paste]
   );
 
   return { onKeyDown };

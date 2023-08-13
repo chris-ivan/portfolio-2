@@ -38,7 +38,7 @@ const useKonvaShortcut = (props: IUseKeyboardShortcut) => {
       window.removeEventListener("keydown", onKeyDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [konvaClipboardShortcut.onKeyDown]);
 };
 
 export default useKonvaShortcut;
