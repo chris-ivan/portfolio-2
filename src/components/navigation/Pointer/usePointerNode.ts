@@ -19,10 +19,11 @@ const usePointerNode = (props: IUsePointerNode) => {
   const { targetId, label } = props;
   const viewportSize = useViewport();
   const { isNavigating } = useNavigationStore();
-  const calcProps = useMemo(
-    () => ({ label, targetId, viewportSize }),
-    [label, targetId, viewportSize]
-  );
+
+  const calcProps = useMemo(() => {
+    const targetElem = document.getElementById(targetId);
+    return { label, targetElem, viewportSize };
+  }, [label, targetId, viewportSize]);
 
   const [position, setPosition] = useState<frameCoordinateType>(
     calculatePointerNodePosition(calcProps).position
@@ -43,7 +44,10 @@ const usePointerNode = (props: IUsePointerNode) => {
     setPointerPosition(pointerArrowPosition);
   }, [label, calcProps]);
 
-  useInterval(calculatePosition, isNavigating ? 100 : null);
+  useInterval(
+    () => requestAnimationFrame(calculatePosition),
+    isNavigating ? 100 : null
+  );
 
   return { position, angle, pointerPosition };
 };

@@ -34,21 +34,23 @@ const TextInput = (props: ITextInput) => {
 
   const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
-    modifyNodes(
-      [textData.id],
-      {
-        ...textData.config,
-        text: e.target.value,
-      },
-      false
-    );
+    requestAnimationFrame(() => {
+      modifyNodes(
+        [textData.id],
+        {
+          ...textData.config,
+          text: e.target.value,
+        },
+        false
+      );
+    });
   };
 
   useEffect(() => {
     // wait for the text to get updated after setValue
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       setInputHeight(textNode?.height() || 0);
-    }, 10);
+    });
   }, [setInputHeight, textNode, value]);
 
   const inputWidth = width || 10;

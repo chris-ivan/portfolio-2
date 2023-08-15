@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useContext, useMemo, RefObject } from "react";
 import { FRAME_KEY, IFrame } from "../../interfaces/frame";
 import { useNavigationStore } from "../../store/navigationStore";
-import { useIntersectionObserver } from "usehooks-ts";
 import useTheme from "../../hooks/useTheme";
 import NoiseBG from "../../assets/images/Noise.png";
+import { FrameRefContext } from "../../context/FrameRefContext";
+import { useIntersectionObserver } from "usehooks-ts";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
@@ -15,19 +16,27 @@ const Frame = (props: IFrameProps) => {
   const { transform, removeRecommendedFrame, changeFrameVisibility } =
     useNavigationStore();
   const { theme, isDarkMode } = useTheme();
+  const refs = useContext(FrameRefContext);
 
-  const ref = useRef<HTMLDivElement>(null);
+  const frameRef = useMemo(() => {
+    return refs[id];
+  }, [id, refs]);
+
+  const observer = useIntersectionObserver(
+    frameRef as RefObject<HTMLDivElement>,
+    {}
+  );
+
   const isInitiated = useRef(false);
-  const entry = useIntersectionObserver(ref, {});
 
   useEffect(() => {
-    changeFrameVisibility(id, !!entry?.isIntersecting);
+    changeFrameVisibility(id, !!observer?.isIntersecting);
 
-    if (isInitiated.current || !entry?.isIntersecting) return;
+    if (isInitiated.current || !observer?.isIntersecting) return;
     removeRecommendedFrame(id);
     isInitiated.current = true;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [entry?.isIntersecting]);
+  }, [observer?.isIntersecting]);
 
   return (
     <div
@@ -37,7 +46,7 @@ const Frame = (props: IFrameProps) => {
         backgroundColor: theme.colorBgBase,
       }}
       id={id}
-      ref={ref}
+      ref={frameRef}
       className="absolute shadow-xl"
     >
       {title && (

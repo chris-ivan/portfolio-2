@@ -29,16 +29,17 @@ const usePencil = () => {
     const prevPoints: number[] = lastLine.config.points as number[];
     const newPoints = [...prevPoints].concat([x, y]);
 
-    modifyNodes(
-      [lastLine.id],
-      { ...lastLine.config, points: newPoints },
-      false
-    );
+    requestAnimationFrame(() => {
+      modifyNodes(
+        [lastLine.id],
+        { ...lastLine.config, points: newPoints },
+        false
+      );
+    });
   };
 
   const onMouseUp = () => {
     isDrawing.current = false;
-    console.log(currentState[currentState.length - 1]);
   };
 
   return { onMouseDown, onMouseMove, onMouseUp };

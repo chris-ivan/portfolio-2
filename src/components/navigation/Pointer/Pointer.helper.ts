@@ -1,15 +1,11 @@
-import {
-  FRAME_KEY,
-  frameCoordinateType,
-  frameSizeType,
-} from "../../../interfaces/frame";
+import { frameCoordinateType, frameSizeType } from "../../../interfaces/frame";
 
 const PADDING = 40;
 const AVG_CHAR_WIDTH = 5.8;
 const AVG_CHAR_HEIGHT = 12;
 
 interface ICalculatePointerNodePosition {
-  targetId: FRAME_KEY;
+  targetElem: HTMLElement | null;
   viewportSize: frameSizeType<number>;
   label: string;
 }
@@ -17,15 +13,13 @@ interface ICalculatePointerNodePosition {
 export const calculatePointerNodePosition = (
   props: ICalculatePointerNodePosition
 ) => {
-  const { targetId, viewportSize, label } = props;
+  const { targetElem, viewportSize, label } = props;
   const { width: viewportWidth, height: viewportHeight } = viewportSize;
 
   const position: frameCoordinateType = { x: 0, y: 0 };
+  if (!targetElem) return { position, angle: 0 };
 
-  const target = document.getElementById(targetId);
-  if (!target) return { position, angle: 0 };
-
-  const targetPosition = target.getBoundingClientRect();
+  const targetPosition = targetElem.getBoundingClientRect();
 
   const viewportCenterX = viewportWidth / 2;
   const viewportCenterY = viewportHeight / 2;
