@@ -46,7 +46,7 @@ const usePointerNode = (props: IUsePointerNode) => {
 
   useInterval(
     () => requestAnimationFrame(calculatePosition),
-    isNavigating ? 100 : null
+    isNavigating ? 1000 / 60 : null
   );
 
   return { position, angle, pointerPosition };
