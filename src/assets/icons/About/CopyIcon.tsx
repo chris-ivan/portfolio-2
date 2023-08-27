@@ -1,6 +1,6 @@
 import { IIcon } from "../../../interfaces/icon";
 
-const DownloadIcon = (props?: IIcon) => {
+const CopyIcon = (props?: IIcon) => {
   const { fill, ...res } = props || {};
   return (
     <svg
@@ -25,4 +25,4 @@ const DownloadIcon = (props?: IIcon) => {
   );
 };
 
-export default DownloadIcon;
+export default CopyIcon;

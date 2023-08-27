@@ -43,3 +43,10 @@ body::-webkit-scrollbar-thumb {
 .w-tc-editor-preview .token.title {
   font-weight: bold !important;
 }
+
+.custom-button {
+  font-family: "Grifter", sans-serif;
+  font-size: 14px;
+  line-height: 150%;
+  letter-spacing: 1px;
+}

@@ -5,6 +5,10 @@ export const getViewportWidth = () =>
   Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
 export const viewportToPx = (size: string): number => {
+  if (size.endsWith("px")) {
+    return parseFloat(size);
+  }
+
   const viewportWidth = getViewportWidth();
   const viewportHeight = window.innerHeight;
 

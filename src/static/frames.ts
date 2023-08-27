@@ -31,7 +31,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.EXPERIENCES]: {
     title: "Experiences",
     size: {
-      width: "80vw",
+      width: "1000px",
     },
     position: {
       top: "380vh",

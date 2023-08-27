@@ -2,7 +2,7 @@ import useTheme from "../../hooks/useTheme";
 import { IIcon } from "../../interfaces/icon";
 
 interface IEditorButton {
-  onClick: () => void;
+  onClick: (() => void) | (() => Promise<void>);
   Icon: (props: IIcon) => JSX.Element;
   label: string;
 }
@@ -16,7 +16,7 @@ const EditorButton = (props: IEditorButton) => {
   return (
     <button
       className={` hover:bg-light-grey hover:dark:bg-black mx-[2px]`}
-      onClick={onClick}
+      onClick={() => void onClick()}
       title={label}
       aria-label={label}
     >

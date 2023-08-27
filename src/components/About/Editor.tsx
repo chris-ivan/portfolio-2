@@ -20,7 +20,7 @@ const Editor = () => {
         </div>
         <div className="flex py-1 px-2">
           <EditorButton
-            onClick={handleCopy}
+            onClick={() => void handleCopy()}
             Icon={CopyIcon}
             label="Copy to clipboard"
           />
