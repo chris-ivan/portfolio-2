@@ -34,3 +34,12 @@ body::-webkit-scrollbar {
 body::-webkit-scrollbar-thumb {
   border: 1px solid #767676;
 }
+
+.w-tc-editor-preview .token.italic {
+  font-style: italic !important;
+}
+
+.w-tc-editor-preview .token.bold,
+.w-tc-editor-preview .token.title {
+  font-weight: bold !important;
+}

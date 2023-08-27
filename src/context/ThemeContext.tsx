@@ -43,8 +43,10 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (isDarkMode) {
       document.documentElement.classList.add("dark");
+      document.documentElement.setAttribute("data-color-mode", "dark");
     } else {
       document.documentElement.classList.remove("dark");
+      document.documentElement.setAttribute("data-color-mode", "light");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDarkMode]);
