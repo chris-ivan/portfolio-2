@@ -5,9 +5,12 @@ interface IButton extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: FC<IButton> = (props) => {
-  const { children } = props;
+  const { children, ...rest } = props;
   return (
-    <button className="custom-button bg-blue hover:bg-orange transition-colors text-white py-4 px-6">
+    <button
+      {...rest}
+      className="custom-button bg-blue hover:bg-orange transition-colors text-white py-4 px-6"
+    >
       {children}
     </button>
   );

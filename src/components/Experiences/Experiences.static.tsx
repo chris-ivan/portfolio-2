@@ -3,6 +3,8 @@ import TaniHubLogo from "../../assets/images/Interests/logo-tanihub.webp";
 import ShopeeLogo from "../../assets/images/Interests/logo-shopee.webp";
 import SinarmasLogo from "../../assets/images/Interests/logo-sinarmas.webp";
 import CitreLogo from "../../assets/images/Interests/logo-citre.webp";
+import { navigateToFrame } from "../../utils/navigation";
+import { FRAME_KEY } from "../../interfaces/frame";
 
 export interface IExperience {
   title: string;
@@ -64,7 +66,10 @@ export const EXPERIENCES: IExperience[] = [
     notes: (
       <p>
         Tech stack: visit my{" "}
-        <span className="underline hover:text-blue cursor-pointer">
+        <span
+          onClick={() => navigateToFrame(FRAME_KEY.SKILLS)}
+          className="underline hover:text-blue cursor-pointer"
+        >
           skills section
         </span>
       </p>

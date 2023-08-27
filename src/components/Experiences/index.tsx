@@ -5,9 +5,12 @@ import NewTab from "../UI/NewTab";
 import Button from "../UI/Button";
 // @ts-ignore
 import { ReactComponent as RightChevronIcon } from "../../assets/icons/UI/ChevronRight.svg";
+import { navigateToFrame } from "../../utils/navigation";
+import { FRAME_KEY } from "../../interfaces/frame";
 
 const ExperiencesSection = () => {
   const { theme } = useTheme();
+
   return (
     <div style={{ color: theme.colorText }} className="pt-[88px]">
       <h2 className="mb-[60px] max-w-[900px] px-[72px]">
@@ -31,7 +34,7 @@ const ExperiencesSection = () => {
         ))}
       </div>
       <div className="p-[40px] flex w-full justify-end border-t border-solid border-light-grey dark:border-dark-grey">
-        <Button>
+        <Button onClick={() => navigateToFrame(FRAME_KEY.PROJECTS)}>
           Take a quick glance at my past Projects{" "}
           <span className="inline-block translate-y-[2px]">
             <RightChevronIcon />
