@@ -1,6 +1,6 @@
 import NewTabIcon from "../../../assets/icons/UI/NewTabIcon";
 import useTheme from "../../../hooks/useTheme";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 interface INewTab {
   fontSize?: number;
@@ -21,6 +21,9 @@ const NewTab: React.FC<INewTab> = (props) => {
     setIsHovering(false);
   };
 
+  const gap = useMemo(() => fontSize / 3, [fontSize]);
+  const translateY = useMemo(() => fontSize / 3, [fontSize]);
+
   return (
     <a
       href={href}
@@ -32,8 +35,16 @@ const NewTab: React.FC<INewTab> = (props) => {
       onMouseLeave={onMouseLeave}
     >
       {children}
-      <span className="mx-4 inline-block translate-y-2">
+      <span
+        className="inline-block"
+        style={{
+          margin: `0 ${gap}px`,
+          transform: `translateY(${translateY}px)`,
+        }}
+      >
         <NewTabIcon
+          width={fontSize / 1.3}
+          height={fontSize}
           fill={isHovering ? theme.colorPrimary : theme.colorTextSecondary}
         />
       </span>

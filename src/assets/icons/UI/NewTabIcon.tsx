@@ -1,9 +1,15 @@
 import { IIcon } from "../../../interfaces/icon";
 
 const NewTabIcon = (props?: IIcon) => {
-  const { fill, ...res } = props || {};
+  const { fill, height, width, ...res } = props || {};
   return (
-    <svg width="33" height="33" viewBox="0 0 33 33" fill="none" {...res}>
+    <svg
+      width={width || "33"}
+      height={height || "33"}
+      viewBox="0 0 33 33"
+      fill="none"
+      {...res}
+    >
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
