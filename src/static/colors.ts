@@ -24,7 +24,7 @@ export const DARK_THEME: ITheme = {
   colorBgSecondary: isMobile ? COLOR.DARKER_GREY : COLOR.BLACK,
   colorText: COLOR.LIGHT_GREY,
   colorTextSecondary: COLOR.GREY,
-  colorTextTertiary: COLOR.DARKER_GREY,
+  colorTextTertiary: COLOR.DARK_GREY,
   colorBorder: COLOR.DARK_GREY,
   colorBorderSecondary: COLOR.DARK_BLUE,
 };

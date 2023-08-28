@@ -26,15 +26,6 @@ body::-webkit-scrollbar {
   height: 12px;
 }
 
-/* Track */
-/* body::-webkit-scrollbar-track {
-} */
-
-/* Handle */
-body::-webkit-scrollbar-thumb {
-  border: 1px solid #767676;
-}
-
 .w-tc-editor-preview .token.italic {
   font-style: italic !important;
 }
@@ -49,4 +40,14 @@ body::-webkit-scrollbar-thumb {
   font-size: 14px;
   line-height: 150%;
   letter-spacing: 1px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #b0b0b0 !important;
+}
+
+.dark input::placeholder,
+.dark textarea::placeholder {
+  color: #767676 !important;
 }

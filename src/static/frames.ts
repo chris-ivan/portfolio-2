@@ -73,7 +73,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.PROJECTS]: {
     title: "Projects I'm Proud of",
     size: {
-      width: "100vw",
+      width: "80vw",
     },
     position: {
       top: "138vh",
