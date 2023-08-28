@@ -49,7 +49,8 @@ export interface ISkill {
   darkIcon?: string;
 }
 
-const getIconObject = (
+// eslint-disable-next-line
+export const getIconObject = (
   name: string,
   icon: string,
   darkIcon?: string
