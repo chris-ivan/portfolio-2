@@ -1,4 +1,4 @@
-export default function checkMobile() {
+export function checkMobile() {
   const isMobileByUserAgent =
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
@@ -6,4 +6,8 @@ export default function checkMobile() {
   const isMobileByTouch = "ontouchstart" in window;
   const isMobileByPointer = navigator.maxTouchPoints > 0;
   return isMobileByUserAgent && isMobileByTouch && isMobileByPointer;
+}
+
+export function checkTouchDevice() {
+  return "ontouchstart" in window;
 }

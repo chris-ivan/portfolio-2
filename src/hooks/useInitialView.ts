@@ -1,6 +1,6 @@
 import { TransformType } from "../interfaces/container";
 import { FRAME_KEY } from "../interfaces/frame";
-import checkMobile from "../utils/isMobile";
+import { checkMobile } from "../utils/device";
 import { useMemo, useRef, useEffect } from "react";
 
 interface IUseInitialView {

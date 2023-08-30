@@ -1,5 +1,5 @@
 import { COLOR, ITheme } from "../interfaces/theme";
-import checkMobile from "../utils/isMobile";
+import { checkMobile } from "../utils/device";
 
 const isMobile = checkMobile();
 
