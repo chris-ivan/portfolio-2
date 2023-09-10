@@ -40,6 +40,7 @@ const Frame = (props: IFrameProps) => {
 
   return (
     <div
+      tabIndex={0}
       style={{
         ...size,
         ...position,
