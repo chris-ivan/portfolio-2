@@ -1,34 +1,16 @@
 import "./App.css";
-import Navigation from "./components/navigation";
-import Container from "./components/template/Container/Container";
 import { NotificationProvider } from "./context/NotificationContext";
-import { FrameRefProvider } from "./context/FrameRefContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import About from "./sections/About";
-import Contact from "./sections/Contact";
-import Experiences from "./sections/Experiences";
-import Interests from "./sections/Interests";
-import LandingPage from "./sections/LandingPage";
-import Projects from "./sections/Projects";
-import Skills from "./sections/Skills";
 import { Toaster } from "react-hot-toast";
+import Layout from "./layout";
+import Navigation from "./components/navigation";
 
 function App() {
   return (
     <ThemeProvider>
       <NotificationProvider>
-        <FrameRefProvider>
-          <Container>
-            <About />
-            <Contact />
-            <Experiences />
-            <Interests />
-            <LandingPage />
-            <Projects />
-            <Skills />
-          </Container>
-          <Navigation />
-        </FrameRefProvider>
+        <Layout />
+        <Navigation />
       </NotificationProvider>
       <Toaster />
     </ThemeProvider>

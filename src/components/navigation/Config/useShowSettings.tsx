@@ -18,6 +18,10 @@ const useShowSettings = (props: IUseShowSettings) => {
     }
   };
 
+  const closeSettings = () => {
+    setShowSettings(false);
+  };
+
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -26,7 +30,7 @@ const useShowSettings = (props: IUseShowSettings) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return { showSettings, toggleShowSettings };
+  return { showSettings, toggleShowSettings, closeSettings };
 };
 
 export default useShowSettings;

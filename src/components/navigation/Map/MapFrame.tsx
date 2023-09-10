@@ -1,6 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { FRAME_KEY, IFrameBbox } from "../../../interfaces/frame";
 import { useNavigationStore } from "../../../store/navigationStore";
+import useTransformListener from "../../../hooks/useTransformListener";
+import { FRAMES } from "../../../static/frames";
+import { viewportToPx } from "../../../utils/viewport";
 interface IMapFrame {
   targetId: FRAME_KEY;
   scale: number;
@@ -14,6 +17,15 @@ const initialBbox: IFrameBbox = {
 const MapFrame = (props: IMapFrame) => {
   const { targetId, scale } = props;
   const [bbox, setBbox] = useState<IFrameBbox>(initialBbox);
+  const { scale: globalScale } = useTransformListener();
+
+  const targetPosition = useMemo(
+    () => ({
+      top: viewportToPx((FRAMES[targetId].position?.top || "0vh") as string),
+      left: viewportToPx((FRAMES[targetId].position?.left || "0vw") as string),
+    }),
+    [targetId]
+  );
 
   const calculateSize = useCallback(() => {
     const target = document.getElementById(targetId);
@@ -21,44 +33,30 @@ const MapFrame = (props: IMapFrame) => {
 
     const clientRect = target.getBoundingClientRect();
     const position = {
-      left: clientRect.left * scale,
-      top: clientRect.top * scale,
+      left: targetPosition.left * scale,
+      top: targetPosition.top * scale,
     };
-
-    const size = {
-      width: clientRect.width * scale,
-      height: clientRect.height * scale,
-    };
-
-    setBbox({ position, size });
-  }, [scale, targetId]);
-
-  useEffect(() => {
-    calculateSize();
-  }, [calculateSize]);
-
-  const updateSize = useCallback(() => {
-    const target = document.getElementById(targetId);
-    if (!target) return;
-
-    const clientRect = target.getBoundingClientRect();
-    const globalScale = useNavigationStore.getState().transform.scale;
 
     const size = {
       width: (clientRect.width * scale) / globalScale,
       height: (clientRect.height * scale) / globalScale,
     };
 
-    setBbox((prev) => ({ ...prev, size }));
-  }, [scale, targetId]);
+    setBbox({ position, size });
+    // eslint-disable-next-line
+  }, [targetId, scale, targetPosition]);
+
+  useEffect(() => {
+    calculateSize();
+  }, [calculateSize]);
 
   useEffect(() => {
     const unsub = useNavigationStore.subscribe(
       (store) => store.frameVisibility[targetId],
-      updateSize
+      calculateSize
     );
     return () => unsub();
-  }, [targetId, updateSize]);
+  }, [targetId, calculateSize]);
 
   return (
     <div

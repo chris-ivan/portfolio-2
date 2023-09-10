@@ -1,31 +1,37 @@
 import SettingsButton from "./SettingsButton";
 import { Transition } from "@headlessui/react";
-import { FC } from "react";
-import { useNavigationStore } from "../../../store/navigationStore";
+import { FC, lazy } from "react";
 import useTheme from "../../../hooks/useTheme";
+import AdventureOnly from "../../template/AdventureOnly";
+import { NavigationMode, useGlobalStore } from "../../../store/globalStore";
+
+const AdventureSettingsMenu = lazy(() => import("./AdventureSettingsMenu"));
 
 interface ISettingsMenu {
   showSettings: boolean;
+  closeSettings: () => void;
 }
 
 const SettingsMenu: FC<ISettingsMenu> = (props) => {
-  const { showSettings } = props;
-
+  const { showSettings, closeSettings } = props;
   const { isDarkMode, setTheme } = useTheme();
-  const navigation = useNavigationStore();
-
-  const { showMiniMap, showNavigation, toggleMiniMap, toggleNavigation } =
-    navigation;
+  const { navigationMode, setNavigationMode } = useGlobalStore();
+  const isAdventure = navigationMode === NavigationMode.ADVENTURE;
 
   const toggleTheme = () => {
     setTheme(isDarkMode ? "light" : "dark");
+    closeSettings();
+  };
+
+  const toggleNavigationMode = () => {
+    setNavigationMode(
+      isAdventure ? NavigationMode.NORMAL : NavigationMode.ADVENTURE
+    );
+    closeSettings();
   };
 
   const themeLabel = isDarkMode ? "Light Mode" : "Dark Mode";
-  const navigationLabel = showNavigation
-    ? "Disable Navigation"
-    : "Enable Navigation";
-  const miniMapLabel = showMiniMap ? "Disable Mini Map" : "Enable Mini Map";
+  const navigationModeLabel = isAdventure ? "Normal Mode" : "Adventure Mode";
 
   return (
     <Transition
@@ -40,8 +46,13 @@ const SettingsMenu: FC<ISettingsMenu> = (props) => {
     >
       <div className="absolute shadow-md bottom-12 right-0 flex flex-col border border-b-0 border-solid border-grey items-start w-36">
         <SettingsButton label={themeLabel} onClick={toggleTheme} />
-        <SettingsButton label={navigationLabel} onClick={toggleNavigation} />
-        <SettingsButton label={miniMapLabel} onClick={toggleMiniMap} />
+        <SettingsButton
+          label={navigationModeLabel}
+          onClick={toggleNavigationMode}
+        />
+        <AdventureOnly>
+          <AdventureSettingsMenu />
+        </AdventureOnly>
       </div>
     </Transition>
   );

@@ -9,7 +9,9 @@ const SettingsMenu = lazy(() => import("./SettingsMenu"));
 
 const Settings = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const { showSettings, toggleShowSettings } = useShowSettings({ ref });
+  const { showSettings, toggleShowSettings, closeSettings } = useShowSettings({
+    ref,
+  });
   const isClicked = useRef<boolean>(false);
 
   const handleClick = () => {
@@ -25,12 +27,15 @@ const Settings = () => {
       {isClicked.current && (
         <Suspense
           fallback={
-            <div className="border border-solid text-grey border-grey flex items-center justify-center absolute shadow-md bottom-12 right-0 h-[112px] w-[144px]">
+            <div className="border border-solid text-grey border-grey flex items-center justify-center absolute shadow-md bottom-12 right-0 h-[40px] w-[144px]">
               <LoadingSpinner />
             </div>
           }
         >
-          <SettingsMenu showSettings={showSettings} />
+          <SettingsMenu
+            closeSettings={closeSettings}
+            showSettings={showSettings}
+          />
         </Suspense>
       )}
       <div className="cursor-pointer scale-75" onClick={handleClick}>

@@ -1,26 +1,16 @@
-import { lazy, Suspense } from "react";
-import Map from "./Map";
-import Scrollbar from "./Scrollbar";
+import AdventureOnly from "../template/AdventureOnly";
 import NavigationConfig from "./Config";
-import useAppResize from "../../hooks/useAppSize";
-import { useNavigationStore } from "../../store/navigationStore";
+import { lazy } from "react";
 
-const Pointer = lazy(() => import("./Pointer"));
+const AdventureNavigation = lazy(() => import("./AdventureNavigation"));
 
 const Navigation = () => {
-  const { isNavigating } = useNavigationStore();
-  useAppResize();
-
   return (
     <>
-      {isNavigating && (
-        <Suspense>
-          <Pointer />
-        </Suspense>
-      )}
-      <Map />
       <NavigationConfig />
-      <Scrollbar />
+      <AdventureOnly>
+        <AdventureNavigation />
+      </AdventureOnly>
     </>
   );
 };
