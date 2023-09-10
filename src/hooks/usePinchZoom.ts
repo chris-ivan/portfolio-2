@@ -1,8 +1,8 @@
 import { getMinimumZoom } from "../components/template/Container/Container.util";
 import { frameSizeType } from "../interfaces/frame";
 import { MAX_SCALE, MIN_SCALE_MULTIPLIER } from "../static/transform";
-import { useNavigationStore } from "../store/navigationStore";
 import updateTransform from "../utils/updateTransform";
+import useTransformListener from "./useTransformListener";
 import useViewport from "./useViewport";
 import { useMemo } from "react";
 
@@ -20,6 +20,7 @@ export default function usePinchZoom(
   initialSize: frameSizeType<number>
 ) {
   const viewportSize = useViewport();
+  const transform = useTransformListener();
 
   const maxScale = MAX_SCALE;
   const minScale = useMemo(
@@ -37,7 +38,6 @@ export default function usePinchZoom(
     if (!contentRef?.current) return;
 
     const { width, height } = initialSize;
-    const { transform } = useNavigationStore.getState();
     const { offsetWidth, offsetHeight, offsetLeft, offsetTop } =
       contentRef.current;
 

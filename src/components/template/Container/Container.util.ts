@@ -1,18 +1,18 @@
+import { TransformType } from "../../../interfaces/container";
 import { frameCoordinateType, frameSizeType } from "../../../interfaces/frame";
 import {
   MOUSE_WHEEL_THRESHOLD,
   SCROLLBAR_HEIGHT,
 } from "../../../static/transform";
-import { useNavigationStore } from "../../../store/navigationStore";
 
 export const calculateMovement = (
   container: HTMLDivElement,
   content: HTMLElement,
-  delta: frameCoordinateType
+  delta: frameCoordinateType,
+  transform: TransformType
 ) => {
   const containerRect = container.getBoundingClientRect();
   const contentRect = content.getBoundingClientRect();
-  const transform = useNavigationStore.getState().transform;
 
   const allowedMovements = {
     up: containerRect.top - contentRect.top,

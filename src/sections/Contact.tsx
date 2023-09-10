@@ -1,8 +1,9 @@
-import { useMemo } from "react";
+import { useMemo, lazy } from "react";
 import Frame from "../components/template/Frame";
 import { FRAME_KEY } from "../interfaces/frame";
 import { FRAMES } from "../static/frames";
-import ContactSection from "../components/Contact";
+
+const ContactSection = lazy(() => import("../components/Contact"));
 
 const Contact = () => {
   const ContactElement = useMemo(() => <ContactSection />, []);

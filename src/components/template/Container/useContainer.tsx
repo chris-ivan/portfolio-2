@@ -16,6 +16,7 @@ import {
   isShiftKeyScrolling,
 } from "./Container.util";
 import { useCallback, useEffect, useState, useContext } from "react";
+import useTransformListener from "../../../hooks/useTransformListener";
 
 interface IUseContainer {
   contentRef: React.RefObject<HTMLDivElement> | null;
@@ -34,23 +35,27 @@ const useContainer = (props: IUseContainer) => {
   });
 
   const { contentRef, containerRef, initialSize } = props;
-
+  const transform = useTransformListener();
   const { updateTransform, dispatchZoomChange } = usePinchZoom(
     contentRef,
     initialSize
   );
 
-  const handleMove2D = (dx: number, dy: number) => {
-    if (!contentRef?.current || !containerRef?.current) return;
+  const handleMove2D = useCallback(
+    (dx: number, dy: number) => {
+      if (!contentRef?.current || !containerRef?.current) return;
 
-    const newPosition = calculateMovement(
-      containerRef.current,
-      contentRef.current,
-      { x: dx, y: dy }
-    );
-    // @ts-ignore
-    updateTransform(newPosition);
-  };
+      const newPosition = calculateMovement(
+        containerRef.current,
+        contentRef.current,
+        { x: dx, y: dy },
+        transform
+      );
+      // @ts-ignore
+      updateTransform(newPosition);
+    },
+    [containerRef, contentRef, transform, updateTransform]
+  );
 
   useInitialView({ containerRef, updateTransform });
   useShortcut({ onZoom: dispatchZoomChange, handleMove2D });

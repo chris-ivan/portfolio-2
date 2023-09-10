@@ -1,18 +1,18 @@
 import { DraggableData, DraggableEvent } from "react-draggable";
 import useViewport from "../../../hooks/useViewport";
 import { frameCoordinateType } from "../../../interfaces/frame";
-import { useNavigationStore } from "../../../store/navigationStore";
 import updateTransform from "../../../utils/updateTransform";
 import { useRef } from "react";
+import useTransformListener from "../../../hooks/useTransformListener";
 
 interface IUseMap {
   scale: number;
 }
 
 const useMap = (props: IUseMap) => {
+  const transform = useTransformListener();
   const isDragging = useRef<boolean>(false);
   const { scale } = props;
-  const { transform } = useNavigationStore();
   const { x, y, scale: globalScale } = transform;
   const { width: viewportWidth, height: viewportHeight } = useViewport();
 

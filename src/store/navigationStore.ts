@@ -1,4 +1,6 @@
 import { create } from "zustand";
+import { subscribeWithSelector } from "zustand/middleware";
+
 import { TransformType } from "../interfaces/container";
 import { FRAME_KEY, frameSizeType } from "../interfaces/frame";
 import { INITIAL_APP_SIZE_PX, NAVIGATING_ORDER } from "../static/frames";
@@ -32,55 +34,57 @@ interface INavigationStore {
   toggleMiniMap: () => void;
 }
 
-export const useNavigationStore = create<INavigationStore>((set) => ({
-  navigationMode: NavigationMode.ADVENTURE,
-  appSize: INITIAL_APP_SIZE_PX,
-  transform: initialTransform,
-  isNavigating: false,
-  showNavigation: true,
-  showMiniMap: true,
-  recommendedFrame: [...NAVIGATING_ORDER],
-  frameVisibility: {
-    [FRAME_KEY.CONTACT]: false,
-    [FRAME_KEY.INTERESTS]: false,
-    [FRAME_KEY.EXPERIENCES]: false,
-    [FRAME_KEY.LANDING]: false,
-    [FRAME_KEY.SKILLS]: false,
-    [FRAME_KEY.ABOUT]: false,
-    [FRAME_KEY.PROJECTS]: false,
-  },
-  setAppSize: (appSize) => set({ appSize }),
-  setTransform: (props) =>
-    set((store: INavigationStore) => ({
-      transform: {
-        ...store.transform,
-        ...props,
-      },
-    })),
-  setIsNavigating: (isNavigating) => set({ isNavigating }),
-  removeRecommendedFrame: (frameKey) =>
-    set((store: INavigationStore) => {
-      const index = store.recommendedFrame.indexOf(frameKey);
-      if (index > -1) {
-        store.recommendedFrame.splice(index, 1);
-      }
-      return {
-        recommendedFrame: [...store.recommendedFrame],
-      };
-    }),
-  changeFrameVisibility: (frameKey, isVisible) =>
-    set((store: INavigationStore) => {
-      return {
-        frameVisibility: {
-          ...store.frameVisibility,
-          [frameKey]: isVisible,
+export const useNavigationStore = create(
+  subscribeWithSelector<INavigationStore>((set) => ({
+    navigationMode: NavigationMode.ADVENTURE,
+    appSize: INITIAL_APP_SIZE_PX,
+    transform: initialTransform,
+    isNavigating: false,
+    showNavigation: true,
+    showMiniMap: true,
+    recommendedFrame: [...NAVIGATING_ORDER],
+    frameVisibility: {
+      [FRAME_KEY.CONTACT]: false,
+      [FRAME_KEY.INTERESTS]: false,
+      [FRAME_KEY.EXPERIENCES]: false,
+      [FRAME_KEY.LANDING]: false,
+      [FRAME_KEY.SKILLS]: false,
+      [FRAME_KEY.ABOUT]: false,
+      [FRAME_KEY.PROJECTS]: false,
+    },
+    setAppSize: (appSize) => set({ appSize }),
+    setTransform: (props) =>
+      set((store: INavigationStore) => ({
+        transform: {
+          ...store.transform,
+          ...props,
         },
-      };
-    }),
-  toggleNavigation: () =>
-    set((store: INavigationStore) => ({
-      showNavigation: !store.showNavigation,
-    })),
-  toggleMiniMap: () =>
-    set((store: INavigationStore) => ({ showMiniMap: !store.showMiniMap })),
-}));
+      })),
+    setIsNavigating: (isNavigating) => set({ isNavigating }),
+    removeRecommendedFrame: (frameKey) =>
+      set((store: INavigationStore) => {
+        const index = store.recommendedFrame.indexOf(frameKey);
+        if (index > -1) {
+          store.recommendedFrame.splice(index, 1);
+        }
+        return {
+          recommendedFrame: [...store.recommendedFrame],
+        };
+      }),
+    changeFrameVisibility: (frameKey, isVisible) =>
+      set((store: INavigationStore) => {
+        return {
+          frameVisibility: {
+            ...store.frameVisibility,
+            [frameKey]: isVisible,
+          },
+        };
+      }),
+    toggleNavigation: () =>
+      set((store: INavigationStore) => ({
+        showNavigation: !store.showNavigation,
+      })),
+    toggleMiniMap: () =>
+      set((store: INavigationStore) => ({ showMiniMap: !store.showMiniMap })),
+  }))
+);

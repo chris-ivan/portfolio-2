@@ -20,7 +20,7 @@ export interface framePositionType<T = elementDimensionType> {
 
 export interface IFrameBbox {
   size?: Partial<frameSizeType>;
-  position?: Partial<framePositionType<viewportDimensionType>>;
+  position?: Partial<framePositionType<viewportDimensionType | number>>;
 }
 
 export interface IFrame extends IFrameBbox {

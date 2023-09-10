@@ -2,6 +2,7 @@ import { useRef } from "react";
 import useContainer from "./useContainer";
 import useTheme from "../../../hooks/useTheme";
 import { useNavigationStore } from "../../../store/navigationStore";
+import useTransformListener from "../../../hooks/useTransformListener";
 
 interface IContainer {
   children: React.ReactNode;
@@ -10,7 +11,8 @@ interface IContainer {
 const Container = ({ children }: IContainer) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const { appSize, transform } = useNavigationStore();
+  const transform = useTransformListener();
+  const { appSize } = useNavigationStore();
   const { theme } = useTheme();
 
   const { onWheel } = useContainer({

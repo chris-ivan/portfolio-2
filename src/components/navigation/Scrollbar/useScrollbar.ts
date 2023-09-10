@@ -2,9 +2,11 @@ import { useNavigationStore } from "../../../store/navigationStore";
 import useViewport from "../../../hooks/useViewport";
 import { DraggableData, DraggableEvent } from "react-draggable";
 import updateTransform from "../../../utils/updateTransform";
+import useTransformListener from "../../../hooks/useTransformListener";
 
 const useScrollbar = () => {
-  const { transform, appSize } = useNavigationStore();
+  const transform = useTransformListener();
+  const { appSize } = useNavigationStore();
   const { width: viewportWidth, height: viewportHeight } = useViewport();
 
   const maxWidth = viewportWidth;

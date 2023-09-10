@@ -5,6 +5,7 @@ import useMap from "./useMap";
 import { useNavigationStore } from "../../../store/navigationStore";
 import { Transition } from "@headlessui/react";
 import Draggable from "react-draggable";
+import { FRAME_KEY } from "../../../interfaces/frame";
 
 const SCALE = 0.015;
 
@@ -25,7 +26,7 @@ const Map = () => {
   const children = useMemo(
     () =>
       Object.keys(FRAMES).map((id) => (
-        <MapFrame targetId={id || ""} scale={SCALE} key={id} />
+        <MapFrame targetId={(id || "") as FRAME_KEY} scale={SCALE} key={id} />
       )),
     []
   );

@@ -52,7 +52,7 @@ const useShortcut = (props: IUseShortcut) => {
       window.removeEventListener("keyup", onKeyUp);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [handleMove2D]);
 };
 
 export default useShortcut;
