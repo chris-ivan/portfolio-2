@@ -6,6 +6,7 @@ import useDeselect from "./keyboardShortcut/useDeselect";
 import { useEffect } from "react";
 import { useNavigationStore } from "../../../../store/navigationStore";
 import { FRAME_KEY } from "../../../../interfaces/frame";
+import useGlobalDeselect from "./useGlobalDeselect";
 
 interface IUseKeyboardShortcut {
   stageRef: React.RefObject<Stage>;
@@ -21,6 +22,7 @@ const useKonvaShortcut = (props: IUseKeyboardShortcut) => {
   const konvaHistoryShortcut = useUndoRedo();
   const konvaClipboardShortcut = useCopyPaste(props);
   const konvaDeselectShortcut = useDeselect();
+  const globalDeselect = useGlobalDeselect();
 
   const onKeyDown = (e: KeyboardEvent) => {
     if (!isCanvasInView()) return;
@@ -31,11 +33,17 @@ const useKonvaShortcut = (props: IUseKeyboardShortcut) => {
     konvaDeselectShortcut.onKeyDown(e);
   };
 
+  const onMouseDown = (e: MouseEvent) => {
+    globalDeselect.onMouseDown(e);
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("mousedown", onMouseDown);
 
     return () => {
       window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("mousedown", onMouseDown);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [konvaClipboardShortcut.onKeyDown]);

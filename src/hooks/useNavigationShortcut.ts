@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import usePanNavigation from "./usePanNavigation";
 import useArrowNavigation from "./useArrowNavigation";
 import useZoomShortcut from "./useZoomShortcut";
-import useGlobalDeselect from "./useGlobalDeselect";
+import { NavigationMode, useGlobalStore } from "../store/globalStore";
 
 interface IUseShortcut {
   onZoom: (value: number) => void;
@@ -11,15 +11,14 @@ interface IUseShortcut {
 
 const useShortcut = (props: IUseShortcut) => {
   const { onZoom, handleMove2D } = props;
+  const { navigationMode } = useGlobalStore();
 
   const panNavigation = usePanNavigation({ handleMove2D });
   const arrowNavigation = useArrowNavigation({ handleMove2D });
   const zoomNavigation = useZoomShortcut({ onZoom });
-  const globalDeselect = useGlobalDeselect();
 
-  const onMouseDown = (e: MouseEvent) => {
+  const onMouseDown = (_e: MouseEvent) => {
     panNavigation.onMouseDown();
-    globalDeselect.onMouseDown(e);
   };
   const onMouseMove = (e: MouseEvent) => {
     panNavigation.onMouseMove(e);
@@ -38,6 +37,8 @@ const useShortcut = (props: IUseShortcut) => {
   };
 
   useEffect(() => {
+    if (navigationMode === NavigationMode.NORMAL) return;
+
     window.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mousemove", onMouseMove);
     window.addEventListener("mouseup", onMouseUp);
@@ -52,7 +53,7 @@ const useShortcut = (props: IUseShortcut) => {
       window.removeEventListener("keyup", onKeyUp);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [handleMove2D]);
+  }, [handleMove2D, navigationMode]);
 };
 
 export default useShortcut;

@@ -1,5 +1,5 @@
-import { FRAME_KEY } from "../interfaces/frame";
-import { useKonvaStore } from "../store/konvaStore";
+import { FRAME_KEY } from "../../../../interfaces/frame";
+import { useKonvaStore } from "../../../../store/konvaStore";
 
 const useGlobalDeselect = () => {
   const { setSelectedNodeIds } = useKonvaStore();

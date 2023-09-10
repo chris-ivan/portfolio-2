@@ -1,6 +1,6 @@
 import { useKonvaStore } from "../../../../store/konvaStore";
 import { Suspense, lazy } from "react";
-import LoadingSpinner from "../../../UI/LoadingSpinner";
+import LoadingSpinner from "../../../UI/Loading/LoadingSpinner";
 
 const ColorPickerContainer = lazy(() => import("./ColorPickerContainer"));
 

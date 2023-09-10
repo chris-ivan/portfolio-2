@@ -14,10 +14,13 @@ const NavigationConfig = () => {
 
   return (
     <>
-      <div className="fixed top-4 left-6" style={{ color: theme.colorText }}>
+      <div
+        className="fixed top-4 left-6 z-[200]"
+        style={{ color: theme.colorText }}
+      >
         Christopher Ivan Gunardi
       </div>
-      <div className="fixed bottom-4 right-6 flex items-center gap-2">
+      <div className="fixed bottom-4 right-6 flex items-center gap-2 z-[200]">
         <SocialLink
           icon={LinkedInIcon as () => JSX.Element}
           link="https://www.linkedin.com/in/christopher-ivan-gunardi/"

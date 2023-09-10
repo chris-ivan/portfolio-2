@@ -1,6 +1,6 @@
 import { ReactNode, Suspense } from "react";
 import { FC } from "react";
-import LoadingSpinner from "../components/UI/LoadingSpinner";
+import LoadingSpinner from "../components/UI/Loading/LoadingSpinner";
 
 interface ILoadingFallback {
   children: ReactNode;

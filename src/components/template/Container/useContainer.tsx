@@ -2,7 +2,7 @@ import { useEffectOnce } from "usehooks-ts";
 import { NotificationContext } from "../../../context/NotificationContext";
 import useInitialView from "../../../hooks/useInitialView";
 import usePinchZoom from "../../../hooks/usePinchZoom";
-import useShortcut from "../../../hooks/useShortcut";
+import useShortcut from "../../../hooks/useNavigationShortcut";
 import { frameSizeType } from "../../../interfaces/frame";
 import {
   BASE_SCALE_RATIO,

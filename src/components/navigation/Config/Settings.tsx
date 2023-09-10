@@ -3,7 +3,7 @@ import { useRef, lazy, Suspense } from "react";
 // @ts-ignore
 import { ReactComponent as SettingsIcon } from "../../../assets/icons/UI/Settings.svg";
 import useShowSettings from "./useShowSettings";
-import LoadingSpinner from "../../UI/LoadingSpinner";
+import LoadingSpinner from "../../UI/Loading/LoadingSpinner";
 
 const SettingsMenu = lazy(() => import("./SettingsMenu"));
 
