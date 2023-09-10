@@ -12,6 +12,7 @@ const SkillTag: FC<ISkill> = (props) => {
         className="w-4 h-4"
         src={isDarkMode ? darkIcon || icon : icon}
         alt={name}
+        loading="lazy"
       />
       <p className="text-dark-grey dark:text-light-grey">{name}</p>
     </div>

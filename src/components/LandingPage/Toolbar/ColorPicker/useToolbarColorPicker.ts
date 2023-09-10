@@ -1,4 +1,4 @@
-import { useKonvaStore } from "../../../store/konvaStore";
+import { useKonvaStore } from "../../../../store/konvaStore";
 import {
   useState,
   useCallback,
@@ -7,9 +7,9 @@ import {
   SetStateAction,
 } from "react";
 import { ColorResult } from "react-color";
-import { getColorHex } from "../../../utils/color";
-import { IFillColorPicker } from "./ToolbarColorPicker";
-import { KonvaNodeType } from "../../../interfaces/konva";
+import { getColorHex } from "../../../../utils/color";
+import { IFillColorPicker } from ".";
+import { KonvaNodeType } from "../../../../interfaces/konva";
 import { useMemo } from "react";
 
 const getInitialFill = (
@@ -105,7 +105,6 @@ const useColorPicker = (props: IFillColorPicker) => {
   }, []);
 
   return {
-    selectedNodes,
     setOpenColorPicker,
     fillColor,
     onChange,

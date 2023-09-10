@@ -78,6 +78,7 @@ const Frame = (props: IFrameProps) => {
         className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none touch-none object-cover w-full h-full"
         style={{ opacity: isDarkMode ? 0.2 : 0.5 }}
         alt=""
+        loading="lazy"
       />
     </div>
   );

@@ -15,7 +15,7 @@ import TriangleIcon from "../../../assets/icons/Toolbar/TriangleIcon";
 import { KonvaToolbarEnum } from "../../../interfaces/konva";
 import { useKonvaStore } from "../../../store/konvaStore";
 import ToolbarButton from "./ToolbarButton";
-import ColorPicker from "./ToolbarColorPicker";
+import ColorPicker from "./ColorPicker";
 import useAlignment from "./useAlignment";
 import useCreateShape from "./useCreateShape";
 import useCreateText from "./useCreateText";
