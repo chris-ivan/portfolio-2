@@ -12,7 +12,7 @@ const LoadingFallback: FC<ILoadingFallback> = ({ children }) => {
       fallback={
         <div className="flex items-center justify-center w-[100%] h-[100%] min-h-[100vh] bg-grey dark:bg-darker-grey text-darker-grey dark:text-white">
           <LoadingSpinner />
-          <span className="text-lg">Loading</span>
+          <span className="text-lg ml-5">Loading</span>
         </div>
       }
     >

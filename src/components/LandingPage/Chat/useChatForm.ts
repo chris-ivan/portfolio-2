@@ -1,16 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import {
-  NavigationMode,
-  useNavigationStore,
-} from "../../../store/navigationStore";
+import { NavigationMode, useGlobalStore } from "../../../store/globalStore";
 
 interface IFormData {
   question: string;
 }
 
 const getDefaultResponse = () => {
-  const { navigationMode } = useNavigationStore.getState();
+  const { navigationMode } = useGlobalStore.getState();
 
   let defaultText =
     "While I'd love to implement the AI chatbot, I'm not sure if I have the time to do so.";

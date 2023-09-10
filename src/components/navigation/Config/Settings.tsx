@@ -3,6 +3,7 @@ import { useRef, lazy, Suspense } from "react";
 // @ts-ignore
 import { ReactComponent as SettingsIcon } from "../../../assets/icons/UI/Settings.svg";
 import useShowSettings from "./useShowSettings";
+import LoadingSpinner from "../../UI/LoadingSpinner";
 
 const SettingsMenu = lazy(() => import("./SettingsMenu"));
 
@@ -22,7 +23,13 @@ const Settings = () => {
   return (
     <div ref={ref} className="relative">
       {isClicked.current && (
-        <Suspense>
+        <Suspense
+          fallback={
+            <div className="border border-solid text-grey border-grey flex items-center justify-center absolute shadow-md bottom-12 right-0 h-[112px] w-[144px]">
+              <LoadingSpinner />
+            </div>
+          }
+        >
           <SettingsMenu showSettings={showSettings} />
         </Suspense>
       )}

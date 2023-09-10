@@ -19,7 +19,7 @@ const ColorPicker = (props: IFillColorPicker) => {
   return (
     <Suspense
       fallback={
-        <div className="text-darker-grey dark:text-white">
+        <div className="mx-3 text-darker-grey dark:text-white">
           <LoadingSpinner />
         </div>
       }
