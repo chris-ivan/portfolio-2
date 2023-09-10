@@ -5,17 +5,20 @@ const LandingPageSection = lazy(
   () => import("../components/LandingPage/index")
 );
 
+const SkillsSection = lazy(() => import("../components/Skills/index"));
+
 const NormalLayout = () => {
   const { theme } = useTheme();
 
   return (
     <div
-      className="relative h-screen"
+      className="normal-layout-container"
       style={{
         backgroundColor: theme.colorBgBase,
       }}
     >
       <LandingPageSection />
+      <SkillsSection />
     </div>
   );
 };
