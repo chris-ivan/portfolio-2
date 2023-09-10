@@ -9,7 +9,13 @@ const initialTransform = {
   scale: 1,
 };
 
+export enum NavigationMode {
+  NORMAL = "Normal",
+  ADVENTURE = "Adventure",
+}
+
 interface INavigationStore {
+  navigationMode: NavigationMode;
   appSize: frameSizeType<number>;
   transform: TransformType;
   isNavigating: boolean;
@@ -27,6 +33,7 @@ interface INavigationStore {
 }
 
 export const useNavigationStore = create<INavigationStore>((set) => ({
+  navigationMode: NavigationMode.ADVENTURE,
   appSize: INITIAL_APP_SIZE_PX,
   transform: initialTransform,
   isNavigating: false,

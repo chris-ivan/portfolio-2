@@ -43,11 +43,25 @@ body::-webkit-scrollbar {
 }
 
 input::placeholder,
-textarea::placeholder {
+textarea::placeholder,
+.placeholder-text {
   color: #b0b0b0 !important;
 }
 
 .dark input::placeholder,
-.dark textarea::placeholder {
+.dark textarea::placeholder,
+.dark .placeholder-text {
   color: #767676 !important;
+}
+
+.chat-cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: flicker 0.5s infinite;
+  margin-bottom: 4px;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1ch;
 }

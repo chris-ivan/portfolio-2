@@ -5,6 +5,9 @@ export default {
   darkMode: "class",
   theme: {
     extend: {
+      animation: {
+        pulse: "pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
       colors: {
         black: "#131313",
         "darker-grey": "#1E1E1E",

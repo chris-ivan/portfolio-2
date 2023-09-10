@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import useTheme from "../../../hooks/useTheme";
 
 interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   placeholder: string;
   className?: string;
 }
@@ -13,9 +13,11 @@ const Input = forwardRef<HTMLInputElement, IInput>((props, ref) => {
 
   return (
     <div className="flex flex-col w-full">
-      <label style={{ color: theme.colorTextSecondary }} className="mb-1">
-        {label}
-      </label>
+      {label && (
+        <label style={{ color: theme.colorTextSecondary }} className="mb-1">
+          {label}
+        </label>
+      )}
       <input
         ref={ref}
         placeholder={placeholder}

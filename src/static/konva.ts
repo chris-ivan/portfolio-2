@@ -135,7 +135,7 @@ export const getInitialNodes = (): KonvaNodeType[] => {
   const titleWidth = 840;
   const subtitleWidth = 660;
   const titleX = viewportWidth / 2 - titleWidth / 2;
-  const titleY = viewportHeight / 3;
+  const titleY = viewportHeight / 4;
   const subtitleX = viewportWidth / 2 - subtitleWidth / 2;
   const subtitleY = titleY + 100;
   const ellipseX = titleX - 200;
