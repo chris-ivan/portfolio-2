@@ -1,50 +1,32 @@
 // import SettingsIcon from "../../../assets/icons/UI/Settings";
-import { useRef } from "react";
+import { useRef, lazy, Suspense } from "react";
 // @ts-ignore
 import { ReactComponent as SettingsIcon } from "../../../assets/icons/UI/Settings.svg";
-import SettingsButton from "./SettingsButton";
-import { useNavigationStore } from "../../../store/navigationStore";
-import useTheme from "../../../hooks/useTheme";
-import { Transition } from "@headlessui/react";
 import useShowSettings from "./useShowSettings";
+
+const SettingsMenu = lazy(() => import("./SettingsMenu"));
 
 const Settings = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const navigation = useNavigationStore();
-  const { showMiniMap, showNavigation, toggleMiniMap, toggleNavigation } =
-    navigation;
-  const { isDarkMode, setTheme } = useTheme();
   const { showSettings, toggleShowSettings } = useShowSettings({ ref });
+  const isClicked = useRef<boolean>(false);
 
-  const themeLabel = isDarkMode ? "Light Mode" : "Dark Mode";
-  const navigationLabel = showNavigation
-    ? "Disable Navigation"
-    : "Enable Navigation";
-  const miniMapLabel = showMiniMap ? "Disable Mini Map" : "Enable Mini Map";
+  const handleClick = () => {
+    if (!isClicked.current) {
+      isClicked.current = true;
+    }
 
-  const toggleTheme = () => {
-    setTheme(isDarkMode ? "light" : "dark");
+    toggleShowSettings();
   };
 
   return (
     <div ref={ref} className="relative">
-      <Transition
-        enter="transition ease-linear duration-150 opacity transform"
-        enterFrom="opacity-0 translate-y-20"
-        enterTo="opacity-100 translate-y-8"
-        leave="transition ease-linear duration-150 opacity transform"
-        leaveFrom="opacity-100 translate-y-8"
-        leaveTo="opacity-0 translate-y-20"
-        show={showSettings}
-      >
-        <div className="absolute shadow-md bottom-12 right-0 flex flex-col border border-b-0 border-solid border-grey items-start w-36">
-          <SettingsButton label={themeLabel} onClick={toggleTheme} />
-          <SettingsButton label={navigationLabel} onClick={toggleNavigation} />
-          <SettingsButton label={miniMapLabel} onClick={toggleMiniMap} />
-        </div>
-      </Transition>
-
-      <div className="cursor-pointer scale-75" onClick={toggleShowSettings}>
+      {isClicked.current && (
+        <Suspense>
+          <SettingsMenu showSettings={showSettings} />
+        </Suspense>
+      )}
+      <div className="cursor-pointer scale-75" onClick={handleClick}>
         <SettingsIcon className="text-black hover:text-grey dark:text-white dark:hover:text-grey" />
       </div>
     </div>
