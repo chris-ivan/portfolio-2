@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { forwardRef } from "react";
 import useTheme from "../../../hooks/useTheme";
 
 interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -7,7 +7,7 @@ interface IInput extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
 }
 
-const Input: FC<IInput> = (props) => {
+const Input = forwardRef<HTMLInputElement, IInput>((props, ref) => {
   const { theme } = useTheme();
   const { label, placeholder, className = "", ...res } = props;
 
@@ -17,12 +17,13 @@ const Input: FC<IInput> = (props) => {
         {label}
       </label>
       <input
+        ref={ref}
         placeholder={placeholder}
         className={`bg-transparent border-none outline-none ${className}`}
         {...res}
       />
     </div>
   );
-};
+});
 
 export default Input;

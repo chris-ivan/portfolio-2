@@ -1,21 +1,20 @@
-import { useForm } from "react-hook-form";
 import Input from "../UI/Input";
 import Button from "../UI/Button";
 import TextArea from "../UI/Input/TextArea";
+import useContactForm from "./useContactForm";
 
 const ContactForm = () => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data: any) => console.log(data);
+  const { register, handleFormSubmit } = useContactForm();
 
   return (
-    <form onSubmit={() => void handleSubmit(onSubmit)}>
+    <form onSubmit={handleFormSubmit}>
       <div className="flex w-full">
         <div className="p-2 border border-r-0 border-grey w-full">
           <Input
             label="Name/initial"
             placeholder="Preferably a real one."
-            {...register("name")}
             className="w-full"
+            {...register("name")}
           />
         </div>
         <div className="p-2 border border-grey w-full">

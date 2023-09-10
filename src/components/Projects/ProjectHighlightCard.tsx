@@ -13,7 +13,7 @@ const ProjectHighlightCard: FC<IProjectHighlight> = (props) => {
       </h3>
       <div className="flex gap-6 h-full">
         <div className="flex-1 h-full bg-grey" />
-        <p className="w-[200px]">{description}</p>
+        <div className="w-[200px]">{description}</div>
       </div>
     </div>
   );
