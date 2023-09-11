@@ -6,6 +6,7 @@ import ProjectSection from "../components/Projects";
 import AboutSection from "../components/About";
 import ContactSection from "../components/Contact";
 import NormalLayoutContainer from "../components/template/NormalLayoutContainer";
+import NoiseBG from "../assets/images/Noise.png";
 
 const NormalLayout = () => {
   const { theme } = useTheme();
@@ -19,6 +20,7 @@ const NormalLayout = () => {
     >
       <NormalLayoutContainer>
         <LandingPageSection />
+        <div className="border border-solid border-light-grey dark:border-dark-grey" />
         <SkillsSection />
         <NormalLayoutContainer maxWidth="1000px" border>
           <ExperiencesSection />
@@ -29,6 +31,11 @@ const NormalLayout = () => {
           <ContactSection />
         </NormalLayoutContainer>
       </NormalLayoutContainer>
+      <img
+        src={NoiseBG}
+        className="fixed top-0 left-0 right-0 bottom-0 opacity-80 pointer-events-none touch-none h-screen w-screen object-cover z-[400]"
+        alt=""
+      />
     </div>
   );
 };

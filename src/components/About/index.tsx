@@ -19,7 +19,9 @@ const AboutSection = () => {
         I’m not a fan of writing long paragraphs ¯\_(ツ)_/¯, but let me share
         you a brief TL;DR of my life.
       </h3>
-      <RenderWhenInView>{EditorComponent}</RenderWhenInView>
+      <div className="pt-8 pb-4 ">
+        <RenderWhenInView>{EditorComponent}</RenderWhenInView>
+      </div>
       {!isDarkMode && (
         <p
           style={{ color: theme.colorTextTertiary }}

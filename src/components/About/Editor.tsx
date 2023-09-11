@@ -10,10 +10,10 @@ const Editor = () => {
   const { theme } = useTheme();
 
   return (
-    <div className="mt-8 mb-4 border border-solid border-grey dark:border-dark-grey">
+    <div className="border border-solid border-grey dark:border-dark-grey">
       <div className="flex items-center border-b border-solid border-grey dark:border-dark-grey">
         <div
-          className="h-full flex-1 py-2 px-4 border-r border-solid border-grey dark:border-dark-grey"
+          className="h-full flex-1 py-2 px-3 border-r border-solid border-grey dark:border-dark-grey"
           style={{ color: theme.colorTextSecondary }}
         >
           about-ivan.md

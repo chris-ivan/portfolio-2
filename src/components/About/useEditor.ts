@@ -4,17 +4,19 @@ const markdownSource = `# Christopher Ivan Gunardi - Frontend Engineer
 *UI/UX Design & Fullstack Enthusiast*
 
 ## Introduction
-Hello! I'm Christopher Ivan Gunardi, a recent graduate based in Bekasi, Indonesia. My focus lies in frontend development, and I've also explored various other aspects of software engineering.
+Hello! I'm Ivan, a fresh graduate based in Bekasi, Indonesia. My focus lies in frontend development, but I'm also experienced both as a UI designer and a fullstack developer.
 
 ## Work Experience
-### Shopee Internship
+### Shopee [Internship]
 At Shopee, I contributed to Shopee's CRM projects, including Order Management System, Shopee Referral, and Shopee Wishlist. I utilized React, Redux, and Typescript to manage and develop features.
 
-### TaniHub Internship
+### TaniHub [Internship]
 During my time at TaniHub, I worked on core features for TaniFund.com, a B2B and peer-to-peer lending platform. I embraced Vue and followed the Agile workflow.
 
+### Sinarmas [Full-time]
+At Sinarmas, I developed a websocket-based chat web application and an email templating service with a rich text editor.
+
 ## Freelance Work
-I've diversified my skills through freelance work:
 - **UI Designer:** Designed interfaces using Figma and Photoshop.
 - **Fullstack Developer:** Developed websites for events and small-to-medium companies.
 - Notable projects:
