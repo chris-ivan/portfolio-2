@@ -20,7 +20,7 @@ const NormalLayout = () => {
       <NormalLayoutContainer>
         <LandingPageSection />
         <SkillsSection />
-        <NormalLayoutContainer maxWidth="1000px">
+        <NormalLayoutContainer maxWidth="1000px" border>
           <ExperiencesSection />
         </NormalLayoutContainer>
         <ProjectSection />

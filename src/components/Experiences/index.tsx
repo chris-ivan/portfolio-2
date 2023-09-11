@@ -34,16 +34,16 @@ const ExperiencesSection = () => {
           </div>
         ))}
       </div>
-      <div className="p-[40px] flex w-full justify-end border-t border-solid border-light-grey dark:border-dark-grey">
-        <AdventureOnly>
+      <AdventureOnly>
+        <div className="p-[40px] flex w-full justify-end border-t border-solid border-light-grey dark:border-dark-grey">
           <Button onClick={() => navigateToFrame(FRAME_KEY.PROJECTS)}>
             Take a quick glance at my past Projects{" "}
             <span className="inline-block translate-y-[2px]">
               <RightChevronIcon />
             </span>
           </Button>
-        </AdventureOnly>
-      </div>
+        </div>
+      </AdventureOnly>
     </div>
   );
 };
