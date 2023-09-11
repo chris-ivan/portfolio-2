@@ -18,7 +18,7 @@ const ProjectCard: FC<IProject> = (props) => {
         style={{
           maxHeight: isAdventure ? undefined : "100vh",
         }}
-        className="sticky top-[72px] w-[60%] flex flex-col py-10 px-[72px] overflow-hidden border-t border-solid border-light-grey dark:border-dark-grey"
+        className="sticky top-[56px] w-[60%] flex flex-col py-10 px-[72px] overflow-hidden border-t border-solid border-light-grey dark:border-dark-grey"
       >
         <h5 style={{ color: theme.colorPrimary }}>{tag}</h5>
         <h2 className="my-5">{title}</h2>

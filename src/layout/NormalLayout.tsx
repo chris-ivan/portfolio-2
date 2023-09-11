@@ -18,7 +18,6 @@ const NormalLayout = () => {
         backgroundColor: theme.colorBgBase,
       }}
     >
-      <div className="fixed top-0 left-0 backdrop-filter backdrop-blur-lg bg-opacity-50 w-[calc(100vw-10px)] h-[72px] z-30 border-b border-solid border-light-grey dark:border-dark-grey bg-white dark:bg-black" />
       <NormalLayoutContainer>
         <div
           className="relative z-40"
@@ -41,7 +40,7 @@ const NormalLayout = () => {
       </NormalLayoutContainer>
       <img
         src={NoiseBG}
-        className="fixed top-0 left-0 right-0 bottom-0 opacity-60 pointer-events-none touch-none h-screen w-screen object-cover z-[400]"
+        className="fixed top-0 left-0 right-0 bottom-0 opacity-60 pointer-events-none touch-none h-screen w-screen object-cover z-[300]"
         alt=""
       />
     </div>
