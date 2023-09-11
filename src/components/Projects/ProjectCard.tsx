@@ -10,14 +10,11 @@ const ProjectCard: FC<IProject> = (props) => {
   const { theme } = useTheme();
 
   return (
-    <div
-      style={{ color: theme.colorText }}
-      className="flex items-center h-[100vh]"
-    >
-      <div className="w-[60%] h-full flex-1 flex flex-col py-10 px-[72px] border-t border-solid border-light-grey dark:border-dark-grey">
+    <div style={{ color: theme.colorText }} className="flex min-h-fit">
+      <div className="w-[60%] flex flex-col py-10 px-[72px] border-t border-solid border-light-grey dark:border-dark-grey">
         <h5 style={{ color: theme.colorPrimary }}>{tag}</h5>
         <h2 className="my-5">{title}</h2>
-        <img className="flex-1 bg-grey my-8" />
+        <img className="flex-1 bg-grey my-8 aspect-video max-h-[600px]" />
         <ProjectCardInfo title="TL;DR" content={tldr} />
         <ProjectCardInfo title="Role" content={role.join(", ")} />
         <ProjectCardInfo
@@ -31,7 +28,7 @@ const ProjectCard: FC<IProject> = (props) => {
           }
         />
       </div>
-      <div className="w-[40%] h-full flex flex-col">
+      <div className="w-[40%] flex flex-col">
         {highlights.map((highlight) => (
           <ProjectHighlightCard key={highlight.title} {...highlight} />
         ))}

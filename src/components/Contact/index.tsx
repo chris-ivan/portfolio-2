@@ -1,5 +1,8 @@
+import { lazy } from "react";
 import useTheme from "../../hooks/useTheme";
-import ContactForm from "./ContactForm";
+import RenderWhenInView from "../template/RenderWhenInView";
+
+const ContactForm = lazy(() => import("./ContactForm"));
 
 const ContactSection = () => {
   const { theme } = useTheme();
@@ -11,7 +14,9 @@ const ContactSection = () => {
         for love, freelance jobs and full-time permanent opportunities.
         Preferably WFH, but I’d love to fly to your country if needed. 🦅
       </h2>
-      <ContactForm />
+      <RenderWhenInView>
+        <ContactForm />
+      </RenderWhenInView>
       <p className="mt-20" style={{ color: theme.colorTextTertiary }}>
         Created with effort and dedication from Bekasi, Indonesia
       </p>

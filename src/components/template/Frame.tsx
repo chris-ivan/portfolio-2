@@ -12,7 +12,7 @@ import useTheme from "../../hooks/useTheme";
 import NoiseBG from "../../assets/images/Noise.png";
 import { FrameRefContext } from "../../context/FrameRefContext";
 import { useIntersectionObserver } from "usehooks-ts";
-import LoadingFallback from "../../sections/LoadingFallback";
+import LoadingFallback from "../../sections/Adventure/LoadingFallback";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
@@ -54,11 +54,11 @@ const Frame = (props: IFrameProps) => {
         ...size,
         ...position,
         backgroundColor: theme.colorBgBase,
-        minHeight: size?.height ? undefined : "100vh",
+        minHeight: size?.height ? undefined : "fit-content",
       }}
       id={id}
       ref={frameRef}
-      className="absolute shadow-xl min-h-[75vh]"
+      className="absolute shadow-xl"
     >
       {title && (
         <div

@@ -136,7 +136,6 @@ const useContainer = (props: IUseContainer) => {
         const ratio = 1 + (newDistance - prev) / prev;
         const centerX = (touches[0].screenX + touches[1].screenX) / 2;
         const centerY = (touches[0].screenY + touches[1].screenY) / 2;
-        console.log(newDistance - prev, newDistance, prev);
         dispatchZoomChange(ratio, centerX, centerY);
 
         return newDistance;

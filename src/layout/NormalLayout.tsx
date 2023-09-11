@@ -1,11 +1,11 @@
-import { lazy } from "react";
 import useTheme from "../hooks/useTheme";
-
-const LandingPageSection = lazy(
-  () => import("../components/LandingPage/index")
-);
-
-const SkillsSection = lazy(() => import("../components/Skills/index"));
+import LandingPageSection from "../components/LandingPage";
+import SkillsSection from "../components/Skills";
+import ExperiencesSection from "../components/Experiences";
+import ProjectSection from "../components/Projects";
+import AboutSection from "../components/About";
+import ContactSection from "../components/Contact";
+import NormalLayoutContainer from "../components/template/NormalLayoutContainer";
 
 const NormalLayout = () => {
   const { theme } = useTheme();
@@ -17,8 +17,18 @@ const NormalLayout = () => {
         backgroundColor: theme.colorBgBase,
       }}
     >
-      <LandingPageSection />
-      <SkillsSection />
+      <NormalLayoutContainer>
+        <LandingPageSection />
+        <SkillsSection />
+        <NormalLayoutContainer maxWidth="1000px">
+          <ExperiencesSection />
+        </NormalLayoutContainer>
+        <ProjectSection />
+        <NormalLayoutContainer maxWidth="1000px">
+          <AboutSection />
+          <ContactSection />
+        </NormalLayoutContainer>
+      </NormalLayoutContainer>
     </div>
   );
 };

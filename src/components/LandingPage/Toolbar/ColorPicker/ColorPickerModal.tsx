@@ -22,8 +22,6 @@ const ColorPickerModal: FC<IColorPickerUI> = (props) => {
 
   useOnClickOutside({ ref, onClickOutside });
 
-  console.log("HERE");
-
   return (
     <div ref={ref} className="absolute top-[150%] right-0">
       <ColorPickerUI color={fillColor} onChange={onChange} />

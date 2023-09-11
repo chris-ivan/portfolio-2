@@ -1,6 +1,6 @@
 import { frameCoordinateType, frameSizeType } from "../../../interfaces/frame";
 
-const PADDING = 40;
+const PADDING = 50;
 const AVG_CHAR_WIDTH = 5.8;
 const AVG_CHAR_HEIGHT = 12;
 
@@ -67,8 +67,8 @@ export const calculatePointerNodeArrowPosition = (
   const nodeHeight = AVG_CHAR_HEIGHT + PADDING;
 
   const angleRad = (angle * Math.PI) / 180;
-  const allowedWidth = nodeLength / 2;
-  const allowedHeight = nodeHeight / 2;
+  const allowedWidth = nodeLength / 1.5;
+  const allowedHeight = nodeHeight / 1.5;
 
   const arrowWidth = allowedWidth * Math.cos(angleRad);
   const arrowHeight = allowedHeight * Math.sin(angleRad);

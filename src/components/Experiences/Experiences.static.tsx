@@ -5,6 +5,7 @@ import SinarmasLogo from "../../assets/images/Interests/logo-sinarmas.webp";
 import CitreLogo from "../../assets/images/Interests/logo-citre.webp";
 import { navigateToFrame } from "../../utils/navigation";
 import { FRAME_KEY } from "../../interfaces/frame";
+import AdventureOnly from "../template/AdventureOnly";
 
 export interface IExperience {
   title: string;
@@ -64,15 +65,17 @@ export const EXPERIENCES: IExperience[] = [
       "Admin dashboards, mini e-commerce, cashier systems, etc",
     ],
     notes: (
-      <p>
-        Tech stack: visit my{" "}
-        <span
-          onClick={() => navigateToFrame(FRAME_KEY.SKILLS)}
-          className="underline hover:text-blue cursor-pointer"
-        >
-          skills section
-        </span>
-      </p>
+      <AdventureOnly>
+        <p>
+          Tech stack: visit my{" "}
+          <span
+            onClick={() => navigateToFrame(FRAME_KEY.SKILLS)}
+            className="underline hover:text-blue cursor-pointer"
+          >
+            skills section
+          </span>
+        </p>
+      </AdventureOnly>
     ),
   },
 ];

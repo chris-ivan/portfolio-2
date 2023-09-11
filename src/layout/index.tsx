@@ -24,9 +24,9 @@ const Layout = () => {
     <>
       <Suspense
         fallback={
-          <div className="flex flex-col items-center justify-center absolute top-0 left-0 right-0 bottom-0 z-[100] bg-white dark:bg-darker-grey">
+          <div className="flex flex-col items-center justify-center absolute top-0 left-0 right-0 bottom-0 z-[100] bg-white dark:bg-darker-grey transition-[background-color]">
             <LoadingPage />
-            <p className="text-lg text-darker-grey dark:text-light-blue">
+            <p className="text-lg text-darker-grey dark:text-light-blue transition-[color]">
               Booting up a new world...
             </p>
           </div>

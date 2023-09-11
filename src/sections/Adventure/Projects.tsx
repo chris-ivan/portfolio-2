@@ -1,9 +1,9 @@
 import { useMemo, lazy } from "react";
-import Frame from "../components/template/Frame";
-import { FRAME_KEY } from "../interfaces/frame";
-import { FRAMES } from "../static/frames";
+import Frame from "../../components/template/Frame";
+import { FRAME_KEY } from "../../interfaces/frame";
+import { FRAMES } from "../../static/frames";
 
-const ProjectSection = lazy(() => import("../components/Projects"));
+const ProjectSection = lazy(() => import("../../components/Projects"));
 
 const Projects = () => {
   const ProjectsContent = useMemo(() => <ProjectSection />, []);

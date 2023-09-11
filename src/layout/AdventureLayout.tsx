@@ -1,12 +1,12 @@
 import Container from "../components/template/Container/Container";
 import { FrameRefProvider } from "../context/FrameRefContext";
-import About from "../sections/About";
-import Contact from "../sections/Contact";
-import Experiences from "../sections/Experiences";
-import Interests from "../sections/Interests";
-import LandingPage from "../sections/LandingPage";
-import Projects from "../sections/Projects";
-import Skills from "../sections/Skills";
+import About from "../sections/Adventure/About";
+import Contact from "../sections/Adventure/Contact";
+import Experiences from "../sections/Adventure/Experiences";
+import Interests from "../sections/Adventure/Interests";
+import LandingPage from "../sections/Adventure/LandingPage";
+import Projects from "../sections/Adventure/Projects";
+import Skills from "../sections/Adventure/Skills";
 
 const AdventureLayout = () => {
   return (

@@ -7,6 +7,7 @@ import Button from "../UI/Button";
 import { ReactComponent as RightChevronIcon } from "../../assets/icons/UI/ChevronRight.svg";
 import { navigateToFrame } from "../../utils/navigation";
 import { FRAME_KEY } from "../../interfaces/frame";
+import AdventureOnly from "../template/AdventureOnly";
 
 const ExperiencesSection = () => {
   const { theme } = useTheme();
@@ -34,12 +35,14 @@ const ExperiencesSection = () => {
         ))}
       </div>
       <div className="p-[40px] flex w-full justify-end border-t border-solid border-light-grey dark:border-dark-grey">
-        <Button onClick={() => navigateToFrame(FRAME_KEY.PROJECTS)}>
-          Take a quick glance at my past Projects{" "}
-          <span className="inline-block translate-y-[2px]">
-            <RightChevronIcon />
-          </span>
-        </Button>
+        <AdventureOnly>
+          <Button onClick={() => navigateToFrame(FRAME_KEY.PROJECTS)}>
+            Take a quick glance at my past Projects{" "}
+            <span className="inline-block translate-y-[2px]">
+              <RightChevronIcon />
+            </span>
+          </Button>
+        </AdventureOnly>
       </div>
     </div>
   );

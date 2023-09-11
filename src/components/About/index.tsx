@@ -1,6 +1,8 @@
-import { useMemo } from "react";
+import { lazy, useMemo } from "react";
 import useTheme from "../../hooks/useTheme";
-import Editor from "./Editor";
+import RenderWhenInView from "../template/RenderWhenInView";
+
+const Editor = lazy(() => import("./Editor"));
 
 const AboutSection = () => {
   const { theme, isDarkMode } = useTheme();
@@ -17,7 +19,7 @@ const AboutSection = () => {
         I’m not a fan of writing long paragraphs ¯\_(ツ)_/¯, but let me share
         you a brief TL;DR of my life.
       </h3>
-      {EditorComponent}
+      <RenderWhenInView>{EditorComponent}</RenderWhenInView>
       {!isDarkMode && (
         <p
           style={{ color: theme.colorTextTertiary }}

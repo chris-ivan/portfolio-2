@@ -11,6 +11,7 @@ const ExperienceCard = (props: IExperience) => {
           width: 235,
           height: 157,
         }}
+        loading="lazy"
       />
       <div className="ml-[52px]">
         <h3>{title}</h3>

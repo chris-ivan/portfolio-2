@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { FRAME_KEY, IFrameBbox } from "../../../interfaces/frame";
 import { useNavigationStore } from "../../../store/navigationStore";
-import useTransformListener from "../../../hooks/useTransformListener";
 import { FRAMES } from "../../../static/frames";
 import { viewportToPx } from "../../../utils/viewport";
 interface IMapFrame {
@@ -17,12 +16,12 @@ const initialBbox: IFrameBbox = {
 const MapFrame = (props: IMapFrame) => {
   const { targetId, scale } = props;
   const [bbox, setBbox] = useState<IFrameBbox>(initialBbox);
-  const { scale: globalScale } = useTransformListener();
 
-  const targetPosition = useMemo(
+  const targetDefaultData = useMemo(
     () => ({
       top: viewportToPx((FRAMES[targetId].position?.top || "0vh") as string),
       left: viewportToPx((FRAMES[targetId].position?.left || "0vw") as string),
+      width: viewportToPx(FRAMES[targetId].size?.width as string),
     }),
     [targetId]
   );
@@ -33,9 +32,11 @@ const MapFrame = (props: IMapFrame) => {
 
     const clientRect = target.getBoundingClientRect();
     const position = {
-      left: targetPosition.left * scale,
-      top: targetPosition.top * scale,
+      left: targetDefaultData.left * scale,
+      top: targetDefaultData.top * scale,
     };
+
+    const globalScale = clientRect.width / targetDefaultData.width;
 
     const size = {
       width: (clientRect.width * scale) / globalScale,
@@ -44,7 +45,7 @@ const MapFrame = (props: IMapFrame) => {
 
     setBbox({ position, size });
     // eslint-disable-next-line
-  }, [targetId, scale, targetPosition]);
+  }, [targetId, scale, targetDefaultData]);
 
   useEffect(() => {
     calculateSize();

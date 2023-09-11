@@ -13,15 +13,14 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       width: "50vw",
     },
     position: {
-      top: "223vh",
-      left: "233vw",
+      top: "150vh",
+      left: "263vw",
     },
   },
   [FRAME_KEY.INTERESTS]: {
     title: "Interests",
     size: {
       width: "100vw",
-      height: "100vh",
     },
     position: {
       top: "330vh",
@@ -53,7 +52,6 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     title: "Skills",
     size: {
       width: "120vw",
-      height: "100vh",
     },
     position: {
       top: "472vh",
@@ -73,7 +71,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.PROJECTS]: {
     title: "Projects I'm Proud of",
     size: {
-      width: "80vw",
+      width: "100vw",
     },
     position: {
       top: "138vh",

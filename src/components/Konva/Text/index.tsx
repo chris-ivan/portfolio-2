@@ -1,9 +1,10 @@
 import TextComponent from "./TextComponent";
 import { IKonvaText } from "../../../interfaces/konva";
-import { useState, useEffect } from "react";
-import TextInput from "./TextInput";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useKonvaStore } from "../../../store/konvaStore";
 import useText from "./useText";
+
+const TextInput = lazy(() => import("./TextInput"));
 
 const Text = (props: IKonvaText) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -47,11 +48,13 @@ const Text = (props: IKonvaText) => {
   return (
     <>
       {isEditing && (
-        <TextInput
-          nodeRef={useTextData.shapeRef}
-          onBlur={onBlur}
-          textData={props}
-        />
+        <Suspense>
+          <TextInput
+            nodeRef={useTextData.shapeRef}
+            onBlur={onBlur}
+            textData={props}
+          />
+        </Suspense>
       )}
       <TextComponent
         useTextProps={useTextData}
