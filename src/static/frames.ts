@@ -74,7 +74,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
       width: "100vw",
     },
     position: {
-      top: "138vh",
+      top: "100vh",
       left: "630vw",
     },
   },

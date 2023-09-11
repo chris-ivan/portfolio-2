@@ -11,7 +11,9 @@ const NormalLayoutContainer: FC<INormalLayoutContainer> = (props) => {
   return (
     <div
       className={`${
-        border ? "border border-solid border-grey dark:border-dark-grey" : ""
+        border
+          ? "border border-solid border-light-grey dark:border-dark-grey"
+          : ""
       } mx-auto`}
       style={{ maxWidth }}
     >

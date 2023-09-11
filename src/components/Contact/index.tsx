@@ -18,7 +18,7 @@ const ContactSection = () => {
         <ContactForm />
       </RenderWhenInView>
       <p className="mt-20" style={{ color: theme.colorTextTertiary }}>
-        Created with effort and dedication from Bekasi, Indonesia
+        Created with effort and dedication, because love would never feed me.
       </p>
     </div>
   );

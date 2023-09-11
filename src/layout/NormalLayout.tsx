@@ -33,7 +33,7 @@ const NormalLayout = () => {
       </NormalLayoutContainer>
       <img
         src={NoiseBG}
-        className="fixed top-0 left-0 right-0 bottom-0 opacity-80 pointer-events-none touch-none h-screen w-screen object-cover z-[400]"
+        className="fixed top-0 left-0 right-0 bottom-0 opacity-60 pointer-events-none touch-none h-screen w-screen object-cover z-[400]"
         alt=""
       />
     </div>

@@ -19,14 +19,11 @@ const AboutSection = () => {
         I’m not a fan of writing long paragraphs ¯\_(ツ)_/¯, but let me share
         you a brief TL;DR of my life.
       </h3>
-      <div className="pt-8 pb-4 ">
+      <div className="py-8 pb-4 ">
         <RenderWhenInView>{EditorComponent}</RenderWhenInView>
       </div>
       {!isDarkMode && (
-        <p
-          style={{ color: theme.colorTextTertiary }}
-          className="text-base mt-4"
-        >
+        <p style={{ color: theme.colorTextTertiary }} className="text-xs">
           Yes, the light mode text editor hurts my eyes as well :”D
         </p>
       )}
