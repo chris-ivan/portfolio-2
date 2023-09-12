@@ -22,7 +22,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "150vh",
-      left: "263vw",
+      left: "223vw",
     },
   },
   [FRAME_KEY.INTERESTS]: {
@@ -32,7 +32,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "330vh",
-      left: "84vw",
+      left: "34vw",
     },
   },
   [FRAME_KEY.EXPERIENCES]: {
@@ -42,7 +42,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "380vh",
-      left: "212vw",
+      left: "172vw",
     },
   },
   [FRAME_KEY.LANDING]: {
@@ -53,7 +53,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "295vh",
-      left: "360vw",
+      left: "320vw",
     },
   },
   [FRAME_KEY.SKILLS]: {
@@ -63,7 +63,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "472vh",
-      left: "400vw",
+      left: "360vw",
     },
   },
   [FRAME_KEY.ABOUT]: {
@@ -73,7 +73,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "177vh",
-      left: "518vw",
+      left: "478vw",
     },
   },
   [FRAME_KEY.PROJECTS]: {
@@ -83,7 +83,7 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "100vh",
-      left: "680vw",
+      left: "640vw",
     },
   },
 };
@@ -102,7 +102,7 @@ export const PHOTO_CARDS: IPhotoCard[] = [
     tinySrc: Photo1Min,
     position: {
       top: "120vh",
-      left: "120vw",
+      left: "80vw",
     },
   },
   {
@@ -111,7 +111,7 @@ export const PHOTO_CARDS: IPhotoCard[] = [
     tinySrc: Photo2Min,
     position: {
       top: "600vh",
-      left: "50vw",
+      left: "10vw",
     },
   },
   {
@@ -120,7 +120,7 @@ export const PHOTO_CARDS: IPhotoCard[] = [
     tinySrc: Photo3Min,
     position: {
       top: "525vh",
-      left: "555vw",
+      left: "515vw",
     },
   },
 ];
