@@ -13,6 +13,7 @@ import NoiseBG from "../../assets/images/Noise.png";
 import { FrameRefContext } from "../../context/FrameRefContext";
 import { useIntersectionObserver } from "usehooks-ts";
 import LoadingFallback from "../../sections/Adventure/LoadingFallback";
+import useTransformListener from "../../hooks/useTransformListener";
 
 interface IFrameProps extends IFrame {
   children: React.ReactNode;
@@ -21,7 +22,8 @@ interface IFrameProps extends IFrame {
 
 const Frame = (props: IFrameProps) => {
   const { children, size, position, title, id } = props;
-  const { transform, removeRecommendedFrame, changeFrameVisibility } =
+  const transform = useTransformListener();
+  const { removeRecommendedFrame, changeFrameVisibility } =
     useNavigationStore();
   const { theme, isDarkMode } = useTheme();
   const refs = useContext(FrameRefContext);
