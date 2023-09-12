@@ -4,10 +4,12 @@ import LoadingFallback from "../../sections/Adventure/LoadingFallback";
 
 interface IRenderWhenInView {
   children: ReactNode;
+  width?: number | string;
+  height?: number | string;
 }
 
 const RenderWhenInView: FC<IRenderWhenInView> = (props) => {
-  const { children } = props;
+  const { children, ...res } = props;
   const ref = useRef<HTMLDivElement>(null);
   const entry = useIntersectionObserver(ref, {
     freezeOnceVisible: true,
@@ -17,7 +19,7 @@ const RenderWhenInView: FC<IRenderWhenInView> = (props) => {
 
   return (
     <div ref={ref}>
-      {isVisible && <LoadingFallback>{children}</LoadingFallback>}
+      {isVisible && <LoadingFallback {...res}>{children}</LoadingFallback>}
     </div>
   );
 };

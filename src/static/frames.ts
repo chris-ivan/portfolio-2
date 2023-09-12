@@ -1,16 +1,24 @@
 import {
   FRAME_KEY,
   IFrame,
+  framePositionType,
   frameSizeType,
   viewportDimensionType,
 } from "../interfaces/frame";
 import { viewportToPx } from "../utils/viewport";
 
+import Photo1 from "../assets/images/profile/photo-1.webp";
+import Photo1Min from "../assets/images/profile/photo-1-min.webp";
+import Photo2 from "../assets/images/profile/photo-2.webp";
+import Photo2Min from "../assets/images/profile/photo-2-min.webp";
+import Photo3 from "../assets/images/profile/photo-3.webp";
+import Photo3Min from "../assets/images/profile/photo-3-min.webp";
+
 export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
   [FRAME_KEY.CONTACT]: {
     title: "Contact Me",
     size: {
-      width: "50vw",
+      width: "70vw",
     },
     position: {
       top: "150vh",
@@ -55,13 +63,13 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "472vh",
-      left: "416vw",
+      left: "400vw",
     },
   },
   [FRAME_KEY.ABOUT]: {
     title: "About",
     size: {
-      width: "60vw",
+      width: "80vw",
     },
     position: {
       top: "177vh",
@@ -75,10 +83,47 @@ export const FRAMES: { [key in FRAME_KEY]: IFrame } = {
     },
     position: {
       top: "100vh",
-      left: "630vw",
+      left: "680vw",
     },
   },
 };
+
+export interface IPhotoCard {
+  key: number;
+  src: string;
+  tinySrc: string;
+  position: Partial<framePositionType<viewportDimensionType | number>>;
+}
+
+export const PHOTO_CARDS: IPhotoCard[] = [
+  {
+    key: 1,
+    src: Photo1,
+    tinySrc: Photo1Min,
+    position: {
+      top: "120vh",
+      left: "120vw",
+    },
+  },
+  {
+    key: 2,
+    src: Photo2,
+    tinySrc: Photo2Min,
+    position: {
+      top: "600vh",
+      left: "50vw",
+    },
+  },
+  {
+    key: 3,
+    src: Photo3,
+    tinySrc: Photo3Min,
+    position: {
+      top: "525vh",
+      left: "555vw",
+    },
+  },
+];
 
 export const INITIAL_APP_SIZE: frameSizeType<viewportDimensionType> = {
   width: "800vw",
