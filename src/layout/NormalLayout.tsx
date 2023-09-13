@@ -18,14 +18,7 @@ const NormalLayout = () => {
         backgroundColor: theme.colorBgBase,
       }}
     >
-      <div
-        className="relative z-40"
-        style={{
-          backgroundColor: theme.colorBgBase,
-        }}
-      >
-        <LandingPageSection />
-      </div>
+      <LandingPageSection />
       <NormalLayoutContainer>
         <div className="border border-solid border-light-grey dark:border-dark-grey" />
         <SkillsSection />

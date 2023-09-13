@@ -2,6 +2,7 @@ import SkillTag from "./SkillTag";
 import { ISkill } from "./Skills.static";
 import { FC, lazy } from "react";
 import RenderWhenInView from "../template/RenderWhenInView";
+import FadeIn from "../template/FadeIn";
 
 const SkillCardPhoto = lazy(() => import("./SkillCardPhoto"));
 
@@ -16,16 +17,24 @@ const SkillCard: FC<ISkillCard> = (props) => {
 
   return (
     <div className="max-w-[30%] min-w-[18%]">
-      <RenderWhenInView height={300}>
-        <SkillCardPhoto />
-      </RenderWhenInView>
-      <h3 className="mt-8">{title}</h3>
-      <h5 className="text-blue mt-2 mb-6">{status}</h5>
-      <div className="flex flex-wrap gap-2">
-        {skills.map((skill) => (
-          <SkillTag key={skill.name} {...skill} />
-        ))}
-      </div>
+      <FadeIn>
+        <RenderWhenInView height={300}>
+          <SkillCardPhoto />
+        </RenderWhenInView>
+      </FadeIn>
+      <FadeIn>
+        <h3 className="mt-8">{title}</h3>
+      </FadeIn>
+      <FadeIn>
+        <h5 className="text-blue mt-2 mb-6">{status}</h5>
+      </FadeIn>
+      <FadeIn>
+        <div className="flex flex-wrap gap-2">
+          {skills.map((skill) => (
+            <SkillTag key={skill.name} {...skill} />
+          ))}
+        </div>
+      </FadeIn>
     </div>
   );
 };

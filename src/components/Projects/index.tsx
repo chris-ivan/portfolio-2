@@ -1,4 +1,5 @@
 import useTheme from "../../hooks/useTheme";
+import FadeIn from "../template/FadeIn";
 import ProjectCard from "./ProjectCard";
 import { PROJECTS } from "./index.static";
 
@@ -8,14 +9,21 @@ const ProjectSection = () => {
   return (
     <div className="pt-[100px] pb-10">
       <div className="px-[76px]">
-        <h2 style={{ color: theme.colorText }}>
-          I mean, I've built tens of projects, but it's not like you'll read
-          them all anyway. Here’s some.
-        </h2>
-        <h5 style={{ color: theme.colorTextSecondary }} className="mt-6 mb-10">
-          not including websites I developed during internship/full-time jobs
-          for obvious reasons.
-        </h5>
+        <FadeIn>
+          <h2 style={{ color: theme.colorText }}>
+            I mean, I've built tens of projects, but it's not like you'll read
+            them all anyway. Here’s some.
+          </h2>
+        </FadeIn>
+        <FadeIn>
+          <h5
+            style={{ color: theme.colorTextSecondary }}
+            className="mt-6 mb-10"
+          >
+            not including websites I developed during internship/full-time jobs
+            for obvious reasons.
+          </h5>
+        </FadeIn>
       </div>
       <div className="border-b border-solid border-light-grey dark:border-dark-grey">
         {PROJECTS.map((project) => (
