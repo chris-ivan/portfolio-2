@@ -11,3 +11,5 @@ export function checkMobile() {
 export function checkTouchDevice() {
   return "ontouchstart" in window;
 }
+
+export const IS_APPLE = /Mac|iPod|iPhone|iPad/.test(navigator.platform);

@@ -3,6 +3,7 @@ import usePanNavigation from "./usePanNavigation";
 import useArrowNavigation from "./useArrowNavigation";
 import useZoomShortcut from "./useZoomShortcut";
 import { NavigationMode, useGlobalStore } from "../store/globalStore";
+import usePagePagination from "./usePageNavigation";
 
 interface IUseShortcut {
   onZoom: (value: number) => void;
@@ -16,6 +17,7 @@ const useShortcut = (props: IUseShortcut) => {
   const panNavigation = usePanNavigation({ handleMove2D });
   const arrowNavigation = useArrowNavigation({ handleMove2D });
   const zoomNavigation = useZoomShortcut({ onZoom });
+  const pageNavigation = usePagePagination();
 
   const onMouseDown = (_e: MouseEvent) => {
     panNavigation.onMouseDown();
@@ -31,7 +33,9 @@ const useShortcut = (props: IUseShortcut) => {
     panNavigation.onKeyDown(e);
     arrowNavigation.onKeyDown(e);
     zoomNavigation.onKeyDown(e);
+    pageNavigation.onKeyDown(e);
   };
+
   const onKeyUp = (_e: KeyboardEvent) => {
     panNavigation.onKeyUp();
   };

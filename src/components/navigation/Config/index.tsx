@@ -1,3 +1,4 @@
+import { lazy } from "react";
 // @ts-ignore
 import { ReactComponent as GithubIcon } from "../../../assets/icons/Logo/Github.svg";
 // @ts-ignore
@@ -6,8 +7,11 @@ import { ReactComponent as LinkedInIcon } from "../../../assets/icons/Logo/Linke
 import { ReactComponent as WhatsAppIcon } from "../../../assets/icons/Logo/WhatsApp.svg";
 
 import useTheme from "../../../hooks/useTheme";
+import AdventureOnly from "../../template/AdventureOnly";
 import Settings from "./Settings";
 import SocialLink from "./SocialLink";
+
+const GuideButton = lazy(() => import("./GuideButton"));
 
 const NavigationConfig = () => {
   const { theme } = useTheme();
@@ -33,6 +37,9 @@ const NavigationConfig = () => {
           icon={WhatsAppIcon as () => JSX.Element}
           link="https://wa.me/6287784795500/"
         />
+        <AdventureOnly>
+          <GuideButton />
+        </AdventureOnly>
         <Settings />
       </div>
     </>

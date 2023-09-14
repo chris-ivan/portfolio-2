@@ -11,6 +11,6 @@ interface IGlobalStore {
 }
 
 export const useGlobalStore = create<IGlobalStore>((set) => ({
-  navigationMode: NavigationMode.NORMAL,
+  navigationMode: NavigationMode.ADVENTURE,
   setNavigationMode: (navigationMode) => set({ navigationMode }),
 }));

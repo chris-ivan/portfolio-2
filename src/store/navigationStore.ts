@@ -16,6 +16,7 @@ interface INavigationStore {
   transform: TransformType;
   isNavigating: boolean;
   showNavigation: boolean;
+  showGuide: boolean;
   showMiniMap: boolean;
   recommendedFrame: FRAME_KEY[];
   frameVisibility: { [key in FRAME_KEY]: boolean };
@@ -26,6 +27,7 @@ interface INavigationStore {
   changeFrameVisibility: (frameKey: FRAME_KEY, isVisible: boolean) => void;
   toggleNavigation: () => void;
   toggleMiniMap: () => void;
+  setShowGuide: (showGuide: boolean) => void;
 }
 
 export const useNavigationStore = create(
@@ -34,6 +36,7 @@ export const useNavigationStore = create(
     transform: initialTransform,
     isNavigating: false,
     showNavigation: true,
+    showGuide: false,
     showMiniMap: true,
     recommendedFrame: [...NAVIGATING_ORDER],
     frameVisibility: {
@@ -79,5 +82,6 @@ export const useNavigationStore = create(
       })),
     toggleMiniMap: () =>
       set((store: INavigationStore) => ({ showMiniMap: !store.showMiniMap })),
+    setShowGuide: (showGuide) => set({ showGuide }),
   }))
 );
