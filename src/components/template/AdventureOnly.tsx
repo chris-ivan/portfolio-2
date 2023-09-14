@@ -1,5 +1,5 @@
-import { NavigationMode, useGlobalStore } from "../../store/globalStore";
 import { Suspense, ReactNode, FC } from "react";
+import useGlobalStore from "../../hooks/useGlobalStore";
 
 interface IAdventureOnly {
   children: ReactNode;
@@ -7,11 +7,9 @@ interface IAdventureOnly {
 
 const AdventureOnly: FC<IAdventureOnly> = (props) => {
   const { children } = props;
-  const { navigationMode } = useGlobalStore();
+  const { isAdventure } = useGlobalStore();
 
-  return navigationMode === NavigationMode.ADVENTURE ? (
-    <Suspense>{children}</Suspense>
-  ) : null;
+  return isAdventure ? <Suspense>{children}</Suspense> : null;
 };
 
 export default AdventureOnly;

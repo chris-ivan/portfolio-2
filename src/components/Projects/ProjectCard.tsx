@@ -4,13 +4,12 @@ import useTheme from "../../hooks/useTheme";
 import SkillTag from "../Skills/SkillTag";
 import ProjectCardInfo from "./ProjectCardInfo";
 import ProjectHighlightCard from "./ProjectHighlightCard";
-import { NavigationMode, useGlobalStore } from "../../store/globalStore";
+import useGlobalStore from "../../hooks/useGlobalStore";
 
 const ProjectCard: FC<IProject> = (props) => {
   const { tag, title, tldr, role, techStack, highlights } = props;
   const { theme } = useTheme();
-  const { navigationMode } = useGlobalStore();
-  const isAdventure = navigationMode === NavigationMode.ADVENTURE;
+  const { isAdventure } = useGlobalStore();
 
   return (
     <div style={{ color: theme.colorText }} className="flex min-h-fit">

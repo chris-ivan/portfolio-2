@@ -1,7 +1,8 @@
 import LoadingPage from "../components/UI/Loading/LoadingPage";
 import Navigation from "../components/navigation";
-import { NavigationMode, useGlobalStore } from "../store/globalStore";
 import { lazy, Suspense } from "react";
+import useGlobalStore from "../hooks/useGlobalStore";
+import { NavigationMode } from "../interfaces/global";
 
 const AdventureLayout = lazy(() => import("./AdventureLayout"));
 const NormalLayout = lazy(() => import("./NormalLayout"));

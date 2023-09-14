@@ -1,31 +1,16 @@
 import { useForm } from "react-hook-form";
-import { useState } from "react";
-import { NavigationMode, useGlobalStore } from "../../../store/globalStore";
+import { useCallback, useState } from "react";
+import useGlobalStore from "../../../hooks/useGlobalStore";
 
 interface IFormData {
   question: string;
 }
 
-const getDefaultResponse = () => {
-  const { navigationMode } = useGlobalStore.getState();
-
-  let defaultText =
-    "While I'd love to implement the AI chatbot, I'm not sure if I have the time to do so.";
-
-  if (navigationMode === NavigationMode.ADVENTURE) {
-    defaultText +=
-      " For now, try to zoom-out or scroll around. If you are bored, play around with the text & shapes in this page. They're fully functional :D";
-  } else {
-    defaultText += " For now, please kindly wait for further updates :D";
-  }
-
-  return defaultText;
-};
-
 const useChatForm = () => {
   const [response, setResponse] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const { register, handleSubmit } = useForm<IFormData>();
+  const { isAdventure } = useGlobalStore();
 
   const animateResponse = (response: string) => {
     setIsTyping(true);
@@ -44,6 +29,20 @@ const useChatForm = () => {
       i += 1 + Math.floor(Math.random() * 3);
     }, 50);
   };
+
+  const getDefaultResponse = useCallback(() => {
+    let defaultText =
+      "While I'd love to implement the AI chatbot, I'm not sure if I have the time to do so.";
+
+    if (isAdventure) {
+      defaultText +=
+        " For now, try to zoom-out or scroll around. If you are bored, play around with the text & shapes in this page. They're fully functional :D";
+    } else {
+      defaultText += " For now, please kindly wait for further updates :D";
+    }
+
+    return defaultText;
+  }, [isAdventure]);
 
   const onSubmit = (data: IFormData) => {
     console.log(data);

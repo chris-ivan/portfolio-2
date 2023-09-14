@@ -1,7 +1,7 @@
 import { ReactNode, FC } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 import { useRef } from "react";
-import { NavigationMode, useGlobalStore } from "../../store/globalStore";
+import useGlobalStore from "../../hooks/useGlobalStore";
 
 interface IFadeIn {
   children: ReactNode;
@@ -31,12 +31,12 @@ const FadeInWithIntersection: FC<IFadeIn> = (props) => {
 };
 
 const FadeIn: FC<IFadeIn> = (props) => {
-  const { navigationMode } = useGlobalStore();
+  const { isAdventure } = useGlobalStore();
 
-  if (navigationMode === NavigationMode.NORMAL) {
-    return <FadeInWithIntersection {...props} />;
-  } else {
+  if (isAdventure) {
     return props.children;
+  } else {
+    return <FadeInWithIntersection {...props} />;
   }
 };
 

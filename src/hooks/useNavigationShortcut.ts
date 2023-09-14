@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import usePanNavigation from "./usePanNavigation";
 import useArrowNavigation from "./useArrowNavigation";
 import useZoomShortcut from "./useZoomShortcut";
-import { NavigationMode, useGlobalStore } from "../store/globalStore";
 import usePagePagination from "./usePageNavigation";
+import useGlobalStore from "./useGlobalStore";
 
 interface IUseShortcut {
   onZoom: (value: number) => void;
@@ -12,7 +12,7 @@ interface IUseShortcut {
 
 const useShortcut = (props: IUseShortcut) => {
   const { onZoom, handleMove2D } = props;
-  const { navigationMode } = useGlobalStore();
+  const { isAdventure, navigationMode } = useGlobalStore();
 
   const panNavigation = usePanNavigation({ handleMove2D });
   const arrowNavigation = useArrowNavigation({ handleMove2D });
@@ -41,7 +41,7 @@ const useShortcut = (props: IUseShortcut) => {
   };
 
   useEffect(() => {
-    if (navigationMode === NavigationMode.NORMAL) return;
+    if (!isAdventure) return;
 
     window.addEventListener("mousedown", onMouseDown);
     window.addEventListener("mousemove", onMouseMove);

@@ -1,15 +1,16 @@
 import { FC, ReactNode, useEffect, useRef, useState } from "react";
-import { NavigationMode, useGlobalStore } from "../../../store/globalStore";
 import useTheme from "../../../hooks/useTheme";
+import useGlobalStore from "../../../hooks/useGlobalStore";
 
 interface IFlashlight {
   children: ReactNode;
+  color: string;
 }
 
 const Flashlight: FC<IFlashlight> = (props) => {
-  const { children } = props;
+  const { children, color } = props;
   const containerRef = useRef<HTMLDivElement>(null);
-  const { navigationMode } = useGlobalStore();
+  const { isAdventure } = useGlobalStore();
   const { isDarkMode } = useTheme();
   const [position, setPosition] = useState<{ x: number; y: number }>({
     x: 0,
@@ -27,20 +28,28 @@ const Flashlight: FC<IFlashlight> = (props) => {
     setPosition({ x, y });
   };
 
-  useEffect(() => {
-    if (navigationMode === NavigationMode.ADVENTURE || !isDarkMode) return;
+  const handleMouseMove = (e: MouseEvent) => {
+    requestAnimationFrame(() => onMouseMove(e));
+  };
 
-    window.addEventListener("mousemove", onMouseMove);
+  useEffect(() => {
+    if (isAdventure || !isDarkMode) return;
+
+    window.addEventListener("mousemove", handleMouseMove);
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [isDarkMode, navigationMode]);
+    // eslint-disable-next-line
+  }, [isDarkMode, isAdventure]);
 
   return (
-    <div className="relative overflow-hidden" ref={containerRef}>
+    <div
+      className="relative overflow-hidden pointer-events-none touch-none"
+      ref={containerRef}
+    >
       <div
-        className="absolute w-[100px] h-[100px] bg-blue blur-[150px] mix-blend-screen"
-        style={{ top: position.y, left: position.x }}
+        className="absolute translate-x-[-50px] translate-y-[-50px] w-[100px] h-[100px] rounded-full blur-[100px]"
+        style={{ top: position.y, left: position.x, backgroundColor: color }}
       />
       {children}
     </div>

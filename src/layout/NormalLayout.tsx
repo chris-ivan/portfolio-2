@@ -7,6 +7,9 @@ import AboutSection from "../components/About";
 import ContactSection from "../components/Contact";
 import NormalLayoutContainer from "../components/template/NormalLayoutContainer";
 import NoiseBG from "../assets/images/Noise.png";
+import ScrollingGallery from "../components/ScrollingGallery";
+import Flashlight from "../components/UI/Flashlight";
+import { COLOR } from "../interfaces/theme";
 
 const NormalLayout = () => {
   const { theme } = useTheme();
@@ -18,18 +21,23 @@ const NormalLayout = () => {
         backgroundColor: theme.colorBgBase,
       }}
     >
-      <LandingPageSection />
-      <NormalLayoutContainer>
-        <div className="border border-solid border-light-grey dark:border-dark-grey" />
-        <SkillsSection />
-        <NormalLayoutContainer maxWidth="1000px" border>
-          <ExperiencesSection />
-        </NormalLayoutContainer>
-        <ProjectSection />
-        <NormalLayoutContainer maxWidth="1000px">
-          <AboutSection />
-          <ContactSection />
-        </NormalLayoutContainer>
+      <NormalLayoutContainer border>
+        <LandingPageSection />
+        <Flashlight color={COLOR.BLUE}>
+          <div className="border border-solid border-light-grey dark:border-dark-grey" />
+          <SkillsSection />
+          <NormalLayoutContainer maxWidth="1000px" border>
+            <ExperiencesSection />
+          </NormalLayoutContainer>
+          <ProjectSection />
+          <NormalLayoutContainer maxWidth="1000px">
+            <AboutSection />
+          </NormalLayoutContainer>
+          <ScrollingGallery />
+          <NormalLayoutContainer maxWidth="1000px">
+            <ContactSection />
+          </NormalLayoutContainer>
+        </Flashlight>
       </NormalLayoutContainer>
       <img
         src={NoiseBG}

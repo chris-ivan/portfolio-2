@@ -1,11 +1,12 @@
 import useTheme from "../../../hooks/useTheme";
-import { NavigationMode, useGlobalStore } from "../../../store/globalStore";
 import { GUIDES } from "./Guide.static";
 import GuideInstruction from "./GuideInstruction";
 // @ts-ignore
 import { ReactComponent as CloseIcon } from "../../../assets/icons/UI/close-icon.svg";
 import { useNavigationStore } from "../../../store/navigationStore";
 import { Transition } from "@headlessui/react";
+import useGlobalStore from "../../../hooks/useGlobalStore";
+import { NavigationMode } from "../../../interfaces/global";
 
 const Guide = () => {
   const { theme } = useTheme();

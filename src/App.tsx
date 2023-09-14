@@ -3,14 +3,17 @@ import { NotificationProvider } from "./context/NotificationContext";
 import { ThemeProvider } from "./context/ThemeContext";
 import { Toaster } from "react-hot-toast";
 import Layout from "./layout";
+import { GlobalProvider } from "./context/GlobalContext";
 
 function App() {
   return (
     <ThemeProvider>
-      <NotificationProvider>
-        <Layout />
-      </NotificationProvider>
-      <Toaster />
+      <GlobalProvider>
+        <NotificationProvider>
+          <Layout />
+        </NotificationProvider>
+        <Toaster />
+      </GlobalProvider>
     </ThemeProvider>
   );
 }

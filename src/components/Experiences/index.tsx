@@ -10,13 +10,17 @@ import { FRAME_KEY } from "../../interfaces/frame";
 import AdventureOnly from "../template/AdventureOnly";
 import Flashlight from "../UI/Flashlight";
 import FadeIn from "../template/FadeIn";
+import { COLOR } from "../../interfaces/theme";
 
 const ExperiencesSection = () => {
   const { theme } = useTheme();
 
   return (
-    <Flashlight>
-      <div style={{ color: theme.colorText }} className="pt-[88px]">
+    <Flashlight color={COLOR.ORANGE}>
+      <div
+        style={{ color: theme.colorText, backgroundColor: theme.colorBgBase }}
+        className="pt-[88px]"
+      >
         <FadeIn>
           <h2 className="mb-[60px] max-w-[900px] px-[72px]">
             You can find the details on my{" "}

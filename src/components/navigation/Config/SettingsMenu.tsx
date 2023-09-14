@@ -3,7 +3,8 @@ import { Transition } from "@headlessui/react";
 import { FC, lazy } from "react";
 import useTheme from "../../../hooks/useTheme";
 import AdventureOnly from "../../template/AdventureOnly";
-import { NavigationMode, useGlobalStore } from "../../../store/globalStore";
+import useGlobalStore from "../../../hooks/useGlobalStore";
+import { NavigationMode } from "../../../interfaces/global";
 
 const AdventureSettingsMenu = lazy(() => import("./AdventureSettingsMenu"));
 
@@ -15,8 +16,7 @@ interface ISettingsMenu {
 const SettingsMenu: FC<ISettingsMenu> = (props) => {
   const { showSettings, closeSettings } = props;
   const { isDarkMode, setTheme } = useTheme();
-  const { navigationMode, setNavigationMode } = useGlobalStore();
-  const isAdventure = navigationMode === NavigationMode.ADVENTURE;
+  const { setNavigationMode, isAdventure } = useGlobalStore();
 
   const toggleTheme = () => {
     setTheme(isDarkMode ? "light" : "dark");

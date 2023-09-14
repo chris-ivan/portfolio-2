@@ -3,7 +3,7 @@ import { FC, useState } from "react";
 // @ts-ignore
 import { ReactComponent as ImageIcon } from "../../../assets/icons/UI/Picture.svg";
 import useTheme from "../../../hooks/useTheme";
-import useProgressiveImg from "../../../hooks/useProgressiveImg";
+import Image from "../../UI/Image";
 
 interface IPhotoCardContent {
   src: string;
@@ -11,7 +11,6 @@ interface IPhotoCardContent {
 }
 
 const PhotoCardContent: FC<IPhotoCardContent> = (props) => {
-  const { src, blur } = useProgressiveImg(props.src, props.tinySrc);
   const [open, setOpen] = useState<boolean>(true);
   const { theme } = useTheme();
 
@@ -52,14 +51,7 @@ const PhotoCardContent: FC<IPhotoCardContent> = (props) => {
         leaveTo="h-0 opacity-0"
       >
         <div className="p-4 w-full aspect-square pointer-events-none bg-light-grey dark:bg-darker-grey dark:border-t border-solid border-dark-grey">
-          <img
-            src={src}
-            alt=""
-            className="object-cover w-full h-full drop-shadow-lg dark:drop-shadow-none transition-[filter]"
-            style={{
-              filter: blur ? "blur(10px)" : "none",
-            }}
-          />
+          <Image src={props.src} tinySrc={props.tinySrc} />
         </div>
       </Transition>
     </div>
