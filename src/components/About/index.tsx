@@ -2,6 +2,7 @@ import { lazy, useMemo } from "react";
 import useTheme from "../../hooks/useTheme";
 import RenderWhenInView from "../template/RenderWhenInView";
 import FadeIn from "../template/FadeIn";
+import AnimateText from "../template/AnimateText";
 
 const Editor = lazy(() => import("./Editor"));
 
@@ -14,14 +15,18 @@ const AboutSection = () => {
     <div className="py-[80px] px-[72px]">
       <FadeIn>
         <h2 style={{ color: theme.colorText }}>
-          Hello, world!{" "}
-          <span style={{ color: theme.colorPrimary }}>I'm Ivan.</span>
+          <AnimateText>Hello, world! </AnimateText>
+          <span style={{ color: theme.colorPrimary }}>
+            <AnimateText charDelay={14}>I'm Ivan.</AnimateText>
+          </span>
         </h2>
       </FadeIn>
       <FadeIn>
         <h3 className="mt-8" style={{ color: theme.colorTextSecondary }}>
-          I’m not a fan of writing long paragraphs ¯\_(ツ)_/¯, but let me share
-          you a brief TL;DR of my life.
+          <AnimateText>
+            I’m not a fan of writing long paragraphs ¯\_(ツ)_/¯, but let me
+            share you a brief TL;DR of my life.
+          </AnimateText>
         </h3>
       </FadeIn>
       <div className="py-8 pb-4 ">

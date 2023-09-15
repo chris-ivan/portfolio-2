@@ -36,8 +36,10 @@ const Flashlight: FC<IFlashlight> = (props) => {
     if (isAdventure || !isDarkMode) return;
 
     window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("wheel", handleMouseMove);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("wheel", handleMouseMove);
     };
     // eslint-disable-next-line
   }, [isDarkMode, isAdventure]);
@@ -48,7 +50,7 @@ const Flashlight: FC<IFlashlight> = (props) => {
       ref={containerRef}
     >
       <div
-        className="absolute translate-x-[-50px] translate-y-[-50px] w-[100px] h-[100px] rounded-full blur-[100px]"
+        className="absolute translate-x-[-50px] translate-y-[-50px] w-[100px] h-[100px] rounded-full blur-[100px] transition-all duration-75"
         style={{ top: position.y, left: position.x, backgroundColor: color }}
       />
       {children}

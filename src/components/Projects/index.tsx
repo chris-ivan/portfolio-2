@@ -1,4 +1,5 @@
 import useTheme from "../../hooks/useTheme";
+import AnimateText from "../template/AnimateText";
 import FadeIn from "../template/FadeIn";
 import ProjectCard from "./ProjectCard";
 import { PROJECTS } from "./index.static";
@@ -11,8 +12,10 @@ const ProjectSection = () => {
       <div className="px-[76px]">
         <FadeIn>
           <h2 style={{ color: theme.colorText }}>
-            I mean, I've built tens of projects, but it's not like you'll read
-            them all anyway. Here’s some.
+            <AnimateText>
+              I mean, I've built tens of projects, but it's not like you'll read
+              them all anyway. Here’s some.
+            </AnimateText>
           </h2>
         </FadeIn>
         <FadeIn>

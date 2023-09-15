@@ -2,8 +2,13 @@ import { lazy } from "react";
 import useTheme from "../../hooks/useTheme";
 import RenderWhenInView from "../template/RenderWhenInView";
 import FadeIn from "../template/FadeIn";
+import AnimateText from "../template/AnimateText";
 
 const ContactForm = lazy(() => import("./ContactForm"));
+
+const text1 = `Currently `;
+const text2 = `available `;
+const text3 = `for love, freelance jobs and full-time permanent opportunities. Preferably WFH, but I’d love to fly to your country if needed. 🦅`;
 
 const ContactSection = () => {
   const { theme } = useTheme();
@@ -12,9 +17,13 @@ const ContactSection = () => {
     <div style={{ color: theme.colorText }} className="px-[72px] py-[60px]">
       <FadeIn>
         <h2 className="mb-8">
-          Currently <span style={{ color: theme.colorPrimary }}>available</span>{" "}
-          for love, freelance jobs and full-time permanent opportunities.
-          Preferably WFH, but I’d love to fly to your country if needed. 🦅
+          <AnimateText>{text1}</AnimateText>
+          <span style={{ color: theme.colorPrimary }}>
+            <AnimateText charDelay={text1.length}>{text2}</AnimateText>
+          </span>
+          <AnimateText charDelay={text1.length + text2.length}>
+            {text3}
+          </AnimateText>
         </h2>
       </FadeIn>
       <RenderWhenInView>

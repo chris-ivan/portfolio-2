@@ -21,8 +21,8 @@ const NormalLayout = () => {
         backgroundColor: theme.colorBgBase,
       }}
     >
+      <LandingPageSection />
       <NormalLayoutContainer border>
-        <LandingPageSection />
         <Flashlight color={COLOR.BLUE}>
           <div className="border border-solid border-light-grey dark:border-dark-grey" />
           <SkillsSection />
