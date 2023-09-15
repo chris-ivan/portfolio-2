@@ -8,55 +8,73 @@ import { ReactComponent as RightChevronIcon } from "../../assets/icons/UI/Chevro
 import { navigateToFrame } from "../../utils/navigation";
 import { FRAME_KEY } from "../../interfaces/frame";
 import AdventureOnly from "../template/AdventureOnly";
-import Flashlight from "../UI/Flashlight";
 import FadeIn from "../template/FadeIn";
-import { COLOR } from "../../interfaces/theme";
+import useGlobalStore from "../../hooks/useGlobalStore";
+import AnimateText from "../template/AnimateText";
+
+const text1 = "You can find the details on my ";
+const text2 = "LinkedIn profile";
+const text3 = ", but here’s a quick summary 📝";
 
 const ExperiencesSection = () => {
   const { theme } = useTheme();
+  const { isAdventure } = useGlobalStore();
 
   return (
-    <Flashlight color={COLOR.ORANGE}>
-      <div
-        style={{ color: theme.colorText, backgroundColor: theme.colorBgBase }}
-        className="pt-[88px]"
-      >
-        <FadeIn>
-          <h2 className="mb-[60px] max-w-[900px] px-[72px]">
-            You can find the details on my{" "}
+    <div
+      className="relative"
+      style={{
+        color: theme.colorText,
+        margin: isAdventure ? "-2px" : undefined,
+      }}
+    >
+      <FadeIn>
+        <div
+          style={{
+            backgroundColor: theme.colorBgBase,
+          }}
+          className="experience-section pt-[88px] pb-[60px] px-[72px] border border-solid border-light-grey dark:border-dark-grey"
+        >
+          <h2 className="max-w-[900px]">
+            <AnimateText>{text1}</AnimateText>
             <NewTab
               fontSize={44}
               href="https://www.linkedin.com/in/christopher-ivan-gunardi/"
             >
-              LinkedIn profile
+              <AnimateText charDelay={text1.length}>{text2}</AnimateText>
             </NewTab>
-            , but here’s a quick summary 📝
+            <AnimateText charDelay={text1.length + text2.length}>
+              {text3}
+            </AnimateText>
           </h2>
-        </FadeIn>
-        <div className="flex flex-col">
-          {EXPERIENCES.map((experience, idx) => (
-            <div
-              className="px-[72px] py-[40px] border-t border-solid border-light-grey dark:border-dark-grey"
-              key={idx}
-            >
-              <FadeIn>
-                <ExperienceCard {...experience} />
-              </FadeIn>
-            </div>
-          ))}
         </div>
-        <AdventureOnly>
-          <div className="p-[40px] flex w-full justify-end border-t border-solid border-light-grey dark:border-dark-grey">
-            <Button onClick={() => navigateToFrame(FRAME_KEY.PROJECTS)}>
-              Take a quick glance at my past Projects{" "}
-              <span className="inline-block translate-y-[2px]">
-                <RightChevronIcon />
-              </span>
-            </Button>
-          </div>
-        </AdventureOnly>
+      </FadeIn>
+      <div className="flex flex-col">
+        {EXPERIENCES.map((experience, idx) => (
+          <FadeIn animationClass="experience-section">
+            <div
+              className="px-[72px] mt-[-1px] py-[40px] border border-solid border-light-grey dark:border-dark-grey"
+              key={idx}
+              style={{
+                backgroundColor: theme.colorBgBase,
+              }}
+            >
+              <ExperienceCard {...experience} />
+            </div>
+          </FadeIn>
+        ))}
       </div>
-    </Flashlight>
+      <AdventureOnly>
+        <div className="p-[40px] flex w-full justify-end">
+          <Button onClick={() => navigateToFrame(FRAME_KEY.PROJECTS)}>
+            Take a quick glance at my past Projects{" "}
+            <span className="inline-block translate-y-[2px]">
+              <RightChevronIcon />
+            </span>
+          </Button>
+        </div>
+      </AdventureOnly>
+    </div>
   );
 };
 

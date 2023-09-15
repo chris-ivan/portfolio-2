@@ -53,7 +53,7 @@ const Flashlight: FC<IFlashlight> = (props) => {
         className="absolute translate-x-[-50px] translate-y-[-50px] w-[100px] h-[100px] rounded-full blur-[100px] transition-all duration-75"
         style={{ top: position.y, left: position.x, backgroundColor: color }}
       />
-      {children}
+      <div className="pointer-events-auto touch-auto">{children}</div>
     </div>
   );
 };

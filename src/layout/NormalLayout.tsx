@@ -26,7 +26,7 @@ const NormalLayout = () => {
         <Flashlight color={COLOR.BLUE}>
           <div className="border border-solid border-light-grey dark:border-dark-grey" />
           <SkillsSection />
-          <NormalLayoutContainer maxWidth="1000px" border>
+          <NormalLayoutContainer maxWidth="1000px">
             <ExperiencesSection />
           </NormalLayoutContainer>
           <ProjectSection />

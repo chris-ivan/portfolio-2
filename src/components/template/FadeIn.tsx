@@ -5,10 +5,11 @@ import useGlobalStore from "../../hooks/useGlobalStore";
 
 interface IFadeIn {
   children: ReactNode;
+  animationClass?: string;
 }
 
 const FadeInWithIntersection: FC<IFadeIn> = (props) => {
-  const { children } = props;
+  const { children, animationClass } = props;
   const ref = useRef<HTMLDivElement>(null);
 
   const observer = useIntersectionObserver(ref, {
@@ -16,13 +17,17 @@ const FadeInWithIntersection: FC<IFadeIn> = (props) => {
     freezeOnceVisible: true,
   });
 
+  const { isIntersecting } = observer || {};
+
   return (
     <div
       ref={ref}
-      className="transition-[transform,opacity] duration-500 delay-150"
+      className={`${
+        (isIntersecting && animationClass) || ""
+      } transition-[transform,opacity] duration-500 delay-150`}
       style={{
-        opacity: observer?.isIntersecting ? 1 : 0,
-        transform: observer?.isIntersecting ? "none" : "translateY(20px)",
+        opacity: isIntersecting ? 1 : 0,
+        transform: isIntersecting ? "none" : "translateY(20px)",
       }}
     >
       {children}

@@ -1,3 +1,4 @@
+import AnimateText from "../template/AnimateText";
 import { IExperience } from "./Experiences.static";
 
 const ExperienceCard = (props: IExperience) => {
@@ -14,7 +15,9 @@ const ExperienceCard = (props: IExperience) => {
         loading="lazy"
       />
       <div className="ml-[52px]">
-        <h3>{title}</h3>
+        <h3>
+          <AnimateText interval={30}>{title}</AnimateText>
+        </h3>
         <h5 className="text-blue mt-[6px] mb-[24px]">{role}</h5>
         <ul className="list-disc ml-6 max-w-[480px]">
           {description.map((line, idx) => (
