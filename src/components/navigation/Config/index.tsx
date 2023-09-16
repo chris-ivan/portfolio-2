@@ -29,7 +29,7 @@ const NavigationConfig = () => {
         }`}
       >
         <div
-          className="fixed top-4 left-6 z-[200] touch-auto pointer-events-auto"
+          className="fixed top-0 h-[60px] flex items-center left-6 z-[200] touch-auto pointer-events-auto pt-6 pb-5"
           style={{ color: theme.colorText, position }}
         >
           Christopher Ivan Gunardi

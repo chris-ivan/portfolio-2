@@ -97,14 +97,14 @@ textarea::placeholder,
 } */
 
 .experience-section {
-  animation: 1s ease-in-out forwards 1 experience-animation;
+  animation: 0.75s ease-in-out forwards 1 experience-animation;
 }
 
 @keyframes experience-animation {
   0% {
     opacity: 0;
-    transform: translateY(100px);
-    scale: 0.95;
+    transform: translateY(-20px);
+    scale: 1.05;
   }
   100% {
     opacity: 1;

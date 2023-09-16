@@ -51,10 +51,9 @@ const ExperiencesSection = () => {
       </FadeIn>
       <div className="flex flex-col">
         {EXPERIENCES.map((experience, idx) => (
-          <FadeIn animationClass="experience-section">
+          <FadeIn animationClass="experience-section" key={idx}>
             <div
               className="px-[72px] mt-[-1px] py-[40px] border border-solid border-light-grey dark:border-dark-grey"
-              key={idx}
               style={{
                 backgroundColor: theme.colorBgBase,
               }}
