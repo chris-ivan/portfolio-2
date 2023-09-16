@@ -12,26 +12,31 @@ const About = () => {
   const EditorComponent = useMemo(() => <Editor />, []);
 
   return (
-    <div className="my-8">
-      <h2>
-        <AnimateText>About me.</AnimateText>
-      </h2>
-      <p className="pt-2 pb-4" style={{ color: theme.colorTextSecondary }}>
-        I’m not a fan of writing long paragraphs ¯\_(ツ)_/¯, so let me share you
-        my go-to “tell me about yourself” template :D
-      </p>
-      <RenderWhenInView>
-        <FadeIn>{EditorComponent}</FadeIn>
-      </RenderWhenInView>
-      {!isDarkMode && (
-        <p style={{ color: theme.colorTextTertiary }} className="mt-2 text-xs">
-          Yes, the light mode text editor hurts my eyes as well :”D
-          <br />
-          You can always switch to dark mode by clicking the moon icon on the
-          bottom right corner.
+    <FadeIn>
+      <div className="my-8">
+        <h2>
+          <AnimateText>About me.</AnimateText>
+        </h2>
+        <p className="pt-2 pb-4" style={{ color: theme.colorTextSecondary }}>
+          I’m not a fan of writing long paragraphs ¯\_(ツ)_/¯, so let me share
+          you my go-to “tell me about yourself” template :D
         </p>
-      )}
-    </div>
+        <RenderWhenInView>
+          <FadeIn>{EditorComponent}</FadeIn>
+        </RenderWhenInView>
+        {!isDarkMode && (
+          <p
+            style={{ color: theme.colorTextTertiary }}
+            className="mt-2 text-xs"
+          >
+            Yes, the light mode text editor hurts my eyes as well :”D
+            <br />
+            You can always switch to dark mode by clicking the moon icon on the
+            bottom right corner.
+          </p>
+        )}
+      </div>
+    </FadeIn>
   );
 };
 

@@ -27,7 +27,9 @@ const SkillCard: FC<ISkillCard> = (props) => {
       <div>
         <FadeIn>
           <h3 className="md:mt-8">
-            <AnimateText interval={30}>{title}</AnimateText>
+            <AnimateText charDelay={10} interval={30}>
+              {title}
+            </AnimateText>
           </h3>
         </FadeIn>
         <FadeIn>

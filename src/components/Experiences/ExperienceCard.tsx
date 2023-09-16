@@ -19,7 +19,9 @@ const ExperienceCard = (props: IExperience) => {
       />
       <div>
         <h3>
-          <AnimateText interval={30}>{title}</AnimateText>
+          <AnimateText charDelay={10} interval={30}>
+            {title}
+          </AnimateText>
         </h3>
         <h5 className="text-blue mt-[6px] mb-2 md:mb-[24px]">
           {role}

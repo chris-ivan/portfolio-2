@@ -1,6 +1,7 @@
 import MobileProjectCard from "../../components/Projects/MobileProjectCard";
 import { PROJECTS } from "../../components/Projects/index.static";
 import AnimateText from "../../components/template/AnimateText";
+import FadeIn from "../../components/template/FadeIn";
 import MobileContainer from "../../components/template/MobileContainer";
 import useTheme from "../../hooks/useTheme";
 
@@ -11,13 +12,15 @@ const Projects = () => {
     <div>
       <div className="bg-light-blue dark:bg-darker-grey py-4">
         <MobileContainer>
-          <h2>
-            <AnimateText>The highlights of my freelance career.</AnimateText>
-          </h2>
-          <p style={{ color: theme.colorTextSecondary }} className="mt-2">
-            I mean, I've built tens of projects, but it's not like you'll read
-            them all anyway. Here’s some.
-          </p>
+          <FadeIn>
+            <h2>
+              <AnimateText>The highlights of my freelance career.</AnimateText>
+            </h2>
+            <p style={{ color: theme.colorTextSecondary }} className="mt-2">
+              I mean, I've built tens of projects, but it's not like you'll read
+              them all anyway. Here’s some.
+            </p>
+          </FadeIn>
         </MobileContainer>
       </div>
       <MobileContainer>
