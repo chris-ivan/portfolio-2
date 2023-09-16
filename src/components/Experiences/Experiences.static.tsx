@@ -3,6 +3,13 @@ import TaniHubLogo from "../../assets/images/Interests/logo-tanihub.webp";
 import ShopeeLogo from "../../assets/images/Interests/logo-shopee.webp";
 import SinarmasLogo from "../../assets/images/Interests/logo-sinarmas.webp";
 import CitreLogo from "../../assets/images/Interests/logo-citre.webp";
+
+import ITBSmallLogo from "../../assets/images/Interests/logo-itb-small.webp";
+import TaniHubSmallLogo from "../../assets/images/Interests/logo-tanihub-small.webp";
+import ShopeeSmallLogo from "../../assets/images/Interests/logo-shopee-small.webp";
+import SinarmasSmallLogo from "../../assets/images/Interests/logo-sinarmas-small.webp";
+import CitreSmallLogo from "../../assets/images/Interests/logo-citre-small.webp";
+
 import { navigateToFrame } from "../../utils/navigation";
 import { FRAME_KEY } from "../../interfaces/frame";
 import AdventureOnly from "../template/AdventureOnly";
@@ -22,6 +29,7 @@ export const EXPERIENCES: IExperience[] = [
   {
     title: "Bandung Institute of Technology",
     image: ITBLogo,
+    smallImage: ITBSmallLogo,
     role: "Bachelor’s degree",
     description: [
       "You might have never heard the name, but it's one of the best universities in my country.",
@@ -31,6 +39,7 @@ export const EXPERIENCES: IExperience[] = [
   {
     title: "TaniHub (TaniFund)",
     image: TaniHubLogo,
+    smallImage: TaniHubSmallLogo,
     role: "Frontend Engineer Intern",
     duration: "3 months",
     description: [
@@ -42,6 +51,7 @@ export const EXPERIENCES: IExperience[] = [
   {
     title: "Shopee",
     image: ShopeeLogo,
+    smallImage: ShopeeSmallLogo,
     role: "Frontend Engineer Intern",
     duration: "10 months",
     description: [
@@ -53,6 +63,7 @@ export const EXPERIENCES: IExperience[] = [
   {
     title: "Sinarmas",
     image: SinarmasLogo,
+    smallImage: SinarmasSmallLogo,
     role: "Fulltime Frontend Engineer - since Feb 2023",
     duration: "since Feb 2023",
     description: [
@@ -64,6 +75,7 @@ export const EXPERIENCES: IExperience[] = [
   {
     title: "Freelance",
     image: CitreLogo,
+    smallImage: CitreSmallLogo,
     role: "Fullstack Developer & Designer",
     duration: "3 years+",
     description: [
