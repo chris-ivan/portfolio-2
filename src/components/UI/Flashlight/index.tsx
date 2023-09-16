@@ -46,7 +46,7 @@ const Flashlight: FC<IFlashlight> = (props) => {
 
   return (
     <div
-      className="relative overflow-hidden pointer-events-none touch-none"
+      className="relative overflow-clip pointer-events-none touch-none"
       ref={containerRef}
     >
       <div
