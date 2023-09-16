@@ -42,6 +42,7 @@ import VuetifyIcon from "../../assets/icons/Logo/Vuetify.svg";
 import VuexIcon from "../../assets/icons/Logo/Vuex.svg";
 import ZustandIcon from "../../assets/icons/Logo/Zustand.svg";
 import GithubIcon from "../../assets/icons/Logo/Github.svg";
+import GithubDarkIcon from "../../assets/icons/Logo/GithubDark.svg";
 
 export interface ISkill {
   name: string;
@@ -104,7 +105,7 @@ const BACKEND_SKILLS: ISkill[] = [
 
 const OTHER_SKILLS: ISkill[] = [
   getIconObject("Git", GitIcon),
-  getIconObject("Github", GithubIcon),
+  getIconObject("Github", GithubIcon, GithubDarkIcon),
   getIconObject("Docker", DockerIcon),
   getIconObject("GCP", GCPIcon),
   getIconObject("Google Analytics", AnalyticsIcon),

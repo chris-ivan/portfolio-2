@@ -1,6 +1,5 @@
 // import SendIcon from "../../../assets/icons/UI/SendIcon";
 import useTheme from "../../../hooks/useTheme";
-import useViewport from "../../../hooks/useViewport";
 import Input from "../../UI/Input";
 import useChatForm from "./useChatForm";
 import { useMemo } from "react";
@@ -10,12 +9,7 @@ import ChatCursor from "./ChatCursor";
 
 const ChatForm = () => {
   const { register, handleFormSubmit, response, isTyping } = useChatForm();
-  const { height } = useViewport();
   const { theme } = useTheme();
-
-  const formY = useMemo(() => {
-    return height / 4 + 300;
-  }, [height]);
 
   const placeholderText = useMemo(() => {
     if (isTyping && !response) return "Loading response...";
@@ -28,7 +22,6 @@ const ChatForm = () => {
       onSubmit={handleFormSubmit}
       className="w-full bg-white"
       style={{
-        top: formY,
         backgroundColor: theme.colorBgBase,
         color: theme.colorText,
       }}
