@@ -25,15 +25,16 @@ const ExperiencesSection = () => {
       className="relative"
       style={{
         color: theme.colorText,
-        margin: isAdventure ? "-2px" : undefined,
       }}
     >
       <FadeIn>
         <div
           style={{
             backgroundColor: theme.colorBgBase,
+            borderWidth: isAdventure ? 0 : 1,
+            borderBottomWidth: 1,
           }}
-          className="experience-section pt-[88px] pb-[60px] px-[72px] border border-solid border-light-grey dark:border-dark-grey"
+          className="experience-section pt-[88px] pb-[60px] px-[72px] border-solid border-light-grey dark:border-dark-grey"
         >
           <h2 className="max-w-[900px]">
             <AnimateText>{text1}</AnimateText>
@@ -53,9 +54,11 @@ const ExperiencesSection = () => {
         {EXPERIENCES.map((experience, idx) => (
           <FadeIn animationClass="experience-section" key={idx}>
             <div
-              className="px-[72px] mt-[-1px] py-[40px] border border-solid border-light-grey dark:border-dark-grey"
+              className="px-[72px] py-[40px] border-solid border-light-grey dark:border-dark-grey"
               style={{
                 backgroundColor: theme.colorBgBase,
+                borderWidth: isAdventure ? 0 : 1,
+                borderBottomWidth: 1,
               }}
             >
               <ExperienceCard {...experience} />
