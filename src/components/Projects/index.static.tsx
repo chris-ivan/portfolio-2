@@ -29,18 +29,21 @@ const SINDU: IProject = {
   highlights: [
     {
       title: "A fancy camera?",
+      summary: "Custom-made camera",
       description:
         "Rotateable, flippable, switchable. A simple custom-made camera that just works.",
       image: generateImageData("", "custom-made camera functionality"),
     },
     {
       title: "Unique tech stack",
+      summary: "Unique state management lib (Zustand - 400x faster than redux)",
       description:
         "I implemented Zustand as the state management library. It’s way lighter and faster than Redux.",
       image: generateImageData("", "zustand code for state management"),
     },
     {
       title: "Clean Code",
+      summary: "Clean React codebase.",
       description:
         "Tons of reusable custom hooks to abstract complexity, reusable context providers, forms, etc",
       image: generateImageData("", "react code snippet"),
@@ -58,12 +61,14 @@ const PERSONAL_WEB2: IProject = {
   highlights: [
     {
       title: "Random stuff everywhere",
+      summary: "Lots of fun things (on desktop version)",
       description:
         "A website that just fits my personality. A lot of things are going on here and there.",
       image: generateImageData("", "random stuff in this website"),
     },
     {
       title: "Playable landing page",
+      summary: "Playable landing page (on desktop version)",
       description:
         "Click, drag, resize whatever you want. Not the cleanest code, but it’s definitely not a mess either.",
       image: generateImageData(
@@ -72,7 +77,8 @@ const PERSONAL_WEB2: IProject = {
       ),
     },
     {
-      title: "Sophisticated AI assistant",
+      title: "Sophisticated AI assistant (soon)",
+      summary: "Sophisticated AI assistant :D (soon)",
       description:
         "Ask away. Hopefully it will give you an appropriate response.",
       image: generateImageData("", "ai assistant chatbox"),
@@ -99,18 +105,21 @@ const PERSONAL_WEB1: IProject = {
   highlights: [
     {
       title: "It just looks beautiful",
+      summary: "It just looks beautiful",
       description:
         "White text on a dark blue background, my favorite safe color palette.",
       image: generateImageData("", "color scheme of the website"),
     },
     {
       title: "Scrolling interactions",
+      summary: "Scrolling interactions, lots of animations",
       description:
         "The images move as you move your mouse, the background decorations scrolls slower (or faster) than your scroller.",
       image: generateImageData("", "scrolling interactions in the website"),
     },
     {
       title: "The OG JavaScript",
+      summary: "The OG JavaScript :D",
       description:
         "Written 3 years ago, so it looks nasty if you visit the codebase now, but it was definitely a great kick-off.",
       image: generateImageData("", "javascript code snippet"),
@@ -128,6 +137,14 @@ const INSANE_MATH: IProject = {
   highlights: [
     {
       title: "My start line",
+      summary: (
+        <p>
+          My first ever website, Special credit to{" "}
+          <NewTab href="https://michaelpege.com/" fontSize={12}>
+            @michael_pege
+          </NewTab>
+        </p>
+      ),
       description: (
         <p>
           My first ever website, built with pure HTML, CSS, and CDN-based React.
@@ -142,12 +159,14 @@ const INSANE_MATH: IProject = {
     },
     {
       title: "Programatically generated",
+      summary: "Programatically generated questions & answers.",
       description:
         "Hence most correct answers can be guessed rather than calculated :”",
       image: generateImageData("", "calculation image"),
     },
     {
       title: "A rough start",
+      summary: "Nothing special, it's just me reminiscing the past :D",
       description:
         "14-day marathon working on this simple website every night. But this small project got me into web dev :”",
       image: generateImageData("", "code snippet of the website"),

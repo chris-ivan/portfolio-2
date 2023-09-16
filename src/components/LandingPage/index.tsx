@@ -13,7 +13,9 @@ const LandingPageSection = () => {
     <div className="relative">
       <Toolbar stageRef={stageRef} />
       {canvas}
-      <ChatForm />
+      <div className="absolute w-[500px] left-[50%] translate-x-[-50%]">
+        <ChatForm />
+      </div>
     </div>
   );
 };

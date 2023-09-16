@@ -14,7 +14,10 @@ const ContactSection = () => {
   const { theme } = useTheme();
 
   return (
-    <div style={{ color: theme.colorText }} className="px-[72px] py-[60px]">
+    <div
+      style={{ color: theme.colorText }}
+      className="md:px-[72px] md:py-[60px]"
+    >
       <FadeIn>
         <h2 className="mb-8">
           <AnimateText>{text1}</AnimateText>
@@ -31,7 +34,10 @@ const ContactSection = () => {
           <ContactForm />
         </FadeIn>
       </RenderWhenInView>
-      <p className="mt-20" style={{ color: theme.colorTextTertiary }}>
+      <p
+        className="mt-4 mb-8 max-w-[30ch] md:max-w-none md:mt-20 md:mb-0"
+        style={{ color: theme.colorTextTertiary }}
+      >
         Created with effort and dedication, because love would never feed me.
       </p>
     </div>

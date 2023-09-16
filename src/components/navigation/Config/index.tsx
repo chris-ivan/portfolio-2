@@ -8,12 +8,14 @@ import { ReactComponent as WhatsAppIcon } from "../../../assets/icons/Logo/Whats
 
 import useTheme from "../../../hooks/useTheme";
 import AdventureOnly from "../../template/AdventureOnly";
-import Settings from "./Settings";
 import SocialLink from "./SocialLink";
 import useGlobalStore from "../../../hooks/useGlobalStore";
 import { NavigationMode } from "../../../interfaces/global";
+import { IS_MOBILE } from "../../../utils/device";
 
 const GuideButton = lazy(() => import("./GuideButton"));
+const Settings = lazy(() => import("./Settings"));
+const ThemeToggler = lazy(() => import("./ThemeToggler"));
 
 const NavigationConfig = () => {
   const { theme } = useTheme();
@@ -29,14 +31,14 @@ const NavigationConfig = () => {
         }`}
       >
         <div
-          className="fixed top-0 h-[60px] flex items-center left-6 z-[200] touch-auto pointer-events-auto pt-6 pb-5"
+          className="fixed top-0 h-[60px] flex items-center left-[5vw] md:left-6 z-[200] touch-auto pointer-events-auto pt-6 pb-5 font-grifter md:"
           style={{ color: theme.colorText, position }}
         >
           Christopher Ivan Gunardi
         </div>
         <div
           style={{ position }}
-          className="fixed bottom-4 right-6 flex items-center gap-2 z-[200] touch-auto pointer-events-auto"
+          className="fixed right-4 bottom-4 md:right-6 flex items-center gap-1/2 md:gap-2 z-[200] touch-auto pointer-events-auto"
         >
           <SocialLink
             icon={LinkedInIcon as () => JSX.Element}
@@ -53,7 +55,7 @@ const NavigationConfig = () => {
           <AdventureOnly>
             <GuideButton />
           </AdventureOnly>
-          <Settings />
+          {IS_MOBILE ? <ThemeToggler /> : <Settings />}
         </div>
       </div>
     </div>

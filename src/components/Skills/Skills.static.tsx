@@ -106,7 +106,7 @@ const OTHER_SKILLS: ISkill[] = [
   getIconObject("Git", GitIcon),
   getIconObject("Github", GithubIcon),
   getIconObject("Docker", DockerIcon),
-  getIconObject("Google Cloud Platform", GCPIcon),
+  getIconObject("GCP", GCPIcon),
   getIconObject("Google Analytics", AnalyticsIcon),
   getIconObject("Nginx", NginxIcon),
   getIconObject("Netlify", NetlifyIcon),

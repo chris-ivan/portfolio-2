@@ -8,7 +8,7 @@ interface IImageCard {
 
 const ImageCard: FC<IImageCard> = (props) => {
   return (
-    <div className="mx-4 w-[400px] h-[400px] aspect-square">
+    <div className="mx-2 md:mx-4 w-[200px] md:w-[400px] aspect-square">
       <Image src={props.src} tinySrc={props.tinySrc} />
     </div>
   );

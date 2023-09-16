@@ -4,6 +4,7 @@ import CopyIcon from "../../assets/icons/Toolbar/CopyIcon";
 import DownloadIcon from "../../assets/icons/Toolbar/DownloadIcon";
 import EditorButton from "./EditorButton";
 import useMarkdownEditor from "./useEditor";
+import { IS_MOBILE } from "../../utils/device";
 
 const Editor = () => {
   const { code, setCode, handleCopy, handleDownload } = useMarkdownEditor();
@@ -40,7 +41,7 @@ const Editor = () => {
           onKeyDown={(e) => e.stopPropagation()}
           padding={15}
           style={{
-            fontSize: 16,
+            fontSize: IS_MOBILE ? 12 : 16,
             backgroundColor: theme.colorBgBase,
             fontFamily:
               "ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace",

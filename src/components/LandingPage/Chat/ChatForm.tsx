@@ -26,7 +26,7 @@ const ChatForm = () => {
   return (
     <form
       onSubmit={handleFormSubmit}
-      className="absolute w-[500px] bg-white left-[50%] translate-x-[-50%]"
+      className="w-full bg-white"
       style={{
         top: formY,
         backgroundColor: theme.colorBgBase,

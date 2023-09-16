@@ -10,7 +10,9 @@ import AdventureOnly from "../template/AdventureOnly";
 export interface IExperience {
   title: string;
   image: string;
+  smallImage?: string;
   role: string;
+  duration?: string;
   description: string[];
   notes?: React.ReactNode;
 }
@@ -29,7 +31,8 @@ export const EXPERIENCES: IExperience[] = [
   {
     title: "TaniHub (TaniFund)",
     image: TaniHubLogo,
-    role: "Frontend Engineer Intern - 3 months",
+    role: "Frontend Engineer Intern",
+    duration: "3 months",
     description: [
       "A P2P lending startup in Indonesia, mainly focused in funding local farmers.",
       "Created some static pages, built some internal dashboard features, worked on some small core features.",
@@ -39,7 +42,8 @@ export const EXPERIENCES: IExperience[] = [
   {
     title: "Shopee",
     image: ShopeeLogo,
-    role: "Frontend Engineer Intern - 10 months",
+    role: "Frontend Engineer Intern",
+    duration: "10 months",
     description: [
       "A multinational e-commerce mainly focused in SEA with ~173.9M (i) monthly users.",
       "Developed 3 CRM campaign websites and multiple React libraries for payment system.",
@@ -50,6 +54,7 @@ export const EXPERIENCES: IExperience[] = [
     title: "Sinarmas",
     image: SinarmasLogo,
     role: "Fulltime Frontend Engineer - since Feb 2023",
+    duration: "since Feb 2023",
     description: [
       "A huge multisector company in Indonesia, mainly focused in banking, insurance, and property.",
       "Developed a websocket-based customer center website and a messaging platform dashboard.",
@@ -59,7 +64,8 @@ export const EXPERIENCES: IExperience[] = [
   {
     title: "Freelance",
     image: CitreLogo,
-    role: "Fullstack Developer & Designer - 3 years+",
+    role: "Fullstack Developer & Designer",
+    duration: "3 years+",
     description: [
       "Primarily working on small-medium scale websites for local companies and campus organizations.",
       "Admin dashboards, mini e-commerce, cashier systems, etc",

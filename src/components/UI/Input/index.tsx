@@ -14,7 +14,7 @@ const Input = forwardRef<HTMLInputElement, IInput>((props, ref) => {
   return (
     <div className="flex flex-col w-full">
       {label && (
-        <label style={{ color: theme.colorTextSecondary }} className="mb-1">
+        <label style={{ color: theme.colorTextSecondary }} className="md:mb-1">
           {label}
         </label>
       )}

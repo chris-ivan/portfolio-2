@@ -8,7 +8,7 @@ const SocialLink = (props: ISocialLink) => {
 
   return (
     <a
-      className="scale-75"
+      className="scale-[60%] md:scale-75"
       href={link}
       target="_blank"
       rel="noopener noreferrer"

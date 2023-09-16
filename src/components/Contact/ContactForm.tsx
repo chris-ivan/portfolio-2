@@ -8,8 +8,8 @@ const ContactForm = () => {
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <div className="flex w-full">
-        <div className="p-2 border border-r-0 border-grey w-full">
+      <div className="flex flex-col md:flex-row w-full">
+        <div className="p-2 border md:border-r-0 border-grey w-full">
           <Input
             label="Name/initial"
             placeholder="Preferably a real one."
@@ -17,7 +17,7 @@ const ContactForm = () => {
             {...register("name")}
           />
         </div>
-        <div className="p-2 border border-grey w-full">
+        <div className="p-2 border border-t-0 md:border-t border-grey w-full">
           <Input
             label="Contact"
             placeholder="Email, WhatsApp, Tinder, anything"

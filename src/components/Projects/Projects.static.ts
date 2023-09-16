@@ -29,6 +29,7 @@ interface IProjectImage {
 
 export interface IProjectHighlight {
   title: string;
+  summary: ReactNode;
   description: ReactNode;
   image: IProjectImage;
 }

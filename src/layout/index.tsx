@@ -1,23 +1,13 @@
 import LoadingPage from "../components/UI/Loading/LoadingPage";
 import Navigation from "../components/navigation";
 import { lazy, Suspense } from "react";
-import useGlobalStore from "../hooks/useGlobalStore";
-import { NavigationMode } from "../interfaces/global";
+import { IS_MOBILE } from "../utils/device";
 
-const AdventureLayout = lazy(() => import("./AdventureLayout"));
-const NormalLayout = lazy(() => import("./NormalLayout"));
+const MobileLayout = lazy(() => import("./MobileLayout"));
+const DesktopLayout = lazy(() => import("./DesktopLayout"));
 
 const SelectedLayout = () => {
-  const { navigationMode } = useGlobalStore();
-
-  switch (navigationMode) {
-    case NavigationMode.ADVENTURE:
-      return <AdventureLayout />;
-    case NavigationMode.NORMAL:
-      return <NormalLayout />;
-    default:
-      return null;
-  }
+  return IS_MOBILE ? <MobileLayout /> : <DesktopLayout />;
 };
 
 const Layout = () => {

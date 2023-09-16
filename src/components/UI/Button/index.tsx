@@ -9,7 +9,7 @@ const Button: FC<IButton> = (props) => {
   return (
     <button
       {...rest}
-      className="custom-button bg-blue hover:bg-orange transition-colors text-white py-4 px-6"
+      className="custom-button bg-blue hover:bg-orange transition-colors text-white py-2 px-4 md:py-4 md:px-6"
     >
       {children}
     </button>
