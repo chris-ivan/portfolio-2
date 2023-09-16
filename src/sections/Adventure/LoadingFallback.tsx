@@ -3,7 +3,7 @@ import { FC } from "react";
 import LoadingSpinner from "../../components/UI/Loading/LoadingSpinner";
 
 interface ILoadingFallback {
-  children: ReactNode;
+  children?: ReactNode;
   width?: number | string;
   height?: number | string;
 }

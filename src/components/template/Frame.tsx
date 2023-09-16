@@ -50,13 +50,18 @@ const Frame = (props: IFrameProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [observer?.isIntersecting]);
 
+  const minHeight = useMemo(() => {
+    if (!isShow) return "100vh";
+    return size?.height ? undefined : "fit-content";
+  }, [size, isShow]);
+
   return (
     <div
       style={{
         ...size,
         ...position,
         backgroundColor: theme.colorBgBase,
-        minHeight: size?.height ? undefined : "fit-content",
+        minHeight,
       }}
       id={id}
       ref={frameRef}
@@ -74,7 +79,7 @@ const Frame = (props: IFrameProps) => {
           {title}
         </div>
       )}
-      {isShow && <LoadingFallback>{children}</LoadingFallback>}
+      {isShow && <LoadingFallback height="100vh">{children}</LoadingFallback>}
       <img
         src={NoiseBG}
         className="absolute top-0 left-0 right-0 bottom-0 pointer-events-none touch-none object-cover w-full h-full"
