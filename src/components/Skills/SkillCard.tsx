@@ -20,7 +20,11 @@ const SkillCard: FC<ISkillCard> = (props) => {
   return (
     <div className="flex gap-3 md:block md:max-w-[30%] md:min-w-[18%]">
       <FadeIn>
-        <RenderWhenInView height={IS_MOBILE ? 40 : 300}>
+        <RenderWhenInView
+          small
+          minHeight={IS_MOBILE ? 0 : undefined}
+          height={IS_MOBILE ? 40 : 300}
+        >
           <SkillCardPhoto />
         </RenderWhenInView>
       </FadeIn>

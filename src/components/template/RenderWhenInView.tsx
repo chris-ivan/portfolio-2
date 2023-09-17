@@ -6,6 +6,8 @@ interface IRenderWhenInView {
   children: ReactNode;
   width?: number | string;
   height?: number | string;
+  minHeight?: number | string;
+  small?: boolean;
 }
 
 const RenderWhenInView: FC<IRenderWhenInView> = (props) => {
