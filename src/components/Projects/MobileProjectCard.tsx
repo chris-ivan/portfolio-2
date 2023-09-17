@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, lazy } from "react";
 import { IProject } from "./Projects.static";
 import useTheme from "../../hooks/useTheme";
 import ProjectCardInfo from "./ProjectCardInfo";
@@ -6,9 +6,14 @@ import SkillTag from "../Skills/SkillTag";
 import AnimateText from "../template/AnimateText";
 import FadeIn from "../template/FadeIn";
 import Image from "../UI/Image";
+import LoadingSpinner from "../UI/Loading/LoadingSpinner";
+import LoadingFallback from "../../sections/Adventure/LoadingFallback";
+
+const ReactPlayer = lazy(() => import("react-player"));
 
 const MobileProjectCard: FC<IProject> = (props) => {
-  const { tag, title, tldr, role, techStack, highlights } = props;
+  const { tag, title, tldr, role, techStack, highlights, video, mainImage } =
+    props;
   const { theme } = useTheme();
 
   return (
@@ -26,12 +31,27 @@ const MobileProjectCard: FC<IProject> = (props) => {
       </h3>
       <div className="my-4">
         <FadeIn>
-          <img className="bg-grey w-full aspect-video" />
+          <div className="w-full aspect-video">
+            {video ? (
+              <LoadingFallback height="100%">
+                <ReactPlayer
+                  playing
+                  url={video}
+                  loop
+                  width="100%"
+                  height="100%"
+                  fallback={<LoadingSpinner />}
+                />
+              </LoadingFallback>
+            ) : (
+              <img src={mainImage.src} alt={mainImage.alt} />
+            )}
+          </div>
         </FadeIn>
         <FadeIn>
           <div className="flex w-full gap-2 mt-2">
             {highlights.map(({ title, image }) => (
-              <div key={title} className="flex-1 bg-grey aspect-video">
+              <div key={title} className="flex-1 aspect-video">
                 <Image src={image.src} tinySrc={image.lazySrc} />
               </div>
             ))}

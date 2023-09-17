@@ -38,7 +38,7 @@ const ProjectCard: FC<IProject> = (props) => {
           style={{
             margin: isAdventure ? "8px 0 16px" : "8px 0",
           }}
-          className="flex items-center justify-center flex-[7] aspect-video h-0 bg-light-grey dark:bg-black max-h-[600px] border border-solid border-light-grey dark:border-dark-grey text-grey overflow-hidden"
+          className="flex items-center justify-center flex-[7] aspect-video h-0 bg-light-grey dark:bg-black max-h-[600px] border border-solid border-light-grey dark:border-dark-grey overflow-hidden"
         >
           {video ? (
             <LoadingFallback height="100%">
