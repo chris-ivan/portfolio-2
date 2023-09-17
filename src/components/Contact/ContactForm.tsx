@@ -4,10 +4,11 @@ import TextArea from "../UI/Input/TextArea";
 import useContactForm from "./useContactForm";
 
 const ContactForm = () => {
-  const { register, handleFormSubmit } = useContactForm();
+  const { isEmpty, isLoading, register, handleChange, handleFormSubmit } =
+    useContactForm();
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} onChange={handleChange}>
       <div className="flex flex-col md:flex-row w-full">
         <div className="p-2 border md:border-r-0 border-grey w-full">
           <Input
@@ -32,7 +33,9 @@ const ContactForm = () => {
           rows={6}
         />
       </div>
-      <Button type="submit">Send to Me</Button>
+      <Button disabled={isEmpty} loading={isLoading} type="submit">
+        Send to Me
+      </Button>
     </form>
   );
 };

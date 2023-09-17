@@ -9,8 +9,9 @@ interface IFormData {
 const useChatForm = () => {
   const [response, setResponse] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
-  const { register, handleSubmit } = useForm<IFormData>();
+  const { register, handleSubmit, getValues } = useForm<IFormData>();
   const { isAdventure } = useGlobalStore();
+  const [query, setQuery] = useState<string>("");
 
   const animateResponse = (response: string) => {
     setIsTyping(true);
@@ -54,7 +55,19 @@ const useChatForm = () => {
     void handleSubmit(onSubmit)();
   };
 
-  return { register, handleFormSubmit, response, isTyping };
+  const handleChange: React.FormEventHandler<HTMLFormElement> = () => {
+    const { question } = getValues();
+    setQuery(question);
+  };
+
+  return {
+    query,
+    register,
+    handleChange,
+    handleFormSubmit,
+    response,
+    isTyping,
+  };
 };
 
 export default useChatForm;

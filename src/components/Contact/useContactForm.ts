@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NotificationContext } from "../../context/NotificationContext";
 
 interface IFormData {
@@ -16,10 +16,14 @@ const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
 const URL = `${ENDPOINT}/api/v1.0/email/send`;
 
 const useContactForm = () => {
-  const { register, handleSubmit } = useForm<IFormData>();
+  const { register, handleSubmit, getValues } = useForm<IFormData>();
   const { toastSuccess, toastError } = useContext(NotificationContext);
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onSubmit = async (data: IFormData) => {
+    setIsLoading(true);
+
     const parameters = {
       service_id: SERVICE,
       template_id: TEMPLATE,
@@ -39,6 +43,8 @@ const useContactForm = () => {
     } catch (err) {
       toastError("Failed to send message. Please try again");
       toastError("Reason: " + JSON.stringify(err));
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -47,7 +53,13 @@ const useContactForm = () => {
     void handleSubmit(onSubmit)();
   };
 
-  return { register, handleFormSubmit };
+  const handleChange: React.FormEventHandler<HTMLFormElement> = () => {
+    const { name, contact, message } = getValues();
+    const isFilled = (name || contact) && message;
+    setIsEmpty(!isFilled);
+  };
+
+  return { isEmpty, isLoading, register, handleChange, handleFormSubmit };
 };
 
 export default useContactForm;

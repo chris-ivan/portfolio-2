@@ -8,7 +8,14 @@ import { ReactComponent as SendIcon } from "../../../assets/icons/UI/Send.svg";
 import ChatCursor from "./ChatCursor";
 
 const ChatForm = () => {
-  const { register, handleFormSubmit, response, isTyping } = useChatForm();
+  const {
+    query,
+    register,
+    handleChange,
+    handleFormSubmit,
+    response,
+    isTyping,
+  } = useChatForm();
   const { theme } = useTheme();
 
   const placeholderText = useMemo(() => {
@@ -19,6 +26,7 @@ const ChatForm = () => {
 
   return (
     <form
+      onChange={handleChange}
       onSubmit={handleFormSubmit}
       className="w-full bg-white"
       style={{
@@ -35,7 +43,7 @@ const ChatForm = () => {
           />
         </div>
         <div className="p-2 pb-1 border border-grey">
-          <button disabled={isTyping} type="submit" className="group">
+          <button disabled={isTyping || !query} type="submit" className="group">
             <SendIcon className="transition-[fill] text-blue group-focus:text-orange hover:text-orange cursor-pointer group-disabled:cursor-not-allowed group-disabled:text-grey" />
           </button>
         </div>
