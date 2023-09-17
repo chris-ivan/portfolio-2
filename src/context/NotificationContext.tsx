@@ -3,10 +3,12 @@ import { ThemeContext } from "./ThemeContext";
 import toastLib from "react-hot-toast";
 import { COLOR } from "../interfaces/theme";
 
+type Message = JSX.Element | string;
+
 export interface INotificationContext {
-  toast: (message: string) => void;
-  toastSuccess: (message: string) => void;
-  toastError: (message: string) => void;
+  toast: (message: Message) => void;
+  toastSuccess: (message: Message) => void;
+  toastError: (message: Message) => void;
 }
 
 export const NotificationContext = createContext<INotificationContext>({
@@ -43,21 +45,21 @@ export const NotificationProvider = ({
   }, [isDarkMode]);
 
   const toastSuccess = useCallback(
-    (message: string) => {
+    (message: Message) => {
       toastLib.success(message, { style });
     },
     [style]
   );
 
   const toastError = useCallback(
-    (message: string) => {
+    (message: Message) => {
       toastLib.error(message, { style });
     },
     [style]
   );
 
   const toast = useCallback(
-    (message: string) => {
+    (message: Message) => {
       toastLib(message, { style });
     },
     [style]

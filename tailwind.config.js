@@ -52,7 +52,7 @@ export default {
         white: "#F8F8F8",
         "dark-blue": "#074C7E",
         blue: "#0C8CE9",
-        "light-blue": "#DEE7F0",
+        "light-blue": "#C7DEF6",
         orange: "#E95C0C",
       },
     },

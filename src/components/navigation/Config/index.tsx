@@ -32,7 +32,11 @@ const NavigationConfig = () => {
       >
         <div
           className="fixed top-0 h-[60px] flex items-center left-[5vw] md:left-6 z-[200] touch-auto pointer-events-auto pt-6 pb-5 font-grifter md:"
-          style={{ color: theme.colorText, position }}
+          style={{
+            color: theme.colorText,
+            position,
+            userSelect: isAdventure ? "none" : undefined,
+          }}
         >
           Christopher Ivan Gunardi
         </div>

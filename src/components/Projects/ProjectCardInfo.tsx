@@ -11,7 +11,7 @@ const ProjectCardInfo: FC<IProjectCardInfo> = (props) => {
   const { theme } = useTheme();
 
   return (
-    <div className="flex my-3">
+    <div className="flex">
       <p
         className="min-w-[88px] uppercase"
         style={{ color: theme.colorTextSecondary }}

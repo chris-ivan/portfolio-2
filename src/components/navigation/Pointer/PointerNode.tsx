@@ -48,7 +48,7 @@ const PointerNode = (props: IPointerNode) => {
           color: isActive ? COLOR.WHITE : theme.colorTextSecondary,
         }}
       >
-        {label}
+        <span className="select-none">{label}</span>
       </div>
       <div
         className="absolute flex items-center justify-center"

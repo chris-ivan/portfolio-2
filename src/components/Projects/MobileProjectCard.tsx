@@ -38,36 +38,38 @@ const MobileProjectCard: FC<IProject> = (props) => {
           </div>
         </FadeIn>
       </div>
-      <FadeIn>
-        <ProjectCardInfo title="TL;DR" content={tldr} />
-      </FadeIn>
-      <FadeIn>
-        <ProjectCardInfo
-          title="Higlight"
-          content={
-            <ul className="list-disc ml-4">
-              {highlights.map((highlight) => (
-                <li key={highlight.title}>{highlight.summary}</li>
-              ))}
-            </ul>
-          }
-        />
-      </FadeIn>
-      <FadeIn>
-        <ProjectCardInfo title="Role" content={role.join(", ")} />
-      </FadeIn>
-      <FadeIn>
-        <ProjectCardInfo
-          title="Stack"
-          content={
-            <div className="flex flex-wrap gap-2">
-              {techStack.map((skill) => (
-                <SkillTag {...skill} key={skill.name} />
-              ))}
-            </div>
-          }
-        />
-      </FadeIn>
+      <div className="flex flex-col gap-3 mt-3">
+        <FadeIn>
+          <ProjectCardInfo title="TL;DR" content={tldr} />
+        </FadeIn>
+        <FadeIn>
+          <ProjectCardInfo
+            title="Higlight"
+            content={
+              <ul className="list-disc ml-4">
+                {highlights.map((highlight) => (
+                  <li key={highlight.title}>{highlight.summary}</li>
+                ))}
+              </ul>
+            }
+          />
+        </FadeIn>
+        <FadeIn>
+          <ProjectCardInfo title="Role" content={role.join(", ")} />
+        </FadeIn>
+        <FadeIn>
+          <ProjectCardInfo
+            title="Stack"
+            content={
+              <div className="flex flex-wrap gap-2">
+                {techStack.map((skill) => (
+                  <SkillTag {...skill} key={skill.name} />
+                ))}
+              </div>
+            }
+          />
+        </FadeIn>
+      </div>
     </div>
   );
 };

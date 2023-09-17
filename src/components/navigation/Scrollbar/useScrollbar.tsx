@@ -3,11 +3,17 @@ import useViewport from "../../../hooks/useViewport";
 import { DraggableData, DraggableEvent } from "react-draggable";
 import updateTransform from "../../../utils/updateTransform";
 import useTransformListener from "../../../hooks/useTransformListener";
+import { useContext, useRef } from "react";
+import { NotificationContext } from "../../../context/NotificationContext";
+import Code from "../../UI/Code";
+import { CTRL } from "../Guide/Guide.static";
 
 const useScrollbar = () => {
   const transform = useTransformListener();
   const { appSize } = useNavigationStore();
   const { width: viewportWidth, height: viewportHeight } = useViewport();
+  const { toast } = useContext(NotificationContext);
+  const isTutorialShown = useRef<boolean>(false);
 
   const maxWidth = viewportWidth;
   const maxHeight = viewportHeight;
@@ -28,6 +34,22 @@ const useScrollbar = () => {
   const height = maxHeight * heightPercentage;
 
   const onDragHorizontal = (_: DraggableEvent, data: DraggableData) => {
+    if (isTutorialShown?.current === false) {
+      isTutorialShown.current = true;
+      toast(
+        <span>
+          More commands are available in the <Code>(?)</Code> menu on the bottom
+          right corner
+        </span>
+      );
+      toast(
+        <span>
+          Try <Code>Shift+scroll</Code> to scroll horizontally.{" "}
+          <Code>{CTRL}+scroll</Code> to zoom.
+        </span>
+      );
+    }
+
     updateTransform({
       ...transform,
       x: transform.x - data.deltaX / widthPercentage,

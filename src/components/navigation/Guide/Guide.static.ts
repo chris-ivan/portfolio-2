@@ -1,6 +1,6 @@
 import { IS_APPLE } from "../../../utils/device";
 
-const CTRL = IS_APPLE ? "⌘" : "Ctrl";
+export const CTRL = IS_APPLE ? "⌘" : "Ctrl";
 
 export const GUIDES = [
   {
