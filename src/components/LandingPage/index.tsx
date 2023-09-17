@@ -4,10 +4,12 @@ import { Stage as StageType } from "konva/lib/Stage";
 import Toolbar from "./Toolbar";
 import ChatForm from "./Chat/ChatForm";
 import useViewport from "../../hooks/useViewport";
+import useTheme from "../../hooks/useTheme";
 
 const LandingPageSection = () => {
   const stageRef = useRef<StageType>(null);
   const { height } = useViewport();
+  const { theme } = useTheme();
 
   const formY = useMemo(() => {
     return height / 4 + 300;
@@ -16,7 +18,7 @@ const LandingPageSection = () => {
   const canvas = useMemo(() => <LandingCanvas stageRef={stageRef} />, []);
 
   return (
-    <div className="relative">
+    <div style={{ backgroundColor: theme.colorBgBase }} className="relative">
       <Toolbar stageRef={stageRef} />
       {canvas}
       <div

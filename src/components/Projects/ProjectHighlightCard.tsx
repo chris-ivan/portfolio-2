@@ -2,9 +2,10 @@ import { FC } from "react";
 import { IProjectHighlight } from "./Projects.static";
 import useTheme from "../../hooks/useTheme";
 import AnimateText from "../template/AnimateText";
+import Image from "../UI/Image";
 
 const ProjectHighlightCard: FC<IProjectHighlight> = (props) => {
-  const { title, description } = props;
+  const { title, description, image } = props;
   const { theme } = useTheme();
 
   return (
@@ -13,7 +14,9 @@ const ProjectHighlightCard: FC<IProjectHighlight> = (props) => {
         <AnimateText interval={30}>{title}</AnimateText>
       </h3>
       <div className="flex gap-6 h-full">
-        <div className="flex-1 h-full bg-grey aspect-video max-h-[300px] max-w-[300px]" />
+        <div className="flex-1 h-full bg-grey aspect-video max-h-[300px] max-w-[300px] border border-solid border-light-grey dark:border-dark-grey">
+          <Image src={image.src} tinySrc={image.lazySrc} />
+        </div>
         <div className="w-[200px]">{description}</div>
       </div>
     </div>

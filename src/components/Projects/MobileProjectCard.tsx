@@ -5,6 +5,7 @@ import ProjectCardInfo from "./ProjectCardInfo";
 import SkillTag from "../Skills/SkillTag";
 import AnimateText from "../template/AnimateText";
 import FadeIn from "../template/FadeIn";
+import Image from "../UI/Image";
 
 const MobileProjectCard: FC<IProject> = (props) => {
   const { tag, title, tldr, role, techStack, highlights } = props;
@@ -29,11 +30,10 @@ const MobileProjectCard: FC<IProject> = (props) => {
         </FadeIn>
         <FadeIn>
           <div className="flex w-full gap-2 mt-2">
-            {highlights.map((highlight) => (
-              <img
-                key={highlight.title}
-                className="flex-1 bg-grey aspect-video"
-              />
+            {highlights.map(({ title, image }) => (
+              <div key={title} className="flex-1 bg-grey aspect-video">
+                <Image src={image.src} tinySrc={image.lazySrc} />
+              </div>
             ))}
           </div>
         </FadeIn>
@@ -47,8 +47,8 @@ const MobileProjectCard: FC<IProject> = (props) => {
             title="Higlight"
             content={
               <ul className="list-disc ml-4">
-                {highlights.map((highlight) => (
-                  <li key={highlight.title}>{highlight.summary}</li>
+                {highlights.map(({ title, summary }) => (
+                  <li key={title}>{summary}</li>
                 ))}
               </ul>
             }

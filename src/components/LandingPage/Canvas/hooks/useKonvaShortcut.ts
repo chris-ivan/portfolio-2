@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useNavigationStore } from "../../../../store/navigationStore";
 import { FRAME_KEY } from "../../../../interfaces/frame";
 import useGlobalDeselect from "./useGlobalDeselect";
+import useGlobalStore from "../../../../hooks/useGlobalStore";
 
 interface IUseKeyboardShortcut {
   stageRef: React.RefObject<Stage>;
@@ -23,9 +24,10 @@ const useKonvaShortcut = (props: IUseKeyboardShortcut) => {
   const konvaClipboardShortcut = useCopyPaste(props);
   const konvaDeselectShortcut = useDeselect();
   const globalDeselect = useGlobalDeselect();
+  const { isAdventure } = useGlobalStore();
 
   const onKeyDown = (e: KeyboardEvent) => {
-    if (!isCanvasInView()) return;
+    if (isAdventure && !isCanvasInView()) return;
 
     konvaDeleteShortcut.onKeyDown(e);
     konvaHistoryShortcut.onKeyDown(e);

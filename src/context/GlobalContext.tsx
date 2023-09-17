@@ -1,6 +1,7 @@
 import { createContext, useMemo } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { NavigationMode } from "../interfaces/global";
+import { IS_MOBILE } from "../utils/device";
 
 export const NAVIGATION_LOCAL_KEY = "NAVIGATION_MODE";
 
@@ -23,7 +24,7 @@ export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   );
 
   const isAdventure = useMemo(
-    () => navigationMode === NavigationMode.ADVENTURE,
+    () => navigationMode === NavigationMode.ADVENTURE && !IS_MOBILE,
     [navigationMode]
   );
 

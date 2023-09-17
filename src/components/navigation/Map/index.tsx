@@ -43,7 +43,7 @@ const Map = () => {
         height: height * SCALE,
         opacity: isMapVisible ? 1 : 0,
       }}
-      className="fixed bottom-6 left-6 border border-solid border-grey pointer-events-none transition-opacity"
+      className="backdrop-filter backdrop-blur-md bg-opacity-40 fixed bottom-6 left-6 border border-solid border-grey pointer-events-none transition-opacity"
     >
       {children}
       <Transition show={isMapVisible}>
