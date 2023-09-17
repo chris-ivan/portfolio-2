@@ -14,7 +14,7 @@ const NormalLayout = () => {
 
   return (
     <div
-      className="normal-layout-container"
+      className="normal-layout-container pb-10"
       style={{
         color: theme.colorText,
         backgroundColor: theme.colorBgBase,
