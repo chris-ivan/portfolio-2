@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useContext, useState } from "react";
 import { NotificationContext } from "../../context/NotificationContext";
+import { trackEvent } from "../../utils/analytics";
+import { AnalyticsEvent } from "../../interfaces/analytics";
 
 interface IFormData {
   name: string;
@@ -30,6 +32,8 @@ const useContactForm = () => {
       user_id: USER_ID,
       template_params: { ...data },
     };
+
+    trackEvent(AnalyticsEvent.FORM, "submit contact form", data);
 
     try {
       await fetch(URL, {

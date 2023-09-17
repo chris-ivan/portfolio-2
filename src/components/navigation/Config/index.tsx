@@ -45,14 +45,17 @@ const NavigationConfig = () => {
           className="fixed right-4 bottom-4 md:right-6 flex items-center gap-1/2 md:gap-2 z-[200] touch-auto pointer-events-auto"
         >
           <SocialLink
+            label="LinkedIn"
             icon={LinkedInIcon as () => JSX.Element}
             link="https://www.linkedin.com/in/christopher-ivan-gunardi/"
           />
           <SocialLink
+            label="GitHub"
             icon={GithubIcon as () => JSX.Element}
             link="https://github.com/chris-ivan"
           />
           <SocialLink
+            label="WhatsApp"
             icon={WhatsAppIcon as () => JSX.Element}
             link="https://wa.me/6287784795500/"
           />

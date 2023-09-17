@@ -7,6 +7,8 @@ import { useContext, useRef } from "react";
 import { NotificationContext } from "../../../context/NotificationContext";
 import Code from "../../UI/Code";
 import { CTRL } from "../Guide/Guide.static";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 const useScrollbar = () => {
   const transform = useTransformListener();
@@ -63,6 +65,10 @@ const useScrollbar = () => {
     });
   };
 
+  const onDragEnd = (direction: string) => () => {
+    trackEvent(AnalyticsEvent.NAVIGATION, `drag ${direction} scrollbar`);
+  };
+
   const verticalScrollbar = {
     onDrag: onDragVertical,
     top,
@@ -75,7 +81,7 @@ const useScrollbar = () => {
     width,
   };
 
-  return { verticalScrollbar, horizontalScrollbar };
+  return { verticalScrollbar, horizontalScrollbar, onDragEnd };
 };
 
 export default useScrollbar;

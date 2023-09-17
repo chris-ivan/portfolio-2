@@ -4,6 +4,8 @@ import { FC, useState } from "react";
 import { ReactComponent as ImageIcon } from "../../../assets/icons/UI/Picture.svg";
 import useTheme from "../../../hooks/useTheme";
 import Image from "../../UI/Image";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 interface IPhotoCardContent {
   src: string;
@@ -30,7 +32,15 @@ const PhotoCardContent: FC<IPhotoCardContent> = (props) => {
         </div>
         <button
           className="h-6 w-6 flex items-center justify-center"
-          onClick={() => setOpen((prev) => !prev)}
+          onClick={() =>
+            setOpen((prev) => {
+              trackEvent(
+                AnalyticsEvent.INTERACTION,
+                `${prev ? "close" : "open"} photo card`
+              );
+              return !prev;
+            })
+          }
         >
           <div
             style={{

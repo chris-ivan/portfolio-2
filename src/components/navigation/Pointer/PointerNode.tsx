@@ -7,6 +7,8 @@ import { useMemo } from "react";
 import { FRAME_KEY } from "../../../interfaces/frame";
 import useTheme from "../../../hooks/useTheme";
 import { navigateToFrame } from "../../../utils/navigation";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 interface IPointerNode {
   targetId: FRAME_KEY;
@@ -32,7 +34,10 @@ const PointerNode = (props: IPointerNode) => {
   return (
     <div
       className="absolute flex items-center justify-center cursor-pointer"
-      onClick={() => navigateToFrame(targetId)}
+      onClick={() => {
+        trackEvent(AnalyticsEvent.NAVIGATION, `click ${targetId} pointer node`);
+        navigateToFrame(targetId);
+      }}
       style={{
         transform: `translate(${position.x}px, ${position.y}px)`,
         transition: "transform 0.2s ease-in-out, opacity 0.3s ease-in-out",

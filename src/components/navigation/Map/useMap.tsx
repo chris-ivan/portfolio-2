@@ -4,6 +4,8 @@ import { frameCoordinateType } from "../../../interfaces/frame";
 import updateTransform from "../../../utils/updateTransform";
 import { useRef } from "react";
 import useTransformListener from "../../../hooks/useTransformListener";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 interface IUseMap {
   scale: number;
@@ -48,6 +50,7 @@ const useMap = (props: IUseMap) => {
 
   const onDragStop = () => {
     isDragging.current = false;
+    trackEvent(AnalyticsEvent.NAVIGATION, "drag map");
   };
 
   return {

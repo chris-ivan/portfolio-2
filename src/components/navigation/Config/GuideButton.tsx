@@ -4,6 +4,8 @@ import { ReactComponent as QuestionIcon } from "../../../assets/icons/UI/questio
 import { useNavigationStore } from "../../../store/navigationStore";
 import LoadingSpinner from "../../UI/Loading/LoadingSpinner";
 import useTheme from "../../../hooks/useTheme";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 const Guide = lazy(() => import("../Guide"));
 
@@ -16,6 +18,9 @@ const GuideButton = () => {
   const handleClick = () => {
     if (!isClicked.current) {
       isClicked.current = true;
+      trackEvent(AnalyticsEvent.NAVIGATION, "open guide for the first time");
+    } else {
+      trackEvent(AnalyticsEvent.NAVIGATION, "open guide");
     }
 
     setShowGuide(true);

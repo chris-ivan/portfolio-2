@@ -7,6 +7,8 @@ import { useNavigationStore } from "../../../store/navigationStore";
 import { Transition } from "@headlessui/react";
 import useGlobalStore from "../../../hooks/useGlobalStore";
 import { NavigationMode } from "../../../interfaces/global";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 const Guide = () => {
   const { theme } = useTheme();
@@ -43,7 +45,10 @@ const Guide = () => {
               Navigation Guide
             </p>
             <div
-              onClick={() => setShowGuide(false)}
+              onClick={() => {
+                setShowGuide(false);
+                trackEvent(AnalyticsEvent.NAVIGATION, "close guide");
+              }}
               className="cursor-pointer scale-50 hover:text-black text-dark-grey dark:hover:text-white dark:text-grey"
             >
               <CloseIcon />
@@ -74,7 +79,13 @@ const Guide = () => {
           >
             Find this layout confusing?{" "}
             <span
-              onClick={() => setNavigationMode(NavigationMode.NORMAL)}
+              onClick={() => {
+                setNavigationMode(NavigationMode.NORMAL);
+                trackEvent(
+                  AnalyticsEvent.NAVIGATION,
+                  "change navigation mode from guide panel"
+                );
+              }}
               className="underline cursor-pointer hover:text-black dark:hover:text-white transition-colors"
             >
               Use the normal layout

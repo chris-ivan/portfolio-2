@@ -3,5 +3,5 @@ export enum AnalyticsEvent {
   NAVIGATION = "Navigation",
   GLOBAL = "Global",
   FORM = "Form",
-  VIEW = "View",
+  INTERACTION = "Interaction",
 }

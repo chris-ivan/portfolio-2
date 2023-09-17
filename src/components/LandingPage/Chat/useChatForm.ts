@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
 import useGlobalStore from "../../../hooks/useGlobalStore";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 interface IFormData {
   question: string;
@@ -46,7 +48,7 @@ const useChatForm = () => {
   }, [isAdventure]);
 
   const onSubmit = (data: IFormData) => {
-    console.log(data);
+    trackEvent(AnalyticsEvent.FORM, "submit chat form", data);
     animateResponse(getDefaultResponse());
   };
 

@@ -1,6 +1,8 @@
 import NewTabIcon from "../../../assets/icons/UI/NewTabIcon";
 import useTheme from "../../../hooks/useTheme";
 import { useState, useMemo } from "react";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 interface INewTab {
   fontSize?: number;
@@ -14,7 +16,12 @@ const NewTab: React.FC<INewTab> = (props) => {
   const { theme } = useTheme();
 
   const onMouseEnter = () => {
+    trackEvent(AnalyticsEvent.NAVIGATION, `hover new tab link to ${href}`);
     setIsHovering(true);
+  };
+
+  const onClick = () => {
+    trackEvent(AnalyticsEvent.NAVIGATION, `click new tab link to ${href}`);
   };
 
   const onMouseLeave = () => {
@@ -33,6 +40,7 @@ const NewTab: React.FC<INewTab> = (props) => {
       rel="noopener noreferrer"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={onClick}
     >
       {children}
       <span

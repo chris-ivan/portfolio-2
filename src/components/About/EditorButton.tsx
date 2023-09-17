@@ -1,5 +1,7 @@
 import useTheme from "../../hooks/useTheme";
+import { AnalyticsEvent } from "../../interfaces/analytics";
 import { IIcon } from "../../interfaces/icon";
+import { trackEvent } from "../../utils/analytics";
 
 interface IEditorButton {
   onClick: (() => void) | (() => Promise<void>);
@@ -13,10 +15,15 @@ const EditorButton = (props: IEditorButton) => {
 
   const iconColor = theme.colorTextSecondary;
 
+  const handleClick = () => {
+    void onClick();
+    trackEvent(AnalyticsEvent.INTERACTION, `click ${label} editor button`);
+  };
+
   return (
     <button
       className={` hover:bg-light-grey hover:dark:bg-black mx-[2px]`}
-      onClick={() => void onClick()}
+      onClick={handleClick}
       title={label}
       aria-label={label}
     >

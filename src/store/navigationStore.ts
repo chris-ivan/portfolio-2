@@ -4,6 +4,8 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { TransformType } from "../interfaces/container";
 import { FRAME_KEY, frameSizeType } from "../interfaces/frame";
 import { INITIAL_APP_SIZE_PX, NAVIGATING_ORDER } from "../static/frames";
+import { trackEvent } from "../utils/analytics";
+import { AnalyticsEvent } from "../interfaces/analytics";
 
 const initialTransform = {
   x: 0,
@@ -69,6 +71,10 @@ export const useNavigationStore = create(
       }),
     changeFrameVisibility: (frameKey, isVisible) =>
       set((store: INavigationStore) => {
+        trackEvent(
+          AnalyticsEvent.INTERACTION,
+          `${isVisible ? "viewing" : "leaving"} ${frameKey}`
+        );
         return {
           frameVisibility: {
             ...store.frameVisibility,
