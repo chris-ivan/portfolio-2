@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useCallback, useState } from "react";
 import useGlobalStore from "../../../hooks/useGlobalStore";
-import { trackEvent } from "../../../utils/analytics";
 import { AnalyticsEvent } from "../../../interfaces/analytics";
+import ReactGA from "react-ga4";
 
 interface IFormData {
   question: string;
@@ -11,7 +11,7 @@ interface IFormData {
 const useChatForm = () => {
   const [response, setResponse] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
-  const { register, handleSubmit, getValues } = useForm<IFormData>();
+  const { register, handleSubmit, getValues, reset } = useForm<IFormData>();
   const { isAdventure } = useGlobalStore();
   const [query, setQuery] = useState<string>("");
 
@@ -48,8 +48,13 @@ const useChatForm = () => {
   }, [isAdventure]);
 
   const onSubmit = (data: IFormData) => {
-    trackEvent(AnalyticsEvent.FORM, "submit chat form", data);
+    ReactGA.event({
+      category: AnalyticsEvent.FORM,
+      action: "ask_question",
+      label: data.question,
+    });
     animateResponse(getDefaultResponse());
+    reset();
   };
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {

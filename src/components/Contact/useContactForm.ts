@@ -18,7 +18,8 @@ const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
 const URL = `${ENDPOINT}/api/v1.0/email/send`;
 
 const useContactForm = () => {
-  const { register, handleSubmit, getValues } = useForm<IFormData>();
+  const { register, handleSubmit, getValues, resetField } =
+    useForm<IFormData>();
   const { toastSuccess, toastError } = useContext(NotificationContext);
   const [isEmpty, setIsEmpty] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -44,6 +45,7 @@ const useContactForm = () => {
         body: JSON.stringify(parameters),
       });
       toastSuccess("Message sent successfully.");
+      resetField("message");
     } catch (err) {
       toastError("Failed to send message. Please try again");
       toastError("Reason: " + JSON.stringify(err));
