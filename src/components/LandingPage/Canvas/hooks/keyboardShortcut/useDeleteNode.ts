@@ -1,9 +1,12 @@
+import { AnalyticsEvent } from "../../../../../interfaces/analytics";
 import { useKonvaStore } from "../../../../../store/konvaStore";
+import { trackEvent } from "../../../../../utils/analytics";
 
 const DELETE_KEYS = ["Delete", "Backspace"];
 
 const onDelete = () => {
   const { selectedNodeIds, deleteNodes } = useKonvaStore.getState();
+  trackEvent(AnalyticsEvent.KONVA, "delete node", { selectedNodeIds });
   if (!selectedNodeIds.length) return;
   deleteNodes(selectedNodeIds);
 };

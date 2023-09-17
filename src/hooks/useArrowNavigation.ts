@@ -1,4 +1,6 @@
+import { AnalyticsEvent } from "../interfaces/analytics";
 import { useKonvaStore } from "../store/konvaStore";
+import { trackEvent } from "../utils/analytics";
 
 interface IUseArrowNavigation {
   handleMove2D: (dx: number, dy: number) => void;
@@ -7,6 +9,8 @@ interface IUseArrowNavigation {
 const MULTIPLIER = 10;
 
 const handleArrowNavigation = (e: KeyboardEvent) => {
+  trackEvent(AnalyticsEvent.KONVA, "arrow navigation");
+
   if (e.key === "ArrowDown") {
     return [0, 1];
   } else if (e.key === "ArrowUp") {

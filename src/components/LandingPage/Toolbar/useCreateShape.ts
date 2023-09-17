@@ -1,9 +1,11 @@
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 import {
   KonvaNodeConfigType,
   KonvaNodeType,
   KonvaToolbarEnum,
 } from "../../../interfaces/konva";
 import { useKonvaStore } from "../../../store/konvaStore";
+import { trackEvent } from "../../../utils/analytics";
 import {
   IGenerateShapeProps,
   generateEllipse,
@@ -22,6 +24,7 @@ const useCreateShape = () => {
   const generateShape = (fn: createBasicNodeFn) => {
     const node = fn(getViewportCenter());
     addNodes([node], true);
+    trackEvent(AnalyticsEvent.KONVA, `create ${node.type} node`, { node });
     setCurrentToolbar(KonvaToolbarEnum.SELECT);
   };
 

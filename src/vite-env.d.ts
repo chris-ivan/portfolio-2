@@ -6,6 +6,7 @@ interface ImportMetaEnv {
   readonly VITE_EMAILJS_TEMPLATE: string;
   readonly VITE_EMAILJS_ENDPOINT: string;
   readonly VITE_EMAILJS_USER_ID: string;
+  readonly VITE_GA_ID: string;
   // more env variables...
 }
 

@@ -8,6 +8,8 @@ import {
   DEFAULT_TEXT,
 } from "../../../static/konva";
 import { KonvaToolbarEnum } from "../../../interfaces/konva";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 const getConfig = (config: TextConfig) => {
   return {
@@ -21,6 +23,9 @@ const createTextNode = (baseText: TextConfig) => {
   const textNode = generateText(textConfig);
   useKonvaStore.getState().addNodes([textNode], true);
   useKonvaStore.getState().setCurrentToolbar(KonvaToolbarEnum.SELECT);
+  trackEvent(AnalyticsEvent.KONVA, `create ${textNode.type} node`, {
+    textNode,
+  });
 };
 
 const useCreateText = () => {

@@ -1,5 +1,7 @@
 import useTheme from "../../../hooks/useTheme";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 import { IIcon } from "../../../interfaces/icon";
+import { trackEvent } from "../../../utils/analytics";
 
 interface IToolbarButton {
   onClick: () => void;
@@ -18,12 +20,17 @@ const ToolbarButton = (props: IToolbarButton) => {
     ? "bg-light-grey dark:bg-black"
     : "bg-transparent";
 
+  const handleClick = () => {
+    trackEvent(AnalyticsEvent.KONVA, `clicked ${label} toolbar button`);
+    onClick();
+  };
+
   if (!visible) return null;
 
   return (
     <button
       className={`${tailwindBgClass} hover:bg-light-grey hover:dark:bg-black mx-[2px]`}
-      onClick={onClick}
+      onClick={handleClick}
       title={label}
       aria-label={label}
     >

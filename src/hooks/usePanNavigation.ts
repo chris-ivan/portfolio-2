@@ -1,4 +1,6 @@
 import { useRef, useCallback } from "react";
+import { trackEvent } from "../utils/analytics";
+import { AnalyticsEvent } from "../interfaces/analytics";
 
 const setCursor = (cursor: string) => {
   document.body.style.cursor = cursor;
@@ -29,6 +31,7 @@ const usePanNavigation = (props: IUsePanNavigation) => {
 
   const onMouseUp = useCallback(() => {
     if (!isHoldingLeftKey.current) return;
+    trackEvent(AnalyticsEvent.NAVIGATION, "pan");
     isHoldingLeftKey.current = false;
     setCursor("auto");
   }, []);

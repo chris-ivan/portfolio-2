@@ -4,6 +4,8 @@ import { useKonvaStore } from "../../../store/konvaStore";
 import { generateLine } from "../../../utils/konva";
 import { KonvaEnum } from "../../../interfaces/konva";
 import { Vector2d } from "konva/lib/types";
+import { trackEvent } from "../../../utils/analytics";
+import { AnalyticsEvent } from "../../../interfaces/analytics";
 
 const usePencil = () => {
   const isDrawing = useRef<boolean>(false);
@@ -13,6 +15,7 @@ const usePencil = () => {
     isDrawing.current = true;
     const pos = e.target.getStage()?.getPointerPosition();
     const newLine = generateLine({ x: pos?.x, y: pos?.y });
+    trackEvent(AnalyticsEvent.KONVA, "drawing using pencil tool");
     addNodes([newLine]);
   };
 

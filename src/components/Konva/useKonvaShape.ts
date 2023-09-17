@@ -21,6 +21,8 @@ import {
   IKonvaText,
 } from "../../interfaces/konva";
 import { handleMultipleSelectionTransformStart } from "../../utils/konva";
+import useGlobalStore from "../../hooks/useGlobalStore";
+import { AnalyticsEvent } from "../../interfaces/analytics";
 
 type ShapeType = RectType | EllipseType | PolygonType;
 type ShapeConfig = RectConfig | EllipseConfig | RegularPolygonConfig;
@@ -54,6 +56,7 @@ function useKonvaShape<T1 extends ShapeType, T2 extends ShapeConfig>(
   props: KonvaNodeType
 ) {
   const { id, config } = props;
+  const { trackEvent } = useGlobalStore();
 
   const shapeRef = useRef<T1>(null);
 
@@ -67,6 +70,13 @@ function useKonvaShape<T1 extends ShapeType, T2 extends ShapeConfig>(
       useKonvaStore.getState();
 
     const allowMultiple = e.evt.shiftKey || e.evt.ctrlKey || e.evt.metaKey;
+
+    trackEvent(AnalyticsEvent.KONVA, "select node", {
+      type: props.type,
+      isMultiple: allowMultiple,
+      config,
+    });
+
     if (allowMultiple) {
       toggleNodeSelection(props.id);
       return;
@@ -77,11 +87,21 @@ function useKonvaShape<T1 extends ShapeType, T2 extends ShapeConfig>(
 
   const onTransformStart = () => {
     onChange(config as T2, handleMultipleSelectionTransformStart());
+
+    trackEvent(AnalyticsEvent.KONVA, "transform node", {
+      type: props.type,
+      config,
+    });
   };
 
   const onDragStart = () => {
     const { selectedNodeIds, setSelectedNodeIds } = useKonvaStore.getState();
     const isNotSelected = !selectedNodeIds.includes(props.id);
+
+    trackEvent(AnalyticsEvent.KONVA, "drag node start", {
+      type: props.type,
+      config,
+    });
 
     if (isNotSelected) {
       setSelectedNodeIds([props.id]);
@@ -91,6 +111,11 @@ function useKonvaShape<T1 extends ShapeType, T2 extends ShapeConfig>(
   };
 
   const onDragEnd = (e: KonvaEventObject<DragEvent>) => {
+    trackEvent(AnalyticsEvent.KONVA, "drag node end", {
+      type: props.type,
+      config,
+    });
+
     onChange(
       {
         ...config,

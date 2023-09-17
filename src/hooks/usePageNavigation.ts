@@ -3,6 +3,8 @@ import { FRAME_KEY } from "../interfaces/frame";
 import { getViewportHeight, getViewportWidth } from "../utils/viewport";
 import { NAVIGATING_ORDER_BY_LAYOUT } from "../static/frames";
 import { navigateToFrame } from "../utils/navigation";
+import { trackEvent } from "../utils/analytics";
+import { AnalyticsEvent } from "../interfaces/analytics";
 
 const PAGE_SIZE = NAVIGATING_ORDER_BY_LAYOUT.length;
 
@@ -46,21 +48,23 @@ const getClosestsPage = () => {
   return closest.id as FRAME_KEY;
 };
 
+const prevPage = (curPageId: FRAME_KEY) => {
+  const curIdx = NAVIGATING_ORDER_BY_LAYOUT.indexOf(curPageId);
+  const prevIdx = (curIdx - 1 + PAGE_SIZE) % PAGE_SIZE;
+  const prevPageId = NAVIGATING_ORDER_BY_LAYOUT[prevIdx];
+  trackEvent(AnalyticsEvent.NAVIGATION, "prev page", { from: curPageId });
+  navigateToFrame(prevPageId);
+};
+
+const nextPage = (curPageId: FRAME_KEY) => {
+  const curIdx = NAVIGATING_ORDER_BY_LAYOUT.indexOf(curPageId);
+  const nextIdx = (curIdx + 1) % PAGE_SIZE;
+  const nextPageId = NAVIGATING_ORDER_BY_LAYOUT[nextIdx];
+  trackEvent(AnalyticsEvent.NAVIGATION, "next page", { from: curPageId });
+  navigateToFrame(nextPageId);
+};
+
 const usePagePagination = () => {
-  const prevPage = (curPageId: FRAME_KEY) => {
-    const curIdx = NAVIGATING_ORDER_BY_LAYOUT.indexOf(curPageId);
-    const prevIdx = (curIdx - 1 + PAGE_SIZE) % PAGE_SIZE;
-    const prevPageId = NAVIGATING_ORDER_BY_LAYOUT[prevIdx];
-    navigateToFrame(prevPageId);
-  };
-
-  const nextPage = (curPageId: FRAME_KEY) => {
-    const curIdx = NAVIGATING_ORDER_BY_LAYOUT.indexOf(curPageId);
-    const nextIdx = (curIdx + 1) % PAGE_SIZE;
-    const nextPageId = NAVIGATING_ORDER_BY_LAYOUT[nextIdx];
-    navigateToFrame(nextPageId);
-  };
-
   const onKeyDown = useCallback((e: KeyboardEvent) => {
     const closestId = getClosestsPage();
 

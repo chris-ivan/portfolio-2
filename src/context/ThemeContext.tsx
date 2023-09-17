@@ -4,6 +4,8 @@ import { useDarkMode } from "usehooks-ts";
 import { DARK_THEME, LIGHT_THEME } from "../static/colors";
 import { useZustandThemeStore } from "../store/themeStore";
 import { useKonvaStore } from "../store/konvaStore";
+import useGlobalStore from "../hooks/useGlobalStore";
+import { AnalyticsEvent } from "../interfaces/analytics";
 
 export interface IThemeContext {
   theme: ITheme;
@@ -21,12 +23,14 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { isDarkMode, enable, disable } = useDarkMode();
   const { setTheme: setKonvaTheme } = useKonvaStore();
   const { setIsDarkMode } = useZustandThemeStore();
+  const { trackEvent } = useGlobalStore();
 
   const theme = useMemo(() => {
     return isDarkMode ? DARK_THEME : LIGHT_THEME;
   }, [isDarkMode]);
 
   const setTheme = (theme: ThemeType) => {
+    trackEvent(AnalyticsEvent.GLOBAL, `change theme to ${theme}`);
     theme === "dark" ? enable() : disable();
   };
 
@@ -50,6 +54,13 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isDarkMode]);
+
+  useEffect(() => {
+    trackEvent(AnalyticsEvent.GLOBAL, "theme context initialization", {
+      isDarkMode,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, isDarkMode }}>

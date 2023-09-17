@@ -11,6 +11,8 @@ import { getColorHex } from "../../../../utils/color";
 import { IFillColorPicker } from ".";
 import { KonvaNodeType } from "../../../../interfaces/konva";
 import { useMemo } from "react";
+import { trackEvent } from "../../../../utils/analytics";
+import { AnalyticsEvent } from "../../../../interfaces/analytics";
 
 const getInitialFill = (
   selectedNodes: KonvaNodeType[],
@@ -75,6 +77,7 @@ const useColorPicker = (props: IFillColorPicker) => {
         return;
       }
 
+      trackEvent(AnalyticsEvent.KONVA, "change color", { selectedNodes });
       changeColor(color, true);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,6 +95,10 @@ const useColorPicker = (props: IFillColorPicker) => {
 
   const setOpenColorPicker = useCallback((value: SetStateAction<boolean>) => {
     if (typeof value === "boolean") {
+      trackEvent(
+        AnalyticsEvent.KONVA,
+        `${value ? "open" : "close"} color picker`
+      );
       if (value === false) isDragging.current = false;
       setOpen(value);
       return;
@@ -99,6 +106,10 @@ const useColorPicker = (props: IFillColorPicker) => {
 
     setOpen((prev) => {
       const newValue = value(prev);
+      trackEvent(
+        AnalyticsEvent.KONVA,
+        `${newValue ? "open" : "close"} color picker`
+      );
       if (newValue === false) isDragging.current = false;
       return newValue;
     });

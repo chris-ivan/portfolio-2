@@ -1,20 +1,23 @@
-import "./App.css";
+import ReactGA from "react-ga4";
+import { Toaster } from "react-hot-toast";
 import { NotificationProvider } from "./context/NotificationContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import { Toaster } from "react-hot-toast";
 import Layout from "./layout";
 import { GlobalProvider } from "./context/GlobalContext";
+import "./App.css";
+
+ReactGA.initialize(import.meta.env.VITE_GA_ID);
 
 function App() {
   return (
-    <ThemeProvider>
-      <GlobalProvider>
+    <GlobalProvider>
+      <ThemeProvider>
         <NotificationProvider>
           <Layout />
         </NotificationProvider>
         <Toaster />
-      </GlobalProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </GlobalProvider>
   );
 }
 
