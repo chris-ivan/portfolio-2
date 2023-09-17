@@ -12,6 +12,7 @@ import SinduHighlight3Img from "../../assets/images/projects/sindu-3.webp";
 import SinduHighlight1MinImg from "../../assets/images/projects/sindu-1-min.webp";
 import SinduHighlight2MinImg from "../../assets/images/projects/sindu-2-min.webp";
 import SinduHighlight3MinImg from "../../assets/images/projects/sindu-3-min.webp";
+import SinduImg from "../../assets/images/projects/sindu.webp";
 
 import PersonalWeb2Highlight1Img from "../../assets/images/projects/this-website-1.webp";
 import PersonalWeb2Highlight2Img from "../../assets/images/projects/this-website-2.webp";
@@ -19,6 +20,7 @@ import PersonalWeb2Highlight3Img from "../../assets/images/projects/this-website
 import PersonalWeb2Highlight1MinImg from "../../assets/images/projects/this-website-1-min.webp";
 import PersonalWeb2Highlight2MinImg from "../../assets/images/projects/this-website-2-min.webp";
 import PersonalWeb2Highlight3MinImg from "../../assets/images/projects/this-website-3-min.webp";
+import PersonalWeb2Video from "../../assets/videos/personal-web-2.mp4";
 
 import PersonalWeb1Highlight1Img from "../../assets/images/projects/old-portfolio-1.webp";
 import PersonalWeb1Highlight2Img from "../../assets/images/projects/old-portfolio-2.webp";
@@ -26,6 +28,7 @@ import PersonalWeb1Highlight3Img from "../../assets/images/projects/old-portfoli
 import PersonalWeb1Highlight1MinImg from "../../assets/images/projects/old-portfolio-1-min.webp";
 import PersonalWeb1Highlight2MinImg from "../../assets/images/projects/old-portfolio-2-min.webp";
 import PersonalWeb1Highlight3MinImg from "../../assets/images/projects/old-portfolio-3-min.webp";
+import PersonalWeb1Video from "../../assets/videos/personal-web-1.webm";
 
 import InsaneMathHighlight1Img from "../../assets/images/projects/insane-math-1.webp";
 import InsaneMathHighlight2Img from "../../assets/images/projects/insane-math-2.webp";
@@ -33,11 +36,12 @@ import InsaneMathHighlight3Img from "../../assets/images/projects/insane-math-3.
 import InsaneMathHighlight1MinImg from "../../assets/images/projects/insane-math-1-min.webp";
 import InsaneMathHighlight2MinImg from "../../assets/images/projects/insane-math-2-min.webp";
 import InsaneMathHighlight3MinImg from "../../assets/images/projects/insane-math-3-min.webp";
+import InsaneMathImg from "../../assets/images/projects/insane-math.webp";
 
 const SINDU: IProject = {
   tag: "Cleanest Code",
   title: "Sindu Kas Dashboard",
-  mainImage: generateImageData("", "user interface of sindu kas website"),
+  mainImage: generateImageData(SinduImg, "user interface of sindu kas website"),
   tldr: (
     <p>
       The UI looks decent, but I just love how clean the React/Next/TS codebase
@@ -95,6 +99,7 @@ const PERSONAL_WEB2: IProject = {
   tag: "Most Complicated",
   title: "This website.",
   mainImage: generateImageData("", "user interface of this website"),
+  video: PersonalWeb2Video,
   tldr: "As you can see, this is not your typical portfolio website. I mean, portfolio website is the only website that you can build totally as you want. Might as well go a bit anti-mainstream and code whatever passes my mind.",
   role: [ProjectRoleEnum.FULLSTACK, ProjectRoleEnum.UI],
   techStack: [SKILLS.REACT, SKILLS.TAILWIND, SKILLS.TS, SKILLS.FIGMA],
@@ -143,6 +148,7 @@ const PERSONAL_WEB1: IProject = {
     "user interface of my previous portfolio website",
     PersonalWeb1Highlight1MinImg
   ),
+  video: PersonalWeb1Video,
   tldr: "I thought that CMS would make updating my portfolio data easier, and that’s totally right. Except I’m just too lazy to update my data and prefer to code something new from scratch. Anyway I love the UI.",
   role: [ProjectRoleEnum.FULLSTACK, ProjectRoleEnum.UI],
   techStack: [
@@ -192,7 +198,7 @@ const PERSONAL_WEB1: IProject = {
 const INSANE_MATH: IProject = {
   tag: "My First Project",
   title: "Insane Math (2020)",
-  mainImage: generateImageData("", "user interface of insane math"),
+  mainImage: generateImageData(InsaneMathImg, "user interface of insane math"),
   tldr: "A simple quiz website with randomly generated multiple-choice math questions (& answers). Definitely the ugliest in terms of UI & code, but it’s just memorable.",
   role: [ProjectRoleEnum.FE, ProjectRoleEnum.UI],
   techStack: [SKILLS.REACT, SKILLS.HTML, SKILLS.CSS, SKILLS.JS, SKILLS.FIGMA],
@@ -250,4 +256,4 @@ const INSANE_MATH: IProject = {
 };
 
 // eslint-disable-next-line
-export const PROJECTS = [SINDU, PERSONAL_WEB2, PERSONAL_WEB1, INSANE_MATH];
+export const PROJECTS = [PERSONAL_WEB2, SINDU, PERSONAL_WEB1, INSANE_MATH];

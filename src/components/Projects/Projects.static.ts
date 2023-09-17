@@ -37,6 +37,7 @@ export interface IProjectHighlight {
 export interface IProject {
   tag: string;
   title: string;
+  video?: string;
   mainImage: IProjectImage;
   tldr: ReactNode;
   role: ProjectRoleEnum[];

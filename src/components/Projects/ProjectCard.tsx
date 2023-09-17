@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, lazy } from "react";
 import { IProject } from "./Projects.static";
 import useTheme from "../../hooks/useTheme";
 import SkillTag from "../Skills/SkillTag";
@@ -6,9 +6,14 @@ import ProjectCardInfo from "./ProjectCardInfo";
 import ProjectHighlightCard from "./ProjectHighlightCard";
 import useGlobalStore from "../../hooks/useGlobalStore";
 import AnimateText from "../template/AnimateText";
+import LoadingSpinner from "../UI/Loading/LoadingSpinner";
+import LoadingFallback from "../../sections/Adventure/LoadingFallback";
+
+const ReactPlayer = lazy(() => import("react-player"));
 
 const ProjectCard: FC<IProject> = (props) => {
-  const { tag, title, tldr, role, techStack, highlights } = props;
+  const { tag, title, tldr, role, techStack, highlights, video, mainImage } =
+    props;
   const { theme } = useTheme();
   const { isAdventure } = useGlobalStore();
 
@@ -29,12 +34,27 @@ const ProjectCard: FC<IProject> = (props) => {
         >
           <AnimateText interval={30}>{title}</AnimateText>
         </h2>
-        <img
+        <div
           style={{
             margin: isAdventure ? "8px 0 16px" : "8px 0",
           }}
-          className="flex-[7] bg-grey aspect-video h-0 max-h-[600px]"
-        />
+          className="flex items-center justify-center flex-[7] aspect-video h-0 bg-light-grey dark:bg-black max-h-[600px] border border-solid border-light-grey dark:border-dark-grey text-grey overflow-hidden"
+        >
+          {video ? (
+            <LoadingFallback height="100%">
+              <ReactPlayer
+                playing
+                url={video}
+                loop
+                width="100%"
+                height="100%"
+                fallback={<LoadingSpinner />}
+              />
+            </LoadingFallback>
+          ) : (
+            <img src={mainImage.src} alt={mainImage.alt} />
+          )}
+        </div>
         <div className="flex flex-[4] flex-col mt-3 gap-3">
           <ProjectCardInfo title="TL;DR" content={tldr} />
           <ProjectCardInfo title="Role" content={role.join(", ")} />
