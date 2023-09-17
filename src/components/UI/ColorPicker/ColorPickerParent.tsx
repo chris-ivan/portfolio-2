@@ -42,6 +42,7 @@ const ColorPickerParent = (props: InjectedColorProps) => {
           <Checkboard />
           <div
             className="w-full h-full absolute top-0 left-0"
+            // @ts-ignore
             style={{ background: getColorHex(props) }}
           />
         </div>
