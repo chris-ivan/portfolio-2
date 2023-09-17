@@ -36,6 +36,7 @@ const MobileProjectCard: FC<IProject> = (props) => {
               <LoadingFallback height="100%">
                 <ReactPlayer
                   playing
+                  muted
                   url={video}
                   loop
                   width="100%"

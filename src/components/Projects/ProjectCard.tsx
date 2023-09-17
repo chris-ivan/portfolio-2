@@ -46,6 +46,7 @@ const ProjectCard: FC<IProject> = (props) => {
                 playing
                 url={video}
                 loop
+                muted
                 width="100%"
                 height="100%"
                 fallback={<LoadingSpinner />}

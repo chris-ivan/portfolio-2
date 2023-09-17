@@ -32,6 +32,7 @@ const Landing = () => {
               playing
               url={PersonalWeb1Video}
               loop
+              muted
               width="100%"
               height="100%"
             />
@@ -50,6 +51,7 @@ const Landing = () => {
               playing
               url={PersonalWeb2Video}
               loop
+              muted
               width="100%"
               height="100%"
             />
