@@ -5,7 +5,7 @@ import { useKonvaStore } from "../../../store/konvaStore";
 
 const Polygon = (props: IKonvaPolygon) => {
   const { config: shapeProps } = props;
-  const { currentToolbar } = useKonvaStore();
+  const { currentToolbar } = useKonvaStore.getState();
 
   const polygon = usePolygon(props);
   const {

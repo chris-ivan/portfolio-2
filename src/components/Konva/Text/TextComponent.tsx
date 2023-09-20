@@ -12,7 +12,7 @@ interface ITextComponent {
 const TextComponent = (props: ITextComponent) => {
   const { onDoubleClick, textData, useTextProps } = props;
   const { config: shapeProps } = textData;
-  const { currentToolbar } = useKonvaStore();
+  const { currentToolbar } = useKonvaStore.getState();
 
   const text = useTextProps;
   const {

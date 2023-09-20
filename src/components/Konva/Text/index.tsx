@@ -15,7 +15,7 @@ const Text = (props: IKonvaText) => {
     setSelectedNodeIds,
     setIsEditingText,
     deleteNodes,
-  } = useKonvaStore();
+  } = useKonvaStore.getState();
 
   useEffect(() => {
     const isSelected = selectedNodeIds.includes(props.id);

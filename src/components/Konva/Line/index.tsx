@@ -5,7 +5,7 @@ import { useKonvaStore } from "../../../store/konvaStore";
 
 const Line = (props: IKonvaLine) => {
   const { config: shapeProps } = props;
-  const { currentToolbar } = useKonvaStore();
+  const { currentToolbar } = useKonvaStore.getState();
 
   const line = useLine(props);
   const {

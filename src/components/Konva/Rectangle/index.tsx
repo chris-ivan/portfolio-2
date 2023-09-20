@@ -5,7 +5,7 @@ import { useKonvaStore } from "../../../store/konvaStore";
 
 const Rectangle = (props: IKonvaRect) => {
   const { config: shapeProps } = props;
-  const { currentToolbar } = useKonvaStore();
+  const { currentToolbar } = useKonvaStore.getState();
 
   const rectangle = useRectangle(props);
   const {

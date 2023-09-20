@@ -5,7 +5,7 @@ import { useKonvaStore } from "../../../store/konvaStore";
 
 const Ellipse = (props: IKonvaEllipse) => {
   const { config: shapeProps } = props;
-  const { currentToolbar } = useKonvaStore();
+  const { currentToolbar } = useKonvaStore.getState();
 
   const ellipse = useEllipse(props);
   const {
