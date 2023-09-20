@@ -1,9 +1,11 @@
 import { RegularPolygon } from "react-konva";
 import usePolygon from "./usePolygon";
-import { IKonvaPolygon } from "../../../interfaces/konva";
+import { IKonvaPolygon, KonvaToolbarEnum } from "../../../interfaces/konva";
+import { useKonvaStore } from "../../../store/konvaStore";
 
 const Polygon = (props: IKonvaPolygon) => {
   const { config: shapeProps } = props;
+  const { currentToolbar } = useKonvaStore.getState();
 
   const polygon = usePolygon(props);
   const {
@@ -23,7 +25,7 @@ const Polygon = (props: IKonvaPolygon) => {
         onTap={onSelect}
         ref={shapeRef}
         {...shapeProps}
-        draggable
+        draggable={currentToolbar === KonvaToolbarEnum.SELECT}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onTransformStart={onTransformStart}

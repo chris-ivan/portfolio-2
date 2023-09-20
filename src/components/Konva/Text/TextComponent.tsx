@@ -1,6 +1,7 @@
 import { Text } from "react-konva";
 import useText from "./useText";
-import { IKonvaText } from "../../../interfaces/konva";
+import { IKonvaText, KonvaToolbarEnum } from "../../../interfaces/konva";
+import { useKonvaStore } from "../../../store/konvaStore";
 
 interface ITextComponent {
   onDoubleClick: () => void;
@@ -11,6 +12,7 @@ interface ITextComponent {
 const TextComponent = (props: ITextComponent) => {
   const { onDoubleClick, textData, useTextProps } = props;
   const { config: shapeProps } = textData;
+  const { currentToolbar } = useKonvaStore.getState();
 
   const text = useTextProps;
   const {
@@ -29,7 +31,7 @@ const TextComponent = (props: ITextComponent) => {
       onTap={onSelect}
       ref={shapeRef}
       {...shapeProps}
-      draggable
+      draggable={currentToolbar === KonvaToolbarEnum.SELECT}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onTransform={onTransform}

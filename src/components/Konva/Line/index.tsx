@@ -1,9 +1,11 @@
 import { Line as LineComponent } from "react-konva";
-import { IKonvaLine } from "../../../interfaces/konva";
+import { IKonvaLine, KonvaToolbarEnum } from "../../../interfaces/konva";
 import useLine from "./useLine";
+import { useKonvaStore } from "../../../store/konvaStore";
 
 const Line = (props: IKonvaLine) => {
   const { config: shapeProps } = props;
+  const { currentToolbar } = useKonvaStore.getState();
 
   const line = useLine(props);
   const {
@@ -24,7 +26,7 @@ const Line = (props: IKonvaLine) => {
         onTap={onSelect}
         ref={shapeRef}
         {...shapeProps}
-        draggable
+        draggable={currentToolbar === KonvaToolbarEnum.SELECT}
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         onTransform={onTransform}
