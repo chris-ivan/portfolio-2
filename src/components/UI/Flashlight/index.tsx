@@ -24,7 +24,6 @@ const Flashlight: FC<IFlashlight> = (props) => {
     const containerPosition = container.getBoundingClientRect();
     const x = e.clientX - containerPosition.left;
     const y = e.clientY - containerPosition.top;
-
     setPosition({ x, y });
   };
 

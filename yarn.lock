@@ -2465,6 +2465,13 @@ fast-levenshtein@^2.0.6:
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==
 
+fastdom@^1.0.11:
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/fastdom/-/fastdom-1.0.11.tgz#f22984f9df6b9a6081e5ce2e49cfb5525daf198a"
+  integrity sha512-jl9MwXDFxhg354W4E3s1UMsLh3HWFuVMQiRUlXpHckcHRXQvUe76yzBf1Z7b+x5Ci4TUJ1KmynI9alGUXG95IQ==
+  dependencies:
+    strictdom "^1.0.1"
+
 fastq@^1.6.0:
   version "1.15.0"
   resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.15.0.tgz#d04d07c6a2a68fe4599fea8d2e103a937fae6b3a"
@@ -3695,6 +3702,11 @@ space-separated-tokens@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/space-separated-tokens/-/space-separated-tokens-2.0.2.tgz#1ecd9d2350a3844572c3f4a312bceb018348859f"
   integrity sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==
+
+strictdom@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/strictdom/-/strictdom-1.0.1.tgz#189de91649f73d44d59b8432efa68ef9d2659460"
+  integrity sha512-cEmp9QeXXRmjj/rVp9oyiqcvyocWab/HaoN4+bwFeZ7QzykJD6L3yD4v12K1x0tHpqRqVpJevN3gW7kyM39Bqg==
 
 stringify-entities@^4.0.0:
   version "4.0.3"

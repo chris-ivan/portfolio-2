@@ -3,6 +3,7 @@ import { FRAME_KEY, IFrameBbox } from "../../../interfaces/frame";
 import { useNavigationStore } from "../../../store/navigationStore";
 import { FRAMES } from "../../../static/frames";
 import { viewportToPx } from "../../../utils/viewport";
+import fastdom from "fastdom";
 interface IMapFrame {
   targetId: FRAME_KEY;
   scale: number;
@@ -17,33 +18,34 @@ const MapFrame = (props: IMapFrame) => {
   const { targetId, scale } = props;
   const [bbox, setBbox] = useState<IFrameBbox>(initialBbox);
 
-  const targetDefaultData = useMemo(
-    () => ({
+  const targetDefaultData = useMemo(() => {
+    return {
       top: viewportToPx((FRAMES[targetId].position?.top || "0vh") as string),
       left: viewportToPx((FRAMES[targetId].position?.left || "0vw") as string),
       width: viewportToPx(FRAMES[targetId].size?.width as string),
-    }),
-    [targetId]
-  );
+    };
+  }, [targetId]);
 
   const calculateSize = useCallback(() => {
-    const target = document.getElementById(targetId);
-    if (!target) return;
+    fastdom.measure(() => {
+      const target = document.getElementById(targetId);
+      if (!target) return;
 
-    const clientRect = target.getBoundingClientRect();
-    const position = {
-      left: targetDefaultData.left * scale,
-      top: targetDefaultData.top * scale,
-    };
+      const clientRect = target.getBoundingClientRect();
+      const position = {
+        left: targetDefaultData.left * scale,
+        top: targetDefaultData.top * scale,
+      };
 
-    const globalScale = clientRect.width / targetDefaultData.width;
+      const globalScale = clientRect.width / targetDefaultData.width;
 
-    const size = {
-      width: (clientRect.width * scale) / globalScale,
-      height: (Math.max(clientRect.height) * scale) / globalScale,
-    };
+      const size = {
+        width: (clientRect.width * scale) / globalScale,
+        height: (Math.max(clientRect.height) * scale) / globalScale,
+      };
 
-    setBbox({ position, size });
+      setBbox({ position, size });
+    });
     // eslint-disable-next-line
   }, [targetId, scale, targetDefaultData]);
 

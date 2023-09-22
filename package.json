@@ -12,6 +12,7 @@
   "dependencies": {
     "@headlessui/react": "^1.7.15",
     "@uiw/react-textarea-code-editor": "^2.1.7",
+    "fastdom": "^1.0.11",
     "fontfaceobserver": "^2.3.0",
     "hammerjs": "^2.0.8",
     "konva": "^9.2.0",

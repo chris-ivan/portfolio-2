@@ -7,6 +7,7 @@ import {
 } from "./Pointer.helper";
 import { useNavigationStore } from "../../../store/navigationStore";
 import { useInterval } from "usehooks-ts";
+import fastdom from "fastdom";
 
 interface IUsePointerNode {
   targetId: FRAME_KEY;
@@ -45,7 +46,10 @@ const usePointerNode = (props: IUsePointerNode) => {
   }, [label, calcProps]);
 
   useInterval(
-    () => requestAnimationFrame(calculatePosition),
+    () =>
+      requestAnimationFrame(() => {
+        fastdom.measure(calculatePosition);
+      }),
     isNavigating ? 1000 / 30 : null
   );
 
