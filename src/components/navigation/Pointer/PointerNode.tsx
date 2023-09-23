@@ -1,35 +1,25 @@
-import usePointerNode from "./usePointerNode";
 // @ts-ignore
 import PointerArrow from "../../../assets/icons/NavigationArrow";
 import { COLOR } from "../../../interfaces/theme";
-import { useNavigationStore } from "../../../store/navigationStore";
-import { useMemo } from "react";
 import { FRAME_KEY } from "../../../interfaces/frame";
 import useTheme from "../../../hooks/useTheme";
 import { navigateToFrame } from "../../../utils/navigation";
 import { trackEvent } from "../../../utils/analytics";
 import { AnalyticsEvent } from "../../../interfaces/analytics";
+import { IPosition } from "./usePointerPosition";
 
 interface IPointerNode {
-  targetId: FRAME_KEY;
+  position: IPosition;
+  angle: number;
+  pointerPosition: IPosition;
   label: string;
+  isActive: boolean;
+  targetId: FRAME_KEY;
 }
 
 const PointerNode = (props: IPointerNode) => {
-  const { targetId, label } = props;
-  const { recommendedFrame, frameVisibility } = useNavigationStore();
-  const pointerNode = usePointerNode({ targetId, label });
-  const { position, angle, pointerPosition } = pointerNode;
+  const { position, angle, pointerPosition, label, isActive, targetId } = props;
   const { theme } = useTheme();
-
-  const isActive = useMemo(() => {
-    return targetId === recommendedFrame[0];
-  }, [recommendedFrame, targetId]);
-
-  const isVisible = useMemo(() => {
-    if (!position.x || !position.y) return false;
-    return !frameVisibility[targetId];
-  }, [frameVisibility, targetId, position]);
 
   return (
     <div
@@ -41,8 +31,6 @@ const PointerNode = (props: IPointerNode) => {
       style={{
         transform: `translate(${position.x}px, ${position.y}px)`,
         transition: "transform 0.2s ease-in-out, opacity 0.3s ease-in-out",
-        opacity: isVisible ? 1 : 0,
-        pointerEvents: isVisible ? "auto" : "none",
       }}
     >
       <div

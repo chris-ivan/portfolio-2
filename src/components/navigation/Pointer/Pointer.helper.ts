@@ -1,8 +1,8 @@
 import { frameCoordinateType, frameSizeType } from "../../../interfaces/frame";
 
-const PADDING = 50;
-const AVG_CHAR_WIDTH = 5.8;
-const AVG_CHAR_HEIGHT = 12;
+export const PTR_PADDING = 50;
+export const PTR_AVG_CHAR_WIDTH = 5.8;
+export const PTR_AVG_CHAR_HEIGHT = 12;
 
 interface ICalculatePointerNodePosition {
   targetElem: HTMLElement | null;
@@ -31,9 +31,9 @@ export const calculatePointerNodePosition = (
   const angleRad = Math.atan2(targetCenterY, targetCenterX);
   const angleDeg = (angleRad * 180) / Math.PI;
 
-  const nodeLength = label.length * AVG_CHAR_WIDTH;
-  const allowedWidth = viewportCenterX - PADDING - nodeLength / 1.7;
-  const allowedHeight = viewportCenterY - PADDING;
+  const nodeLength = label.length * PTR_AVG_CHAR_WIDTH;
+  const allowedWidth = viewportCenterX - PTR_PADDING - nodeLength / 1.7;
+  const allowedHeight = viewportCenterY - PTR_PADDING;
 
   const scale = Math.min(
     allowedWidth / Math.abs(targetCenterX),
@@ -63,8 +63,8 @@ export const calculatePointerNodeArrowPosition = (
   props: ICalculatePointerNodeArrowPosition
 ): frameCoordinateType => {
   const { angle, label } = props;
-  const nodeLength = label.length * AVG_CHAR_WIDTH;
-  const nodeHeight = AVG_CHAR_HEIGHT + PADDING;
+  const nodeLength = label.length * PTR_AVG_CHAR_WIDTH;
+  const nodeHeight = PTR_AVG_CHAR_HEIGHT + PTR_PADDING;
 
   const angleRad = (angle * Math.PI) / 180;
   const allowedWidth = nodeLength / 1.5;

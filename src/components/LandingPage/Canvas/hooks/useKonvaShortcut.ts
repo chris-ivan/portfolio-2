@@ -4,21 +4,17 @@ import useDeleteNode from "./keyboardShortcut/useDeleteNode";
 import useUndoRedo from "./keyboardShortcut/useUndoRedo";
 import useDeselect from "./keyboardShortcut/useDeselect";
 import { useEffect } from "react";
-import { useNavigationStore } from "../../../../store/navigationStore";
-import { FRAME_KEY } from "../../../../interfaces/frame";
 import useGlobalDeselect from "./useGlobalDeselect";
 import useGlobalStore from "../../../../hooks/useGlobalStore";
+import { useFrameContext } from "../../../../hooks/useFrameContext";
 
 interface IUseKeyboardShortcut {
   stageRef: React.RefObject<Stage>;
 }
 
-const isCanvasInView = () => {
-  const { frameVisibility } = useNavigationStore.getState();
-  return frameVisibility[FRAME_KEY.LANDING];
-};
-
 const useKonvaShortcut = (props: IUseKeyboardShortcut) => {
+  const { frames } = useFrameContext();
+
   const konvaDeleteShortcut = useDeleteNode();
   const konvaHistoryShortcut = useUndoRedo();
   const konvaClipboardShortcut = useCopyPaste(props);
@@ -27,7 +23,8 @@ const useKonvaShortcut = (props: IUseKeyboardShortcut) => {
   const { isAdventure } = useGlobalStore();
 
   const onKeyDown = (e: KeyboardEvent) => {
-    if (isAdventure && !isCanvasInView()) return;
+    const isVisible = frames.LANDING?.isVisible;
+    if (isAdventure && !isVisible) return;
 
     konvaDeleteShortcut.onKeyDown(e);
     konvaHistoryShortcut.onKeyDown(e);

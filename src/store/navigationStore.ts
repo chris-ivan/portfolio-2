@@ -4,8 +4,6 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { TransformType } from "../interfaces/container";
 import { FRAME_KEY, frameSizeType } from "../interfaces/frame";
 import { INITIAL_APP_SIZE_PX, NAVIGATING_ORDER } from "../static/frames";
-import { trackEvent } from "../utils/analytics";
-import { AnalyticsEvent } from "../interfaces/analytics";
 
 const initialTransform = {
   x: 0,
@@ -21,12 +19,10 @@ interface INavigationStore {
   showGuide: boolean;
   showMiniMap: boolean;
   recommendedFrame: FRAME_KEY[];
-  frameVisibility: { [key in FRAME_KEY]: boolean };
   setAppSize: (appSize: frameSizeType<number>) => void;
   setTransform: (props: Partial<TransformType>) => void;
   setIsNavigating: (isNavigating: boolean) => void;
   removeRecommendedFrame: (frameKey: FRAME_KEY) => void;
-  changeFrameVisibility: (frameKey: FRAME_KEY, isVisible: boolean) => void;
   toggleNavigation: () => void;
   toggleMiniMap: () => void;
   setShowGuide: (showGuide: boolean) => void;
@@ -41,15 +37,6 @@ export const useNavigationStore = create(
     showGuide: false,
     showMiniMap: true,
     recommendedFrame: [...NAVIGATING_ORDER],
-    frameVisibility: {
-      [FRAME_KEY.CONTACT]: false,
-      [FRAME_KEY.INTERESTS]: false,
-      [FRAME_KEY.EXPERIENCES]: false,
-      [FRAME_KEY.LANDING]: false,
-      [FRAME_KEY.SKILLS]: false,
-      [FRAME_KEY.ABOUT]: false,
-      [FRAME_KEY.PROJECTS]: false,
-    },
     setAppSize: (appSize) => set({ appSize }),
     setTransform: (props) =>
       set((store: INavigationStore) => ({
@@ -67,19 +54,6 @@ export const useNavigationStore = create(
         }
         return {
           recommendedFrame: [...store.recommendedFrame],
-        };
-      }),
-    changeFrameVisibility: (frameKey, isVisible) =>
-      set((store: INavigationStore) => {
-        trackEvent(
-          AnalyticsEvent.INTERACTION,
-          `${isVisible ? "viewing" : "leaving"} ${frameKey}`
-        );
-        return {
-          frameVisibility: {
-            ...store.frameVisibility,
-            [frameKey]: isVisible,
-          },
         };
       }),
     toggleNavigation: () =>

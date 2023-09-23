@@ -1,5 +1,6 @@
+import AdventureNavigation from "../components/navigation/AdventureNavigation";
 import Container from "../components/template/Container/Container";
-import { FrameRefProvider } from "../context/FrameRefContext";
+import { FrameProvider } from "../context/FrameContext";
 import About from "../sections/Adventure/About";
 import Contact from "../sections/Adventure/Contact";
 import Experiences from "../sections/Adventure/Experiences";
@@ -11,7 +12,7 @@ import Skills from "../sections/Adventure/Skills";
 
 const AdventureLayout = () => {
   return (
-    <FrameRefProvider>
+    <FrameProvider>
       <Container>
         <About />
         <Contact />
@@ -22,7 +23,8 @@ const AdventureLayout = () => {
         <Skills />
         <Gallery />
       </Container>
-    </FrameRefProvider>
+      <AdventureNavigation />
+    </FrameProvider>
   );
 };
 

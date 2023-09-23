@@ -1,24 +1,23 @@
-import { useMemo } from "react";
 import { FRAME_KEY } from "../../../interfaces/frame";
-import { FRAMES } from "../../../static/frames";
 import PointerNode from "./PointerNode";
 import { Transition } from "@headlessui/react";
 import { useNavigationStore } from "../../../store/navigationStore";
+import usePointerPosition from "./usePointerPosition";
+import { FRAMES } from "../../../static/frames";
 
 const Pointer = () => {
   const { isNavigating, showNavigation } = useNavigationStore();
+  const pointerPositions = usePointerPosition();
 
-  const pointers = useMemo(
-    () =>
-      Object.keys(FRAME_KEY).map((key) => (
-        <PointerNode
-          key={key}
-          targetId={key as FRAME_KEY}
-          label={FRAMES[key as FRAME_KEY].title || ""}
-        />
-      )),
-    []
-  );
+  const pointers = Object.entries(pointerPositions).map(([key, value]) => (
+    <PointerNode
+      {...value}
+      label={FRAMES[key as FRAME_KEY]?.title || key}
+      key={key}
+      targetId={key as FRAME_KEY}
+    />
+  ));
+
   return (
     <Transition
       show={isNavigating && showNavigation}
