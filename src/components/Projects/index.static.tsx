@@ -127,8 +127,8 @@ const PERSONAL_WEB2: IProject = {
       ),
     },
     {
-      title: "Sophisticated AI assistant (soon)",
-      summary: "Sophisticated AI assistant :D (soon)",
+      title: "Sophisticated AI assistant",
+      summary: "Sophisticated AI assistant :D",
       description:
         "Ask away. Hopefully it will give you an appropriate response.",
       image: generateImageData(

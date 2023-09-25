@@ -69,32 +69,32 @@ textarea::placeholder,
   overflow-x: hidden;
 }
 
-/* .normal-layout-container::-webkit-scrollbar {
+.chat-response-field::-webkit-scrollbar {
   width: 10px;
-} */
+}
 
 /* Track */
-/* .normal-layout-container::-webkit-scrollbar-track {
+.chat-response-field::-webkit-scrollbar-track {
   background: #ffffff;
   border-left: 1px solid #b0b0b0;
-} */
+}
 
 /* Handle */
-/* .normal-layout-container::-webkit-scrollbar-thumb {
+.chat-response-field::-webkit-scrollbar-thumb {
   background: #767676;
   border-top: 2px solid #b0b0b0;
   border-bottom: 2px solid #b0b0b0;
-} */
+}
 
-/* .dark .normal-layout-container::-webkit-scrollbar-track {
+.dark .chat-response-field::-webkit-scrollbar-track {
   background: #1e1e1e;
   border-left: 1px solid #767676;
-} */
+}
 
-/* .dark .normal-layout-container::-webkit-scrollbar-thumb {
+.dark .chat-response-field::-webkit-scrollbar-thumb {
   border-left: 1px solid #767676;
   background: #131313;
-} */
+}
 
 .experience-section {
   animation: 0.75s ease-in-out forwards 1 experience-animation;

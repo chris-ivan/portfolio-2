@@ -1,8 +1,11 @@
 import { useForm } from "react-hook-form";
-import { useCallback, useState } from "react";
-import useGlobalStore from "../../../hooks/useGlobalStore";
+import { useContext, useState } from "react";
 import { AnalyticsEvent } from "../../../interfaces/analytics";
 import ReactGA from "react-ga4";
+import { NotificationContext } from "../../../context/NotificationContext";
+
+const ENDPOINT = import.meta.env.VITE_BACKEND_URL;
+const URL = `${ENDPOINT}/v1/query`;
 
 interface IFormData {
   question: string;
@@ -12,7 +15,7 @@ const useChatForm = () => {
   const [response, setResponse] = useState<string>("");
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const { register, handleSubmit, getValues, reset } = useForm<IFormData>();
-  const { isAdventure } = useGlobalStore();
+  const { toastError } = useContext(NotificationContext);
   const [query, setQuery] = useState<string>("");
 
   const animateResponse = (response: string) => {
@@ -33,28 +36,32 @@ const useChatForm = () => {
     }, 50);
   };
 
-  const getDefaultResponse = useCallback(() => {
-    let defaultText =
-      "While I'd love to implement the AI chatbot, I'm not sure if I have the time to do so.";
-
-    if (isAdventure) {
-      defaultText +=
-        " For now, try to zoom-out or scroll around. If you are bored, play around with the text & shapes in this page. They're fully functional :D";
-    } else {
-      defaultText += " For now, please kindly wait for further updates :D";
-    }
-
-    return defaultText;
-  }, [isAdventure]);
-
-  const onSubmit = (data: IFormData) => {
+  const onSubmit = async (data: IFormData) => {
     ReactGA.event({
       category: AnalyticsEvent.FORM,
       action: "ask_question",
       label: data.question,
     });
-    animateResponse(getDefaultResponse());
-    reset();
+
+    try {
+      setIsTyping(true);
+      setResponse("");
+      const response = await fetch(URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ query }),
+      });
+      const data = await response.text();
+      animateResponse(data);
+      reset();
+    } catch (err) {
+      toastError("Error: " + JSON.stringify(err));
+      animateResponse("Oops, something went wrong. Please try again later.");
+    } finally {
+      setIsTyping(false);
+    }
   };
 
   const handleFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {

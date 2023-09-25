@@ -19,7 +19,8 @@ const ChatForm = () => {
   const { theme } = useTheme();
 
   const placeholderText = useMemo(() => {
-    if (isTyping && !response) return "Loading response...";
+    if (isTyping && !response)
+      return "Loading response... (might take a few seconds)";
     if (!response) return "Waiting for your questions...";
     return "";
   }, [isTyping, response]);
@@ -48,7 +49,7 @@ const ChatForm = () => {
           </button>
         </div>
       </div>
-      <div className="p-2 border border-t-0 border-grey w-full h-[120px] overflow-y-auto">
+      <div className="chat-response-field p-2 border border-t-0 border-grey w-full h-[120px] overflow-y-auto">
         {<span>{response}</span>}
         {isTyping && <ChatCursor />}
         {<span className="placeholder-text">{placeholderText}</span>}
