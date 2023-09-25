@@ -37,12 +37,6 @@ const useChatForm = () => {
   };
 
   const onSubmit = async (data: IFormData) => {
-    ReactGA.event({
-      category: AnalyticsEvent.FORM,
-      action: "ask_question",
-      label: data.question,
-    });
-
     try {
       setIsTyping(true);
       setResponse("");
@@ -53,11 +47,25 @@ const useChatForm = () => {
         },
         body: JSON.stringify({ query }),
       });
-      const data = await response.text();
-      animateResponse(data);
+      const answer = await response.text();
+
+      ReactGA.event({
+        category: AnalyticsEvent.FORM,
+        action: "ask_question",
+        label: `${data.question} - ${answer}`,
+      });
+
+      animateResponse(answer);
       reset();
     } catch (err) {
       toastError("Error: " + JSON.stringify(err));
+
+      ReactGA.event({
+        category: AnalyticsEvent.FORM,
+        action: "ask_question",
+        label: `[ERROR] ${data.question} - ${JSON.stringify(err)}`,
+      });
+
       animateResponse("Oops, something went wrong. Please try again later.");
     } finally {
       setIsTyping(false);
