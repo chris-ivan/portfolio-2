@@ -8,7 +8,7 @@ import { INITIAL_APP_SIZE_PX, NAVIGATING_ORDER } from "../static/frames";
 const initialTransform = {
   x: 0,
   y: 0,
-  scale: 1,
+  scale: 0.75,
 };
 
 interface INavigationStore {

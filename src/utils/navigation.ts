@@ -3,7 +3,7 @@ import { useNavigationStore } from "../store/navigationStore";
 import updateTransform from "./updateTransform";
 import { getViewportHeight, getViewportWidth } from "./viewport";
 
-export const navigateToFrame = (frameId: FRAME_KEY) => {
+export const navigateToFrame = (frameId: FRAME_KEY, duration = 500) => {
   const target = document.getElementById(frameId);
   if (!target) return;
 
@@ -30,7 +30,7 @@ export const navigateToFrame = (frameId: FRAME_KEY) => {
   const containerDiv = document.getElementById("app-container");
 
   if (containerDiv) {
-    containerDiv.style.transition = "transform 0.5s ease-in-out";
+    containerDiv.style.transition = `transform ${duration / 1000}s ease-in-out`;
   }
 
   updateTransform({
@@ -41,6 +41,6 @@ export const navigateToFrame = (frameId: FRAME_KEY) => {
   if (containerDiv) {
     setTimeout(() => {
       containerDiv.style.transition = "";
-    }, 500);
+    }, duration);
   }
 };

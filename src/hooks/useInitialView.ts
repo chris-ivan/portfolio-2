@@ -2,6 +2,7 @@ import { TransformType } from "../interfaces/container";
 import { FRAME_KEY } from "../interfaces/frame";
 import { checkMobile } from "../utils/device";
 import { useMemo, useRef, useEffect } from "react";
+import { navigateToFrame } from "../utils/navigation";
 
 interface IUseInitialView {
   containerRef: React.RefObject<HTMLDivElement> | null;
@@ -9,18 +10,14 @@ interface IUseInitialView {
 }
 
 const useInitialView = (props: IUseInitialView) => {
-  const { containerRef, updateTransform } = props;
+  const { containerRef } = props;
   const isMobile = useMemo(checkMobile, []);
   const isInitialized = useRef<boolean>(false);
 
   useEffect(() => {
-    if (isMobile || !containerRef) return;
+    if (isMobile || !containerRef || isInitialized.current) return;
 
-    const targetId = FRAME_KEY.LANDING;
-    const target = document.getElementById(targetId || "");
-    if (!target) return;
-
-    updateTransform({ x: -target.offsetLeft, y: -target.offsetTop });
+    navigateToFrame(FRAME_KEY.LANDING);
     isInitialized.current = true;
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
