@@ -20,7 +20,7 @@ export const ThemeContext = createContext<IThemeContext>({
 });
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const { isDarkMode, enable, disable } = useDarkMode();
+  const { isDarkMode, enable, disable } = useDarkMode(true);
   const { setTheme: setKonvaTheme } = useKonvaStore();
   const { setIsDarkMode } = useZustandThemeStore();
   const { trackEvent } = useGlobalStore();

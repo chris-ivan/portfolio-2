@@ -14,8 +14,10 @@ export interface IGlobalContext {
   trackEvent: (category: AnalyticsEvent, action: string, data?: object) => void;
 }
 
+const initialNavigationMode = NavigationMode.NORMAL;
+
 export const GlobalContext = createContext<IGlobalContext>({
-  navigationMode: NavigationMode.ADVENTURE,
+  navigationMode: initialNavigationMode,
   setNavigationMode: () => undefined,
   isAdventure: false,
   trackEvent: () => undefined,
@@ -24,7 +26,7 @@ export const GlobalContext = createContext<IGlobalContext>({
 export const GlobalProvider = ({ children }: { children: React.ReactNode }) => {
   const [navigationMode, setNavigationMode] = useLocalStorage(
     NAVIGATION_LOCAL_KEY,
-    NavigationMode.ADVENTURE
+    initialNavigationMode
   );
 
   const isAdventure = useMemo(
