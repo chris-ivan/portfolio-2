@@ -21,7 +21,7 @@ const ChatForm = () => {
   const placeholderText = useMemo(() => {
     if (isTyping && !response)
       return "Loading response... (might take a few seconds)";
-    if (!response) return "Waiting for your questions...";
+    if (!response) return "Waiting for your questions about Ivan...";
     return "";
   }, [isTyping, response]);
 
@@ -38,7 +38,7 @@ const ChatForm = () => {
       <div className="flex w-full">
         <div className="p-2 flex-1 flex items-center border border-r-0 border-grey w-full">
           <Input
-            placeholder="Ask me anything..."
+            placeholder="Hi! I'm an AI chatbot. Ask me anything :D"
             className="w-full"
             {...register("question")}
           />
