@@ -37,6 +37,7 @@ import InsaneMathHighlight1MinImg from "../../assets/images/projects/insane-math
 import InsaneMathHighlight2MinImg from "../../assets/images/projects/insane-math-2-min.webp";
 import InsaneMathHighlight3MinImg from "../../assets/images/projects/insane-math-3-min.webp";
 import InsaneMathImg from "../../assets/images/projects/insane-math.webp";
+import Code from "../UI/Code";
 
 const SINDU: IProject = {
   tag: "Cleanest Code",
@@ -100,7 +101,13 @@ const PERSONAL_WEB2: IProject = {
   title: "This website.",
   mainImage: generateImageData("", "user interface of this website"),
   video: PersonalWeb2Video,
-  tldr: "As you can see, this is not your typical portfolio website. I mean, portfolio website is the only website that you can build totally as you want. Might as well go a bit anti-mainstream and code whatever passes my mind.",
+  tldr: (
+    <p>
+      If you visit the <Code>Adventure mode</Code> (available on desktop at the
+      bottom right settings menu), you would see that this is not your typical
+      portfolio website.
+    </p>
+  ),
   role: [ProjectRoleEnum.FULLSTACK, ProjectRoleEnum.UI],
   techStack: [SKILLS.REACT, SKILLS.TAILWIND, SKILLS.TS, SKILLS.FIGMA],
   highlights: [
