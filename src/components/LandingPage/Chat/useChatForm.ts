@@ -37,6 +37,8 @@ const useChatForm = () => {
   };
 
   const onSubmit = async (data: IFormData) => {
+    if (!query) return;
+
     try {
       setIsTyping(true);
       setResponse("");
